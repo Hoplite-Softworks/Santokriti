@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Επικοινωνία με τον Δήμο Σαντοκρήτης</title>
+    <link href="css/contact.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="logo">
+        <img src="images/logo.png">
+    </section>
+    <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+    <nav id="navbar">
+        <ul>
+            <li class="navitem"><a href="home.html">Χάρτης</a></li>
+            <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
+            <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
+            <li class="navitem" id="bookmarks"><a>Τα αποθηκευμένα μου</a></li>
+            <li class="navitem"><a href="sign-in.html">Εγγραφή/Είσοδος</a></li>
+        </ul>
+    </nav>
+    <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;">
+
+    <h1>Επικοινωνήστε μαζί μας!</h1>
+    <hr style="margin-left: 100px; margin-right: 100px;">
+    <div id="form">
+        <form action="#">
+            <div id="form-intro">
+                Το Γραφείο Τουριστικής Ανάπτυξης του Δήμου Σαντοκρητών βρίσκεται πάντα στην υπηρεσία του επισκέπτη.
+            </div>
+            <div id="form-details">
+                <section id="names">
+                    <div>
+                        <label for="first_name">Ονοματεπώνυμο</label>
+                    </div>
+                    <div>
+                        <input id="first_name" type="text" name="first_name" placeholder="Όνομα">
+                        <input type="text" name="last_name" placeholder="Επώνυμο">
+                    </div>
+                </section>
+                <section id="contact-info">
+                    <div>
+                        <label for="telephone">Στοιχεία επικοινωνίας</label>
+                    </div>
+                    <div>
+                        <input type="tel" id="telephone" name="telephone" placeholder="Τηλέφωνο">
+                        <input required type="email" name="email" placeholder="Διεύθυνση μέιλ">
+                    </div>
+                </section>
+                <section id="personal-message">
+                    <div>
+                        <label for="message">Μήνυμα</label>
+                    </div>
+                    <div>
+                        <textarea required id="message" name="message"></textarea>
+                    </div>
+                </section>
+            </div>
+            <input id="submit" type="submit" value="Αποστολή μηνύματος">
+        </form>
+    </div>
+</body>
+
+</html>

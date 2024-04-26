@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Τα αγαπημένα μου μέρη στη Σαντοκρήτη</title>
+    <link href="css/bookmarks.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="logo">
+        <img src="images/logo.png">
+    </section>
+    <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+    <nav id="navbar">
+        <ul>
+            <li class="navitem"><a href="home.html">Χάρτης</a></li>
+            <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
+            <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
+            <li class="navitem" id="bookmarks"><a href="bookmarks.html">Τα αποθηκευμένα μου</a></li>
+            <li class="navitem"><a href="home.html">Αποσύνδεση</a></li>
+        </ul>
+    </nav>
+    <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;">
+
+    <h1>Αποθηκευμένα μέρη</h1>
+    <hr style="margin-left: 100px; margin-right: 100px;">
+    <div class="menu">
+        <div class="category" onclick="toggleContent('category1')">Φαγητό</div>
+        <div id="category1-content" class="content" style="display: none;">
+            <a id="anc" href="place1.html"><div class="place">
+                <div class="place-image">
+                    <img src="images/place1.jpeg" height="200px">
+                </div>
+                <div class="place-info">
+                    <h2>"Η Αιγαιοπελαγίτισσα"</h2>
+                    <p class="info">Μια γραφική ταβέρνα που βρίσκεται κατά μήκος της ακτογραμμής, προσφέροντας μια μαγευτική θέα στο γαλάζιο του Αιγαίου. Εδώ θα απολαύσετε μια μεγάλη ποικιλία από φρέσκα θαλασσινά, προετοιμασμένα με τις παραδοσιακές συνταγές και τις μυστικές μας μαρινάδες. Επιπλέον, η ταβέρνα μας προσφέρει επίσης εκλεκτές επιλογές από τοπικά ελληνικά πιάτα, όπως μεζέδες, ψητά κρέατα και φρέσκες σαλάτες, πάντα σε συνδυασμό με εξαιρετική εξυπηρέτηση και φιλική ατμόσφαιρα.
+
+                    </p>
+                    <input type="button" value="Διαγραφή">
+                </div>
+            </div></a>
+            <div class="place">
+                <div class="place-image">
+                    <img src="images/place2.jpg" height="200px">
+                </div>
+                <div class="place-info">
+                    <h2>"Ο Κτήνιος Οίκος"</h2>
+                    <p class="info">
+                        Ένας οικογενειακό προορισμό για τους λάτρεις της κρητικής κουζίνας και της αυθεντικής ελληνικής φιλοξενίας. Βρισκόμαστε στο κέντρο του χωριού, περιβάλλοντας τους επισκέπτες με μια ατμόσφαιρα ζεστασιάς και φιλίας. Στον "Κτήνιο Οίκο" θα ανακαλύψετε μια πληθώρα από κρητικές λιχουδιές, όπως νόστιμα γεμιστά λαχανικά, κρεατικές λιχουδιές από τον ξυλόφουρνο και φρέσκες σαλάτες με τοπικά συστατικά. Επιπλέον, μπορείτε να απολαύσετε μια εκλεκτή ποικιλία από κρητικά κρασιά και τοπικά αποστάγματα, προσφέροντας μια πλήρη εμπειρία γεύσεων και αρωμάτων της Σαντοκρήτης.
+                    </p>
+                    <input type="button" value="Διαγραφή">
+                </div>
+            </div>
+        </div>
+        <div class="category" onclick="toggleContent('category2')">Παραλίες</div>
+        <div id="category2-content" class="content" style="display: none;">
+            <div class="place">
+                <div class="place-image">
+                    <img src="images/place3.jpg" height="200px">
+                </div>
+                <div class="place-info">
+                    <h2>"Αγία Μαρίνα"</h2>
+                    <p class="info">Καλωσορίσατε στην πανέμορφη παραλία της Αγίας Μαρίνας, έναν από τους κοσμικότερους προορισμούς του νησιού. Με την λευκή αμμουδιά της και τα κρυστάλλινα νερά του Αιγαίου, η παραλία προσφέρει μια μοναδική εμπειρία ηρεμίας και χαλάρωσης. Εδώ οι επισκέπτες μπορούν να απολαύσουν τον ήλιο και τη θάλασσα σε άνετες ξαπλώστρες και ομπρέλες, ενώ οι ταβέρνες και οι μπαρ στην παραλία προσφέρουν δροσιστικά ποτά και νόστιμα ελληνικά εδέσματα.
+
+                    </p>
+                    <input type="button" value="Διαγραφή">
+                </div>
+            </div>
+            <div class="place">
+                <div class="place-image">
+                    <img src="images/place4.jpg" height="200px">
+                </div>
+                <div class="place-info">
+                    <h2>"Παραλία Αγίου Νικολάου"</h2>
+                    <p class="info">
+                    Ανακαλύψτε τη μαγεία της φυσικής ομορφιάς στην παραλία του Αγίου Νικολάου, έναν μυστηριώδη κόλπο που εκτείνεται κάτω από τους γαλάζιους ουρανούς του Αιγαίου. Η αμμουδιά εδώ, με τον λευκό της χρυσό άμμο και τα γαλαζοπράσινα νερά της θάλασσας, δημιουργεί μια εικόνα ονειρικής ομορφιάς. Οι επισκέπτες μπορούν να απολαύσουν το μπάνιο τους σε ένα από τα καθαρότερα νερά της περιοχής. Με πολλά εστιατόρια και καφετέριες που περιβάλλουν την παραλία, οι επισκέπτες μπορούν να απολαύσουν νόστιμα ελληνικά γεύματα και δροσιστικά ποτά με θέα στην απέραντη γαλήνη του Αιγαίου.
+                    </p>
+                    <input type="button" value="Διαγραφή">
+                </div>
+            </div>
+        </div>
+        <div class="category" onclick="toggleContent('category3')">Διαμονή</div>
+        <div id="category3-content" class="content" style="display: none;">
+            Content for Category 3
+        </div>
+        <div class="category" onclick="toggleContent('category4')">Διασκέδαση</div>
+        <div id="category4-content" class="content" style="display: none;">
+            Content for Category 1
+        </div>
+        <div class="category" onclick="toggleContent('category5')">Αξιοθέατα</div>
+        <div id="category5-content" class="content" style="display: none;">
+            Content for Category 2
+        </div>
+        <div class="category" onclick="toggleContent('category6')">Περίθαλψη</div>
+        <div id="category6-content" class="content" style="display: none;">
+            Content for Category 3
+        </div>
+    </div>
+    <script src="js/menu.js"></script>
+</body>
+
+</html>

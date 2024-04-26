@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Σύνδεση/Εγγραφή - Ξεκινήστε να σχεδιάζετε το ταξίδι σας στη Σαντοκρήτη!</title>
+    <link href="css/sign-in.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="logo">
+        <img src="images/logo.png">
+    </section>
+    <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+    <nav id="navbar">
+        <ul>
+            <li class="navitem"><a href="home.html">Χάρτης</a></li>
+            <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
+            <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
+            <li class="navitem" id="bookmarks"><a>Τα αποθηκευμένα μου</a></li>
+            <li class="navitem"><a href="sign-in.html">Εγγραφή/Είσοδος</a></li>
+        </ul>
+    </nav>
+    <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;">
+
+    <h1>Ξεκινήστε να σχεδιάζετε το ταξίδι σας στη Σαντοκρήτη!</h1>
+    <hr style="margin-left: 100px; margin-right: 100px;">
+    <div id="container">
+        <div id="form-intro">
+            Συνδεθείτε ή εγγραφείτε στον τουριστικό οδηγό μας για να μπορείτε να αποθηκεύετε τα αγαπημένα σας μέρη στη
+            Σαντοκρήτη και να σχεδιάσετε εύκολα το ταξίδι σας στον κρυμμένο παράδεισο του Ιονίου.
+        </div>
+        <form id="signInForm" action="home.html">
+            <label for="username">Όνομα χρήστη:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Κωδικός:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Είσοδος</button>
+            <label id="registerLabel">Δεν έχετε λογαριασμό ακόμα; <a href="#"
+                    id="toggleRegistration">Εγγραφή</a></label>
+        </form>
+
+        <form id="registrationForm" style="display: none;" action="home.html">
+            <label for="username">Όνομα χρήστη:</label>
+            <input type="text" name="username" required>
+            <label for="password">Κωδικός:</label>
+            <input type="password" name="password" required>
+            <label for="email">email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Τηλέφωνο:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="country">Χώρα:</label>
+            <select id="country" name="country" required>
+                <option value="">Επιλέξτε χώρα</option>
+                <option value="USA">Ελλάδα</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+            </select>
+            <button type="submit">Εγγραφή</button>
+            <label id="signInLabel">Έχετε ήδη λογαριασμό; <a href="#" id="toggleSignIn">Σύνδεση</a></label>
+        </form>
+    </div>
+    <script src="js/register.js"></script>
+</body>
+
+</html>
