@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Σαντοκρήτη - Ο κρυμμένος παράδεισος του Αιγαίου</title>
+    <link href="css/home.css" rel="stylesheet">
+</head>
+<body>
+    <section id="logo">
+        <img src="images/logo.png">
+        <!-- <div>
+            <a class="weatherwidget-io" href="https://forecast7.com/el/38d2521d73/patras/" data-label_1="ΣΑΝΤΟΚΡΗΤΗ" data-font="Palatino" data-icons="Climacons Animated" data-mode="Current" data-theme="original" >PATRAS WEATHER</a>
+            <script>
+                !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+            </script>
+        </div> -->
+    </section>
+    <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+    <nav id="navbar">
+        <ul>
+            <li class="navitem"><a href="home.html">Χάρτης</a></li>
+            <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
+            <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
+            <li class="navitem" id="bookmarks"><a>Τα αποθηκευμένα μου</a></li>
+            <li class="navitem"><a href="sign-in.html">Εγγραφή/Είσοδος</a></li>
+        </ul>
+    </nav>
+    <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;">
+    <section id="map">
+        <div id="map-div">
+            <img src="images/island2.png">
+            <img class="places" src="images/places-orange.png">
+            <img class="places" src="images/places-blue.png">
+            <img class="places" src="images/places-brown.png">
+            <img class="places" src="images/places-purple.png">
+            <img class="places" src="images/places-green.png">
+            <img class="places" src="images/places-pink.png">
+            <img class="places" id="places-many" src="images/places-many.png">
+        </div>
+        <div id="filters-div">
+            <ul id="filters">
+                <li><input id="food" type="checkbox">
+                    <label for="food">Φαγητό</label></li>
+                <li><input id="beach" type="checkbox">
+                    <label for="beach">Παραλίες</label></li>
+                <li><input id="hotel" type="checkbox">
+                    <label for="hotel">Διαμονή</label></li>
+                <li><input id="fun" type="checkbox">
+                    <label for="fun">Διασκέδαση</label></li>
+                <li><input id="sight" type="checkbox">
+                    <label for="sight">Αξιοθέατα</label></li>
+                <li><input id="medical" type="checkbox">
+                    <label for="medical">Περίθαλψη</label></li>
+            </ul>    
+        </div>
+    </section>
+    <script src="js/map.js"></script>
+</body>
+</html>
