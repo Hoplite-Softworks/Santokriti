@@ -4,11 +4,6 @@
     <meta charset="UTF-8" />
     <title>Σαντοκρήτη - Ο κρυμμένος παράδεισος του Αιγαίου</title>
     <link href="css/home.css" rel="stylesheet">
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="css/leaflet.css">
-    <!-- Leaflet.MarkerCluster -->
-    <link href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" rel="stylesheet"/>
-    <link href="Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" rel="stylesheet"/>
 </head>
 <body>
     <section id="logo">
@@ -31,9 +26,16 @@
         </ul>
     </nav>
     <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;">
-    <section id="map-sec">
-        <div id="map">
-            
+    <section id="map">
+        <div id="map-div">
+            <img src="images/island2.png">
+            <img class="places" src="images/places-orange.png">
+            <img class="places" src="images/places-blue.png">
+            <img class="places" src="images/places-brown.png">
+            <img class="places" src="images/places-purple.png">
+            <img class="places" src="images/places-green.png">
+            <img class="places" src="images/places-pink.png">
+            <img class="places" id="places-many" src="images/places-many.png">
         </div>
         <div id="filters-div">
             <ul id="filters">
@@ -52,10 +54,6 @@
             </ul>    
         </div>
     </section>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
     <script src="js/map.js"></script>
-    <script src="Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script>
 </body>
 </html>
