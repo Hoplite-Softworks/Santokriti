@@ -3,13 +3,28 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Task list</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title></title>
         <link rel="stylesheet" href="/style.css">
     </head>
 
     <body>
+        <h1>
+            ΣΑΝΤΟΚΡΗΤΗ
+        </h1>
+        <h2>
+            Ο κρυμμένος παράδεισος του Ιονίου
+        </h2>
+        <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+        <nav id="navbar">
+            <ul>
+                <li class="navitem"><a href="home.html">Χάρτης</a></li>
+                <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
+                <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
+                <li class="navitem" id="bookmarks"><a href="bookmarks.html">Τα αποθηκευμένα μου</a></li>
+                <li class="navitem"><a href="sign-in.html">Εγγραφή/Είσοδος</a></li>
+            </ul>
+        </nav>
+        <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
         <div class="container">
             <div class="row">
                 <div class="col mt-3">
@@ -17,7 +32,7 @@
                 </div>
                 <div class="col mt-3 text-right">
                     {{!-- Η μεταβλητή userId είναι διαθέσιμη μέσω του αντικειμένου res.local που παίρνει τιμή στον controller --}}
-                    {{#if userId}}
+                    {{#if name}}
                         <a href="/logout">Αποσύνδεση</a>
                     {{else}}
                         <a href="/login">Είσοδος</a>
