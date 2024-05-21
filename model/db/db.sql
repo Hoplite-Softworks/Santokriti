@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "User" (
 	"userId" INTEGER PRIMARY KEY AUTOINCREMENT,
 	"name" STRING,
-	"email" STRING,
+	"email" STRING UNIQUE,
 	"password" STRING,
 	"isShopKeeper" BINARY
 );

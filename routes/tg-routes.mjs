@@ -1,20 +1,36 @@
-import express from 'express'
+import express from 'express';
 const router = express.Router();
 
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV !== 'production') {
-    console.log('loading .env');
-    dotenv.config();
-}
+import * as tgController from '../controller/tg-controller.mjs';
 
-const taskListController = await import(`../controller/tg-controller.mjs`);
+//Για την υποστήριξη σύνδεσης/αποσύνδεσης χρηστών
+import * as logInController from '../controller/login-controller-password.mjs';
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
-router.route('/').get((req, res) => { res.redirect('/tasks') });
+router.route('/').get((req, res, next) => {
+    // όταν το φτιάξετε, σχολιάστε την παρακάτω γραμμή
+    //throw new Error('Panos Lelakis 1083712 :)'); 
+    res.redirect('/map');
+});
 
-//router.get('/tasks/remove/:removeTaskId', taskListController.removeTask);
-//router.get('/tasks/toggle/:toggleTaskId', taskListController.toggleTask);
-//router.get('/tasks', taskListController.listAllTasksRender);
-//router.get('/tasks/add/', taskListController.addTask);
+router.get('/bookmark/remove/:removeBookmarkId', logInController.checkAuthenticated, tgController.removeBookmark);
+//router.get('/tasks/toggle/:toggleTaskId', logInController.checkAuthenticated, taskListController.toggleTask);
+router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
+router.get('bookmarks/add/', logInController.checkAuthenticated, tgController.addBookmark);
+
+//Αιτήματα για σύνδεση
+//Δείξε τη φόρμα σύνδεσης.
+router.route('/login').get(logInController.showLogInForm);
+
+// // //Αυτή η διαδρομή καλείται όταν η φόρμα φτάσει στον εξυπηρετητή με POST στο /login. Διεκπεραιώνει τη σύνδεση (login) του χρήστη
+router.route('/login').post(logInController.doLogin);
+
+// //Αποσυνδέει το χρήστη
+router.route('/logout').get(logInController.doLogout);
+
+// //Εγγραφή νέου χρήστη
+router.route('/register').get(logInController.showRegisterForm);
+
+router.post('/register', logInController.doRegister);
 
 export default router;

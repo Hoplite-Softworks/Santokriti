@@ -28,16 +28,16 @@ app.use(express.static('public'))
 //Γενικά όλα τα μέλη του αντικειμένου res.locals είναι προσβάσιμα στη μηχανή template.
 //(http://expressjs.com/en/api.html#res.locals)
 app.use((req, res, next) => {
-    if (req.session) {
-       res.locals.userId = req.session.loggedUserId;
-    } else {
-       res.locals.userId = 'επισκέπτης';
-    }
-    next();
- });
+   if (req.session) {
+      res.locals.userId = req.session.loggedUserId;
+   } else {
+      res.locals.userId = 'επισκέπτης';
+   }
+   next();
+});
 
 //Διαδρομές. Αντί να γράψουμε τις διαδρομές μας εδώ, τις φορτώνουμε από ένα άλλο αρχείο
-import routes from './routes/task-list-routes.mjs';
+import routes from './routes/tg-routes.mjs';
 //και τώρα χρησιμοποιούμε αυτές τις διαδρομές
 app.use('/', routes);
 
@@ -54,13 +54,8 @@ app.use((err, req, res, next) => {
 //Σημ.: η engine πρέπει να έχει ίδιο όνομα με το extname, αλλιώς δεν θα
 //αναγνωριστεί το extname (αν δεν το κάνουμε αυτό, απλά τα αρχεία handlebars θα πρέπει να
 ///τελειώνουν με .handlebars)
-app.engine(
-    'hbs',
-    exphbs.engine({
-       extname: 'hbs',
-    })
- );
+app.engine('hbs', exphbs.engine({ extname: 'hbs', }));
  //και ορίζουμε πως θα χρησιμοποιήσουμε τη μηχανή template με όνομα 'hbs'
- app.set('view engine', 'hbs');
+app.set('view engine', 'hbs');
 
 export { app as tg };

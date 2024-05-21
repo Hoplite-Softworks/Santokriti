@@ -12,7 +12,7 @@ export let showRegisterForm = function (req, res) {
 
 export let doRegister = async function (req, res) {
     try {
-        const registrationResult = await userModel.registerUser(req.body.username, req.body.password);
+        const registrationResult = await userModel.registerUser(req.body.name, req.body.email, req.body.password, req.body.isShopKeeper);
         if (registrationResult.message) {
             res.render('register-password', { message: registrationResult.message })
         }
@@ -30,8 +30,8 @@ export let doLogin = async function (req, res) {
     //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
     //συνάρτηση επιστροφής authenticated
 
-    const user = await userModel.getUserByUsername(req.body.username);
-    if (user == undefined || !user.password || !user.id) {
+    const user = await userModel.getUserByEmail(req.body.email);
+    if (user == undefined || !user.password || !user.userId) {
         res.render('login-password', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
     }
     else {
@@ -41,7 +41,7 @@ export let doLogin = async function (req, res) {
             req.session.loggedUserId = user.id;
             //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
             // res.redirect("/");            
-            const redirectTo = req.session.originalUrl || "/tasks";
+            const redirectTo = req.session.originalUrl || "/map";
 
             res.redirect(redirectTo);
         }
