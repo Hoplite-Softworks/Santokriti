@@ -40,3 +40,4 @@ export async function removeBookmark(req, res, next) {
       next(error);
    }
 }
+

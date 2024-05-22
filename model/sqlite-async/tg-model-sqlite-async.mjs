@@ -29,6 +29,21 @@ export let getAllBookmarks = async (userId) => {
     }
 }
 
+export let getAllBookmarksWithPlaces = async (userId) => {
+    const stmt = await sql.prepare(`
+        SELECT b.bookmarkId, b.date, b.userId, b.placeId, p.name as placeName, p.location, p.description
+        FROM Bookmark AS b
+        JOIN Place p ON b.placeId = p.placeId
+        WHERE b.userId = ?
+    `);
+    try {
+        const bookmarks = await stmt.all(userId);
+        return bookmarks;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export let getPlace = async (placeId) => {
     const stmt = await sql.prepare("SELECT * FROM Place WHERE placeId = ? LIMIT 0, 1");
     try {

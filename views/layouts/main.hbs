@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>ΣΑΝΤΟΚΡΗΤΗ</title>
         <link rel="stylesheet" href="/style.css">
     </head>
 
@@ -14,31 +14,26 @@
         <h2>
             Ο κρυμμένος παράδεισος του Ιονίου
         </h2>
-        <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
+        <h3>{{model}} {{session.loggedUserId}}</h3>
+        <hr>
         <nav id="navbar">
             <ul>
-                <li class="navitem"><a href="home.html">Χάρτης</a></li>
-                <li class="navitem"><a href="info.html">Πληροφορίες</a></li>
-                <li class="navitem"><a href="contact.html">Επικοινωνία</a></li>
-                <li class="navitem" id="bookmarks"><a href="bookmarks.html">Τα αποθηκευμένα μου</a></li>
-                <li class="navitem"><a href="sign-in.html">Εγγραφή/Είσοδος</a></li>
-            </ul>
-        </nav>
-        <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;">
-        <div class="container">
-            <div class="row">
-                <div class="col mt-3">
-                    <h3><a href="/tasks">Οι εργασίες μου</a> - {{model}} {{session.loggedUserId}}</h3>
-                </div>
-                <div class="col mt-3 text-right">
-                    {{!-- Η μεταβλητή userId είναι διαθέσιμη μέσω του αντικειμένου res.local που παίρνει τιμή στον controller --}}
+                <li class="navitem" id="map"><a href="/map">Χάρτης</a></li>
+                <li class="navitem" id="info"><a href="/info">Πληροφορίες</a></li>
+                <li class="navitem" id="contact"><a href="/contact">Επικοινωνία</a></li>
+                <li class="navitem" id="bookmarks"><a href="/bookmarks">Αποθηκευμένα μέρη</a></li>
+                <li class="navitem" id="loginlogout">
                     {{#if name}}
                         <a href="/logout">Αποσύνδεση</a>
                     {{else}}
                         <a href="/login">Είσοδος</a>
-                    {{/if}}
-                </div>
-            </div>
+                    {{/if}}</a>
+                </li>
+            </ul>
+        </nav>
+        <hr>
+        
+        <div class="container">
             {{{body}}}
         </div>
     </body>
