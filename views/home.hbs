@@ -4,11 +4,11 @@
 <hr style="margin-top: 30px; margin-left: 400px; margin-right: 400px;" />
 <nav id="navbar">
     <ul>
-        <li class="navitem"><a href="">Χάρτης</a></li>
-        <li class="navitem"><a href="">Πληροφορίες</a></li>
-        <li class="navitem"><a href="">Επικοινωνία</a></li>
-        <li class="navitem" id="bookmarks"><a>Τα αποθηκευμένα μου</a></li>
-        <li class="navitem"><a href="">Εγγραφή/Είσοδος</a></li>
+        <li class="navitem"><a href="">{{mapMenuOption}}</a></li>
+        <li class="navitem"><a href="">{{infoMenuOption}}</a></li>
+        <li class="navitem"><a href="">{{contactMenuOption}}</a></li>
+        <li class="navitem" id="bookmarks"><a>{{bookmarksMenuOption}}</a></li>
+        <li class="navitem"><a href="">{{registerOrSignInMenuOption}}</a></li>
     </ul>
 </nav>
 <hr style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;" />
@@ -19,17 +19,17 @@
     <div id="filters-div">
         <ul id="filters">
             <li><input id="food" type="checkbox" />
-                <label for="food">Φαγητό</label></li>
+                <label for="food">{{foodFilterOption}}</label></li>
             <li><input id="beach" type="checkbox" />
-                <label for="beach">Παραλίες</label></li>
+                <label for="beach">{{beachFilterOption}}</label></li>
             <li><input id="hotel" type="checkbox" />
-                <label for="hotel">Διαμονή</label></li>
+                <label for="hotel">{{StayingFilterOption}}</label></li>
             <li><input id="fun" type="checkbox" />
-                <label for="fun">Διασκέδαση</label></li>
+                <label for="fun">{{FunFilterOption}}</label></li>
             <li><input id="sight" type="checkbox" />
-                <label for="sight">Αξιοθέατα</label></li>
+                <label for="sight">{{SightsFilterOption}}</label></li>
             <li><input id="medical" type="checkbox" />
-                <label for="medical">Περίθαλψη</label></li>
+                <label for="medical">{{AidFilterOption}}</label></li>
         </ul>
     </div>
 </section>

@@ -1,13 +1,13 @@
 let L = window.L;
 
 let map = L.map("map", {
-    //dragging: false,
-    //zoomControl: false,
+    dragging: false,
+    zoomControl: false,
 }).setView([36.261039, 22.987658], 11);
 
 let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
-    //minZoom: 11,
+    minZoom: 11,
     attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);

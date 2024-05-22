@@ -11,9 +11,15 @@ const tgController = await import(`../controller/tg-controller.mjs`);
 const logInController = await import(`../controller/login-controller-password.mjs`);
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
-router.route('/').get((req, res) => { res.render("home")});
+//router.route('/').get((req, res) => { res.render("home")});
 
 router.get('/home', tgController.listHome);
+
+router.get('/', (req, res) => {
+    res.render('home', {
+        title: req.__('title')
+    });
+});
 
 //Αιτήματα για σύνδεση
 

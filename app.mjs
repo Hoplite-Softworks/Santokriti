@@ -11,6 +11,18 @@ if (process.env.NODE_ENV !== "production") {
     dotenv.config();
 }
 
+import i18n from "i18n";
+
+i18n.configure({
+    locales: ['en', 'es'], // List of supported languages
+    directory: path.join(__dirname, 'locales'), // Path to locales directory
+    defaultLocale: 'en', // Default language
+    queryParameter: 'lang', // Query parameter to change language
+    cookie: 'locale' // Cookie to store the language preference
+});
+
+app.use(i18n.init);
+
 import exphbs from "express-handlebars";
 
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +40,13 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+app.use((req, res, next) => {
+    const lang = req.query.lang || req.cookies.locale || 'en';
+    res.cookie('locale', lang, { maxAge: 900000, httpOnly: true });
+    req.setLocale(lang);
+    next();
+ });
 
 import routes from "./routes/tg-routes.mjs";
 app.use("/", routes);
