@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title>Info</title>
-    <link href="css/common.css" rel="stylesheet">
-    <link href="css/info.css" rel="stylesheet">
-</head>
-<body>
-    <div id="header-navbar-placeholder"></div>
-
     <section id="intro">Καλωσορίσατε στη Σαντοκρήτη,<br>ένα μοναδικό νησί με πλούσια ιστορία και κληρονομιά.<br><br>
         Η Σαντοκρήτη συνδυάζει τον αρχαίο πολιτισμό με τη σύγχρονη ζωή,<br>δημιουργώντας μια αξέχαστη εμπειρία για τους
         επισκέπτες της.<br><br>
@@ -100,18 +89,3 @@
             </div>
         </article>
     </section>
-    <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            var navbarPlaceholder = document.getElementById('header-navbar-placeholder');
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'header_navbar.html', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    navbarPlaceholder.innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        });
-    </script>
-</body>
-</html>

@@ -33,4 +33,10 @@ router.route('/register').get(logInController.showRegisterForm);
 
 router.post('/register', logInController.doRegister);
 
+router.get('/info', tgController.info);
+
+router.get('/contact', tgController.contact);
+
+router.get('/map', tgController.map);
+
 export default router;
