@@ -61,7 +61,8 @@ export async function contact(req, res, next) {
 
 export async function map(req, res, next) {
    try {
-      res.render('map', { model: process.env.MODEL, session: req.session });
+      const places = await model.getAllPlaces();
+      res.render('map', { places: JSON.stringify(places), model: process.env.MODEL, session: req.session });
    } catch (error) {
       next(error);
    }

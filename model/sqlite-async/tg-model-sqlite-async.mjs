@@ -31,7 +31,7 @@ export let getAllPlaces = async () => {
 
 export let getAllBookmarksWithPlaces = async (userId) => {
     const stmt = await sql.prepare(`
-        SELECT b.bookmarkId, b.date, b.userId, b.placeId, p.name as placeName, p.location, p.description
+        SELECT b.bookmarkId, b.date, b.userId, b.placeId, p.name as placeName, p.description
         FROM Bookmark AS b
         JOIN Place AS p ON b.placeId = p.placeId
         WHERE b.userId = ?

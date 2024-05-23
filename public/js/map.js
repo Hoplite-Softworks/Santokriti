@@ -14,14 +14,14 @@ let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 var popup = L.popup();
 
-async function fetchPlaces() {
+//async function fetchPlaces() {
     //const response = await fetch(`../places.json`);
-    
-    return response.json();
-}
+    //const response = await fetch('/places');
+    //return response.json();
+//}
 
 async function loadPlacesOnMap() {
-    const places = await fetchPlaces();
+    //const places = await fetchPlaces();
     const markers = L.markerClusterGroup({
         spiderfyOnMaxZoom: false,
         showCoverageOnHover: false,
@@ -29,16 +29,27 @@ async function loadPlacesOnMap() {
     });
 
     places.forEach((place) => {
-        let id = place["id"];
-        let name = place["name"];
-        let description = place["name"];
-        let latitude = place["lat"];
-        let longtitude = place["long"];
-        let markerImage = place["markerImage"];
-        let keywords = place["keywords"].join(", ");
+        //let id = place["placeId"];
+        //let name = place["name"];
+        //let description = place["description"];
+        //let latitude = place["lat"];
+        //let longitude = place["lng"];
+        //let markerImage = place["markerImage"];
+        //let keywords = place["keywords"].join(", ");
+        //let innerHTML = `<img class="marker-image" src="${markerImage}"><div class="marker-text"><div>${name}</div><div>${keywords}</div></div>`;
+        let id = place.placeId;
+        let name = place.name;
+        let description = place.description;
+        let latitude = place.lat;
+        let longitude = place.lng;
+        let markerImage = place.markerImage;
+        let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
         let innerHTML = `<img class="marker-image" src="${markerImage}"><div class="marker-text"><div>${name}</div><div>${keywords}</div></div>`;
+        console.log(id);
+        console.log(latitude);
+        console.log(longitude);
 
-        let newMarker = L.marker([latitude, longtitude])
+        let newMarker = L.marker([latitude, longitude])
             .addTo(map)
             .bindPopup(innerHTML, { maxWidth: "auto", closeButton: false });
 
