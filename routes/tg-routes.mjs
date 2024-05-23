@@ -10,13 +10,13 @@ import * as logInController from '../controller/login-controller-password.mjs';
 router.route('/').get((req, res, next) => {
     // όταν το φτιάξετε, σχολιάστε την παρακάτω γραμμή
     //throw new Error('Panos Lelakis 1083712 :)'); 
-    res.redirect('/map');
+    res.redirect('/login');
 });
 
-router.get('/bookmark/remove/:removeBookmarkId', logInController.checkAuthenticated, tgController.removeBookmark);
+router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
 //router.get('/tasks/toggle/:toggleTaskId', logInController.checkAuthenticated, taskListController.toggleTask);
 router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
-router.get('bookmarks/add/', logInController.checkAuthenticated, tgController.addBookmark);
+router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgController.addBookmark);
 
 //Αιτήματα για σύνδεση
 //Δείξε τη φόρμα σύνδεσης.

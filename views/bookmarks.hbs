@@ -6,7 +6,7 @@
                 <p>Τοποθεσία: {{this.location}}</p>
                 <p>Περιγραφή: {{this.description}}</p>
                 <p>Ημερομηνία προσθήκης: {{this.date}}</p>
-                <form action="/removeBookmark/{{this.placeId}}" method="post">
+                <form action="/bookmarks/remove/{{this.placeId}}">
                     <button type="submit">Αφαίρεση από τα αποθηκευμένα</button>
                 </form>
             </li>
