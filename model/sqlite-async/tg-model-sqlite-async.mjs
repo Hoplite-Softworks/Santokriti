@@ -19,21 +19,21 @@ export let getAllPlaces = async () => {
     }
 }
 
-export let getAllBookmarks = async (userId) => {
-    const stmt = await sql.prepare("SELECT * FROM Bookmark WHERE userId = ?");
-    try {
-        const bookmarks = await stmt.all(userId);
-        return bookmarks;
-    } catch (err) {
-        throw err;
-    }
-}
+//export let getAllBookmarks = async (userId) => {
+    //const stmt = await sql.prepare("SELECT * FROM Bookmark WHERE userId = ?");
+    //try {
+        //const bookmarks = await stmt.all(userId);
+        //return bookmarks;
+    //} catch (err) {
+        //throw err;
+    //}
+//}
 
 export let getAllBookmarksWithPlaces = async (userId) => {
     const stmt = await sql.prepare(`
         SELECT b.bookmarkId, b.date, b.userId, b.placeId, p.name as placeName, p.location, p.description
         FROM Bookmark AS b
-        JOIN Place p ON b.placeId = p.placeId
+        JOIN Place AS p ON b.placeId = p.placeId
         WHERE b.userId = ?
     `);
     try {

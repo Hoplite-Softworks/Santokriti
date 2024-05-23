@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt'
-
 import * as userModel from '../model/sqlite-async/tg-model-sqlite-async.mjs';
 
 export let showLogInForm = function (req, res) {
@@ -35,13 +34,16 @@ export let doLogin = async function (req, res) {
         res.render('login-password', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
     }
     else {
-        const match = await bcrypt.compare(req.body.password, user.password);
-        if (match) {
+        //const match = await bcrypt.compare(req.body.password, user.password);
+        console.log(req.body.password);
+        console.log(user.password);
+        //if (match) {
+        if (req.body.password == user.password) {
             //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
-            req.session.loggedUserId = user.id;
+            req.session.loggedUserId = user.userId;
             //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
             // res.redirect("/");            
-            const redirectTo = req.session.originalUrl || "/map";
+            const redirectTo = req.session.originalUrl || "/bookmarks";
 
             res.redirect(redirectTo);
         }

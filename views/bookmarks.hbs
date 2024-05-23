@@ -1,0 +1,17 @@
+{{#if bookmarks.length}}
+    <ul>
+        {{#each bookmarks}}
+            <li>
+                <h3>{{this.placeName}}</h3>
+                <p>Τοποθεσία: {{this.location}}</p>
+                <p>Περιγραφή: {{this.description}}</p>
+                <p>Ημερομηνία προσθήκης: {{this.date}}</p>
+                <form action="/removeBookmark/{{this.placeId}}" method="post">
+                    <button type="submit">Αφαίρεση από τα αποθηκευμένα</button>
+                </form>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>Δεν έχετε αποθηκεύσει κανένα μέρος ακόμα.</p>
+{{/if}}

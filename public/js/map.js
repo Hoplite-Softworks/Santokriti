@@ -15,7 +15,8 @@ let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 var popup = L.popup();
 
 async function fetchPlaces() {
-    const response = await fetch(`../places.json`);
+    //const response = await fetch(`../places.json`);
+    
     return response.json();
 }
 
