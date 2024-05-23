@@ -23,7 +23,7 @@
                 <li class="navitem" id="contact"><a href="/contact">Επικοινωνία</a></li>
                 <li class="navitem" id="bookmarks"><a href="/bookmarks">Αποθηκευμένα μέρη</a></li>
                 <li class="navitem" id="loginlogout">
-                    {{#if name}}
+                    {{#if session.loggedUserId}}
                         <a href="/logout">Αποσύνδεση</a>
                     {{else}}
                         <a href="/login">Είσοδος</a>
