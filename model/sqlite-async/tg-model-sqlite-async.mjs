@@ -110,14 +110,14 @@ export let userExistsByEmail = async (email) => {
 }
 
 export let registerUser = async function (name, email, password, isShopKeeper) {
-    const userExists = userExistsByEmail(email);
+    const userExists = await userExistsByEmail(email);
     if (userExists) {
         return { message: "Υπάρχει ήδη χρήστης με αυτό το όνομα" };
     } else {
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
             const stmt = await sql.prepare('INSERT INTO User VALUES (null, ?, ?, ?, ?)');
-            const info = await stmt.run(name, email, password, isShopKeeper);
+            const info = await stmt.run(name, email, hashedPassword, isShopKeeper);
             return info.lastID;
         } catch (error) {
             throw error;

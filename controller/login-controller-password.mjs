@@ -6,7 +6,7 @@ export let showLogInForm = function (req, res) {
 }
 
 export let showRegisterForm = function (req, res) {
-    res.render('register-password', {});
+    res.render('register-password', { model: process.env.MODEL });
 }
 
 export let doRegister = async function (req, res) {
@@ -34,11 +34,9 @@ export let doLogin = async function (req, res) {
         res.render('login-password', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
     }
     else {
-        //const match = await bcrypt.compare(req.body.password, user.password);
-        console.log(req.body.password);
-        console.log(user.password);
-        //if (match) {
-        if (req.body.password == user.password) {
+        const match = await bcrypt.compare(req.body.password, user.password);
+        if (match) {
+        //if (req.body.password == user.password) {
             //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
             req.session.loggedUserId = user.userId;
             //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
