@@ -2,18 +2,18 @@ import bcrypt from 'bcrypt'
 import * as userModel from '../model/sqlite-async/tg-model-sqlite-async.mjs';
 
 export let showLogInForm = function (req, res) {
-    res.render('login-password', { model: process.env.MODEL });
+    res.render('login', { model: process.env.MODEL });
 }
 
 export let showRegisterForm = function (req, res) {
-    res.render('register-password', { model: process.env.MODEL });
+    res.render('register', { model: process.env.MODEL });
 }
 
 export let doRegister = async function (req, res) {
     try {
         const registrationResult = await userModel.registerUser(req.body.name, req.body.email, req.body.password, req.body.isShopKeeper);
         if (registrationResult.message) {
-            res.render('register-password', { message: registrationResult.message })
+            res.render('register', { message: registrationResult.message })
         }
         else {
             res.redirect('/login');
@@ -21,7 +21,7 @@ export let doRegister = async function (req, res) {
     } catch (error) {
         console.error('registration error: ' + error);
         //FIXME: δε θα έπρεπε να περνάμε το εσωτερικό σφάλμα στον χρήστη
-        res.render('register-password', { message: error });
+        res.render('register', { message: error });
     }
 }
 
@@ -31,7 +31,7 @@ export let doLogin = async function (req, res) {
 
     const user = await userModel.getUserByEmail(req.body.email);
     if (user == undefined || !user.password || !user.userId) {
-        res.render('login-password', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
+        res.render('login', { message: 'Δε βρέθηκε αυτός ο χρήστης' });
     }
     else {
         const match = await bcrypt.compare(req.body.password, user.password);

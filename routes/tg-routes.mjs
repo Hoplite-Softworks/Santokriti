@@ -8,13 +8,11 @@ import * as logInController from '../controller/login-controller-password.mjs';
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
 router.route('/').get((req, res, next) => {
-    // όταν το φτιάξετε, σχολιάστε την παρακάτω γραμμή
     //throw new Error('Panos Lelakis 1083712 :)'); 
     res.redirect('/login');
 });
 
 router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
-//router.get('/tasks/toggle/:toggleTaskId', logInController.checkAuthenticated, taskListController.toggleTask);
 router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
 router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgController.addBookmark);
 
