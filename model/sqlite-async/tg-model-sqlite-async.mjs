@@ -55,19 +55,6 @@ export let addBookmark = async (userId, placeId) => {
     }
 }
 
-//Αλλαγή της κατάστασης μιας εργασίας
-//export let toggleTask = async (taskId, userId) => {
-    //Αν η εγγραφή με id ίσο με taskId έχει status=0 τότε κάντο 1, αλλιώς κάντο 0
-    //const stmt = await sql.prepare('UPDATE task SET status = CASE WHEN status = 0 THEN 1 ELSE 0 END WHERE id = ? AND user_id = ?');
-    //try {
-        //await stmt.run(taskId, userId);
-        //return true
-    //}
-    //catch (err) {
-        //throw err;
-    //}
-//}
-
 export let removeBookmark = async (placeId, userId) => {
     const stmt = await sql.prepare("DELETE FROM Bookmark WHERE placeId = ? AND userId = ?");
     try {
@@ -80,7 +67,7 @@ export let removeBookmark = async (placeId, userId) => {
 }
 
 export let getUserByEmail = async (email) => {
-    const stmt = await sql.prepare("SELECT userId, email, password FROM User WHERE email = ? LIMIT 0, 1");
+    const stmt = await sql.prepare("SELECT userId, email, password, isShopKeeper FROM User WHERE email = ? LIMIT 0, 1");
     try {
         const user = await stmt.all(email);
         return user[0];
@@ -114,3 +101,20 @@ export let registerUser = async function (name, email, password, isShopKeeper) {
         }
     }
 }
+
+export let getOwnedPlacesWithBookmarkCounts = async (userId) => {
+    const stmt = await sql.prepare(`
+        SELECT p.placeId, p.name AS placeName, COUNT(b.bookmarkId) AS bookmarkCount
+        FROM Owns o
+        JOIN Place p ON o.placeId = p.placeId
+        LEFT JOIN Bookmark b ON p.placeId = b.placeId
+        WHERE o.userId = ?
+        GROUP BY p.placeId
+    `);
+    try {
+        const ownedPlaces = await stmt.all(userId);
+        return ownedPlaces;
+    } catch (err) {
+        throw err;
+    }
+};

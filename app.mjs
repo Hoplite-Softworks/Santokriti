@@ -30,8 +30,10 @@ app.use(express.static('public'))
 app.use((req, res, next) => {
    if (req.session) {
       res.locals.userId = req.session.loggedUserId;
+      res.locals.isShopKeeper = req.session.isShopKeeper;
    } else {
       res.locals.userId = 'επισκέπτης';
+      res.locals.isShopKeeper = 0;
    }
    next();
 });

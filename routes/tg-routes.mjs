@@ -16,6 +16,8 @@ router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgC
 router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
 router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgController.addBookmark);
 
+router.get('/owned', logInController.checkAuthenticated, logInController.checkShopKeeper, tgController.listOwnedPlaces);
+
 //Αιτήματα για σύνδεση
 //Δείξε τη φόρμα σύνδεσης.
 router.route('/login').get(logInController.showLogInForm);

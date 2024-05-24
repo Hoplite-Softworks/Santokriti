@@ -36,9 +36,9 @@ export let doLogin = async function (req, res) {
     else {
         const match = await bcrypt.compare(req.body.password, user.password);
         if (match) {
-        //if (req.body.password == user.password) {
             //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
             req.session.loggedUserId = user.userId;
+            req.session.isShopKeeper = user.isShopKeeper;
             //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/" 
             // res.redirect("/");            
             const redirectTo = req.session.originalUrl || "/bookmarks";
@@ -76,5 +76,13 @@ export let checkAuthenticated = function (req, res, next) {
             console.log("not authenticated, redirecting to /login")
             res.redirect('/login');
         }
+    }
+}
+
+export let checkShopKeeper = function (req, res, next) {
+    if (req.session.isShopKeeper) {
+        next();
+    } else {
+        res.render('contact', { message: 'You must be a shopkeeper to access the owned page. Contact the developers if you want to apply as a shopkeeper.' });
     }
 }

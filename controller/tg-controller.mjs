@@ -1,9 +1,3 @@
-/**
- * Είναι ο controller για τη σελίδα που δημιουργείται με το ./view/bookmarks.hbs
- *
- * Η tasks αλλάζει τα περιεχόμενά της στέλνοντας αιτήματα HTTP στον εξυπηρετητή.
- *
- */
 import * as model from '../model/sqlite-async/tg-model-sqlite-async.mjs';
 
 export async function listAllBookmarksRender(req, res, next) {
@@ -81,5 +75,15 @@ export async function placeInfo(req, res, next) {
       }
    } catch (error) {
       next(error);
+   }
+}
+
+export async function listOwnedPlaces(req, res, next) {
+   const userId = req.session.loggedUserId;
+   try {
+       const ownedPlaces = await model.getOwnedPlacesWithBookmarkCounts(userId);
+       res.render('owned', { ownedPlaces, model: process.env.MODEL, session: req.session });
+   } catch (error) {
+       next(error);
    }
 }

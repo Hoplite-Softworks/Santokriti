@@ -1,0 +1,15 @@
+{{#if message}}
+    <p>{{message}}</p>
+{{/if}}
+{{#if ownedPlaces.length}}
+    <ul>
+        {{#each ownedPlaces}}
+            <li>
+                <h3>{{this.placeName}}</h3>
+                <p>Bookmark count: {{this.bookmarkCount}}</p>
+            </li>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>Δεν είστε ιδιοκτήτης κάποιου μαγαζιού ακόμα.</p>
+{{/if}}

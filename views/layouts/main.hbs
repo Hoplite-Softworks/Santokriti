@@ -22,6 +22,9 @@
                 <li class="navitem" id="info"><a href="/info">Πληροφορίες</a></li>
                 <li class="navitem" id="contact"><a href="/contact">Επικοινωνία</a></li>
                 <li class="navitem" id="bookmarks"><a href="/bookmarks">Αποθηκευμένα μέρη</a></li>
+                {{#if session.isShopKeeper}}
+                    <li><a href="/owned">Owned Places</a></li>
+                {{/if}}
                 <li class="navitem" id="loginlogout">
                     {{#if session.loggedUserId}}
                         <a href="/logout">Αποσύνδεση</a>
