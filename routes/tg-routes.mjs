@@ -11,17 +11,24 @@ const tgController = await import(`../controller/tg-controller.mjs`);
 const logInController = await import(`../controller/login-controller-password.mjs`);
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
-//router.route('/').get((req, res) => { res.render("home")});
+router.route('/').get((req, res) => { res.redirect('/home');});
 
 router.get('/home', tgController.listHome);
 
-router.get('/', (req, res) => {
+/*router.get('/', (req, res) => {
     res.render('home', {
         title: req.__('title')
     });
-});
+});*/
 
-//Αιτήματα για σύνδεση
+router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
+router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
+router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgController.addBookmark);
+
+router.get('/info', tgController.info);
+
+router.get('/contact', tgController.contact);
+
 
 //Δείξε τη φόρμα σύνδεσης.
 router.route('/login').get(logInController.showLogInForm);
@@ -36,5 +43,6 @@ router.route('/logout').get(logInController.doLogout);
 router.route('/register').get(logInController.showRegisterForm);
 
 router.post('/register', logInController.doRegister);
+
 
 export default router;

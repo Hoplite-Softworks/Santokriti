@@ -13,13 +13,17 @@ if (process.env.NODE_ENV !== "production") {
 
 import i18n from "i18n";
 
+import cookieParser from "cookie-parser";
+
 i18n.configure({
-    locales: ['en', 'es'], // List of supported languages
+    locales: ['en', 'el', 'es'], // List of supported languages
     directory: path.join(__dirname, 'locales'), // Path to locales directory
-    defaultLocale: 'en', // Default language
+    defaultLocale: 'el', // Default language
     queryParameter: 'lang', // Query parameter to change language
     cookie: 'locale' // Cookie to store the language preference
 });
+
+app.use(cookieParser());
 
 app.use(i18n.init);
 
@@ -32,6 +36,7 @@ import tgSession from "./app-setup/app-setup-session.mjs";
 app.use(tgSession);
 
 app.use(express.static("public"));
+
 app.use((req, res, next) => {
     if (req.session) {
         res.locals.userId = req.session.loggedUserId;

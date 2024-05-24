@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "User" (
 	"userId" INTEGER PRIMARY KEY AUTOINCREMENT,
 	"name" STRING,
-	"email" STRING,
+	"email" STRING UNIQUE,
 	"password" STRING,
 	"isShopKeeper" BINARY
 );
@@ -9,9 +9,11 @@ CREATE TABLE IF NOT EXISTS "User" (
 CREATE TABLE IF NOT EXISTS "Place" (
 	"placeId" INTEGER PRIMARY KEY AUTOINCREMENT,
 	"name" STRING,
-	"location" STRING,
-	"description" TEXT,
-	"photosDir" STRING
+	"lat" REAL,
+	"lng" REAL,
+	"markerImage" TEXT,
+	"keywords" TEXT,
+	"description" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Bookmark" (

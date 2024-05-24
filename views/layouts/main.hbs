@@ -22,6 +22,32 @@
 
     </head>
 
-    <body> {{{body}}}</body>
+    <body>
+        <section id="logo">
+            <img src="/images/logo.png" />
+        </section>
+        <hr
+            style="margin-top: 30px; margin-left: 400px; margin-right: 400px;"
+        />
+        <nav id="navbar">
+            <ul>
+                <li class="navitem"><a href="">{{mapMenuOption}}</a></li>
+                <li class="navitem"><a href="">{{infoMenuOption}}</a></li>
+                <li class="navitem"><a href="">{{contactMenuOption}}</a></li>
+                <li class="navitem" id="bookmarks"><a
+                    >{{bookmarksMenuOption}}</a></li>
+                <li class="navitem"><a
+                        href=""
+                    >{{registerOrSignInMenuOption}}</a></li>
+            </ul>
+        </nav>
+        <hr
+            style="margin-bottom: 30px; margin-left: 400px; margin-right: 400px;"
+        />
+
+        <div class="container">
+            {{{body}}}
+        </div>
+    </body>
 
 </html>
