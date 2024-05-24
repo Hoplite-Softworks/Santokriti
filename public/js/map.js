@@ -43,9 +43,26 @@ async function loadPlacesOnMap() {
 
         let newMarker = L.marker([latitude, longitude])
             .addTo(map)
-            .bindPopup(innerHTML, { maxWidth: "auto", closeButton: false });
+            .bindPopup(innerHTML, { maxWidth: "auto", closeButton: true });
 
         markers.addLayer(newMarker);
+
+        // Add hover functionality
+        let hoverTimeout;
+        newMarker.on('mouseover', function (e) {
+            hoverTimeout = setTimeout(() => {
+                newMarker.openPopup();
+            }, 1 * 1000); // 1 second
+        });
+        
+        newMarker.on('mouseout', function (e) {
+            clearTimeout(hoverTimeout);
+            newMarker.closePopup();
+        });
+        
+        newMarker.on('click', function (e) {
+            window.location.href = `/place/${id}`;
+        });
     });
 
     map.addLayer(markers);
