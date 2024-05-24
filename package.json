@@ -23,6 +23,9 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "hbs": "^4.2.0",
+    "jquery": "^3.7.1",
+    "jQuery": "^1.7.4",
+    "slick-carousel": "^1.8.1",
     "sqlite-async": "^1.2.0"
   }
 }

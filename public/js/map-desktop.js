@@ -27,19 +27,23 @@ async function loadPlacesOnMap() {
         let description = place.description;
         let latitude = place.lat;
         let longitude = place.lng;
-        let markerImage = place.markerImage;
+        let markerImages = place.markerImage.split(', '); // Assuming images are stored as comma-separated values
+        //let markerImages = place.markerImage.split(',').map(image => image.trim());
         let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
+        
+        //let imageSlides = markerImages.map(image => `<div><img class="marker-image" src="${image}"></div>`).join('');
+        // Creating the carousel HTML
         let innerHTML = `
-            <img class="marker-image" src="${markerImage}">
+            <div class="carousel">
+                ${markerImages.map(img => `<div><img src="${img}" alt="${name}" style="max-width: 100px; max-height: 100px;"></div>`).join('')}
+            </div>
             <div class="marker-text">
                 <div>${name}</div>
                 <div>${keywords}</div>
-                <a href="/place/${id}">More Info</a>
+                
             </div>
         `;
-        console.log(id);
-        console.log(latitude);
-        console.log(longitude);
+        //<a href="/place/${id}">More Info</a>
 
         let newMarker = L.marker([latitude, longitude])
             .addTo(map)
@@ -47,12 +51,16 @@ async function loadPlacesOnMap() {
 
         markers.addLayer(newMarker);
 
-        // Add hover functionality
         let hoverTimeout;
+        // Add mouseover and mouseout events to keep popup open
         newMarker.on('mouseover', function (e) {
             hoverTimeout = setTimeout(() => {
                 newMarker.openPopup();
-            }, 1 * 1000); // 1 second
+                $('.carousel').slick({
+                    autoplay: true,
+                    dots: true,
+                });
+            }, 1.5 * 1000); // 1.5 second
         });
         
         newMarker.on('mouseout', function (e) {
@@ -63,6 +71,43 @@ async function loadPlacesOnMap() {
         newMarker.on('click', function (e) {
             window.location.href = `/place/${id}`;
         });
+
+        // Open popup on marker click (for PC)
+        //newMarker.on('click', function (e) {
+            //newMarker.openPopup();
+        //});
+
+        // Open popup on marker touchstart (for mobile)
+        //newMarker.on('touchstart', function (e) {
+            //newMarker.openPopup();
+        //});
+
+        //let tapCount = 0;
+        //newMarker.on('touchstart', function (e) {
+            //console.log('TAP');
+            //tapCount++;
+            //if (tapCount === 1) {
+                // First tap, open the popup
+                //newMarker.togglePopup();
+                //$('.carousel').slick({
+                    //autoplay: true,
+                    //dots: true,
+                //});
+            //} else {
+                // Second tap, redirect to place page
+                //window.location.href = `/place/${id}`;
+                //newMarker.togglePopup();
+            //}
+        //});
+
+        // Add click/touch event to popup content to navigate to place page
+        //newMarker.on('popupopen', function (e) {
+            //let popupContent = e.popup.getContent();
+            //$(popupContent).find('.carousel').on('click touchstart', function () {
+                //let placeId = $(this).closest('.leaflet-popup-content').data('place-id');
+                //window.location.href = `/place/${placeId}`;
+            //});
+        //});
     });
 
     map.addLayer(markers);

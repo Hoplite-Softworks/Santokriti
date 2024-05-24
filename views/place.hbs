@@ -1,6 +1,33 @@
+<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
+<style>
+    .place-image {
+        max-width: 80%;
+        height: auto;
+    }
+</style>
+
 <h3>{{place.name}} - στην Σαντοκρήτη</h3>
-<p>{{place.name}}</p>
 <p>{{place.description}}</p>
 <p>Keywords: {{place.keywords}}</p>
-<img src="{{place.markerImage}}" alt="{{place.name}}">
+<div class="carousel">
+    {{#each place.images}}
+        <div><img src="{{this}}" alt="{{../place.name}}" class="place-image"></div>
+    {{/each}}
+</div>
 <a href="/map">Back to map</a>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.carousel').slick({
+            autoplay: true,
+            dots: true,
+        });
+    });
+</script>

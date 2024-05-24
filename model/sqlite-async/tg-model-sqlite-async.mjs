@@ -38,7 +38,7 @@ export let getPlace = async (placeId) => {
     const stmt = await sql.prepare("SELECT * FROM Place WHERE placeId = ? LIMIT 0, 1");
     try {
         const place = await stmt.all(placeId);
-        return place;
+        return place[0];
     } catch (err) {
         throw err;
     }

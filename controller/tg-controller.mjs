@@ -71,8 +71,11 @@ export async function placeInfo(req, res, next) {
    const placeId = req.params.placeId;
    try {
       const place = await model.getPlace(placeId);
-      if (place.length > 0) {
-         res.render('place', { place: place[0], model: process.env.MODEL, session: req.session });
+      if (place) {
+         // Assuming markerImage contains comma-separated image paths
+         place.images = place.markerImage.split(', '); 
+         //place.images = place.markerImage.split(',').map(image => image.trim());
+         res.render('place', { place: place, model: process.env.MODEL, session: req.session });
       } else {
          res.status(404).send('Place not found');
       }

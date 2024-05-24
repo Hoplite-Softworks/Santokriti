@@ -29,9 +29,14 @@
     src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"
 ></script>--}}
 
+    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
     <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
     <style>
         #map {
             height: 100vh;
@@ -51,10 +56,12 @@
             width: 100px; /* Adjust the width as needed */
             height: auto; /* Maintain the aspect ratio */
         }
-    </style>
-</head>
 
-<body>
+        .leaflet-popup-content {
+            width: 150px; /* Set your desired width here */
+        }
+    </style>
+
     <section id="map-sec">
         <div id="map"></div>
         <div id="filters-div">
@@ -87,11 +94,17 @@
         </div>
     </section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>const places = {{{places}}}; // Pass places data to JavaScript</script>
     <script>
-        // Pass places data to JavaScript
-        const places = {{{places}}};
+        // Detect user agent to determine whether to load desktop or mobile map script
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.write('<script src="/js/map-mobile.js"><\/script>');
+        } else {
+            document.write('<script src="/js/map-desktop.js"><\/script>');
+        }
     </script>
-    <script src="/js/map.js"></script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
