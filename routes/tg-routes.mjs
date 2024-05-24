@@ -37,4 +37,6 @@ router.get('/contact', tgController.contact);
 
 router.get('/map', tgController.map);
 
+router.get('/place/:placeId', tgController.placeInfo);
+
 export default router;

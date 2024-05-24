@@ -4,7 +4,6 @@
  * Η tasks αλλάζει τα περιεχόμενά της στέλνοντας αιτήματα HTTP στον εξυπηρετητή.
  *
  */
-//import { Bookmark as MyBookmark } from '../model/bookmark.js';
 import * as model from '../model/sqlite-async/tg-model-sqlite-async.mjs';
 
 export async function listAllBookmarksRender(req, res, next) {
@@ -63,6 +62,20 @@ export async function map(req, res, next) {
    try {
       const places = await model.getAllPlaces();
       res.render('map', { places: JSON.stringify(places), model: process.env.MODEL, session: req.session });
+   } catch (error) {
+      next(error);
+   }
+}
+
+export async function placeInfo(req, res, next) {
+   const placeId = req.params.placeId;
+   try {
+      const place = await model.getPlace(placeId);
+      if (place.length > 0) {
+         res.render('place', { place: place[0], model: process.env.MODEL, session: req.session });
+      } else {
+         res.status(404).send('Place not found');
+      }
    } catch (error) {
       next(error);
    }

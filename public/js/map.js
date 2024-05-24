@@ -14,14 +14,7 @@ let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 var popup = L.popup();
 
-//async function fetchPlaces() {
-    //const response = await fetch(`../places.json`);
-    //const response = await fetch('/places');
-    //return response.json();
-//}
-
 async function loadPlacesOnMap() {
-    //const places = await fetchPlaces();
     const markers = L.markerClusterGroup({
         spiderfyOnMaxZoom: false,
         showCoverageOnHover: false,
@@ -29,14 +22,6 @@ async function loadPlacesOnMap() {
     });
 
     places.forEach((place) => {
-        //let id = place["placeId"];
-        //let name = place["name"];
-        //let description = place["description"];
-        //let latitude = place["lat"];
-        //let longitude = place["lng"];
-        //let markerImage = place["markerImage"];
-        //let keywords = place["keywords"].join(", ");
-        //let innerHTML = `<img class="marker-image" src="${markerImage}"><div class="marker-text"><div>${name}</div><div>${keywords}</div></div>`;
         let id = place.placeId;
         let name = place.name;
         let description = place.description;
@@ -44,7 +29,14 @@ async function loadPlacesOnMap() {
         let longitude = place.lng;
         let markerImage = place.markerImage;
         let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
-        let innerHTML = `<img class="marker-image" src="${markerImage}"><div class="marker-text"><div>${name}</div><div>${keywords}</div></div>`;
+        let innerHTML = `
+            <img class="marker-image" src="${markerImage}">
+            <div class="marker-text">
+                <div>${name}</div>
+                <div>${keywords}</div>
+                <a href="/place/${id}">More Info</a>
+            </div>
+        `;
         console.log(id);
         console.log(latitude);
         console.log(longitude);
