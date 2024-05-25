@@ -1,24 +1,31 @@
-<section id="map-sec">
-    <div id="map">
+<div class="row-8">
+    <div class="col-auto">
+        <div id="map">
 
+        </div>
     </div>
-    <div id="filters-div">
-        <ul id="filters">
-            <li><input id="food" type="checkbox" />
-                <label for="food">{{foodFilterOption}}</label></li>
-            <li><input id="beach" type="checkbox" />
-                <label for="beach">{{beachFilterOption}}</label></li>
-            <li><input id="hotel" type="checkbox" />
-                <label for="hotel">{{StayingFilterOption}}</label></li>
-            <li><input id="fun" type="checkbox" />
-                <label for="fun">{{FunFilterOption}}</label></li>
-            <li><input id="sight" type="checkbox" />
-                <label for="sight">{{SightsFilterOption}}</label></li>
-            <li><input id="medical" type="checkbox" />
-                <label for="medical">{{AidFilterOption}}</label></li>
-        </ul>
+</div>
+<div class="floating-container">
+    <div ><input id="food" type="checkbox" />
+        <label for="food">{{foodFilterOption}}</label>
     </div>
-</section>
+    <div ><input id="beach" type="checkbox" />
+        <label for="beach">{{beachFilterOption}}</label>
+    </div>
+    <div ><input id="hotel" type="checkbox" />
+        <label for="hotel">{{StayingFilterOption}}</label>
+    </div>
+    <div><input id="fun" type="checkbox" />
+        <label for="fun">{{FunFilterOption}}</label>
+    </div>
+    <div><input id="sight" type="checkbox" />
+        <label for="sight">{{SightsFilterOption}}</label>
+    </div>
+    <div><input id="medical" type="checkbox" />
+        <label for="medical">{{AidFilterOption}}</label>
+    </div>
+</div>
+
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -28,6 +35,7 @@
     src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"
 ></script>
 <script>
-    const places = {{{places}}};
+    const places =
+    {{{places}}};
 </script>
 <script src="/js/map.js"></script>

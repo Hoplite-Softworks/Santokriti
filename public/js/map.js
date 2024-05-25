@@ -31,13 +31,38 @@ async function loadPlacesOnMap() {
         let longitude = place.lng;
         let markerImage = place.markerImage;
         let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
-        let innerHTML = `<img class="marker-image" src="${markerImage}"><div class="marker-text"><div>${name}</div><div>${keywords}</div></div>`;
+        let innerHTML = `
+        <img class="marker-image" src="${markerImage}">
+        <div class="marker-text">
+        <div>${name}</div>
+        <div>${keywords}</div>
+        <a href="/place/${id}">More Info</a>
+        </div>`;
 
         let newMarker = L.marker([latitude, longitude])
             .addTo(map)
             .bindPopup(innerHTML, { maxWidth: "auto", closeButton: false });
 
         markers.addLayer(newMarker);
+
+        //
+        // Add hover functionality
+        /*let hoverTimeout;
+        newMarker.on('mouseover', function (e) {
+            hoverTimeout = setTimeout(() => {
+                newMarker.openPopup();
+            }, 1 * 1000); // 1 second
+        });
+        
+        newMarker.on('mouseout', function (e) {
+            clearTimeout(hoverTimeout);
+            newMarker.closePopup();
+        });
+        
+        newMarker.on('click', function (e) {
+            window.location.href = `/place/${id}`;
+        });*/
+
     });
 
     map.addLayer(markers);

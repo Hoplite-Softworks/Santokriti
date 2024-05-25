@@ -1,12 +1,29 @@
-span[data-task-id] {
-	cursor: pointer;
-	text-decoration: none;
+@font-face {
+    font-family: Alegreya;
+    src: url(/public/fonts/Alegreya-VariableFont_wght.ttf);
 }
 
-span[data-task-id].task-status-inactive {
-    text-decoration: line-through;
+
+#islandName,
+#islandSlogan {
+    font-family: Alegreya;
+    color: white;
+    justify-self: center;
+    align-self: center;
 }
 
-span[data-task-id].task-disabled {
-    color: gainsboro;
+#islandName {
+    font-size: 2rem;
+}
+
+#islandSlogan {
+    font-size: 1rem;
+}
+
+.background-container {
+    background-image: url(/images/background-image-2.jpg);
+    background-size: cover;
+    background-position: center;
+    height: auto;
+    background-repeat: repeat;
 }

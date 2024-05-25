@@ -1,36 +1,53 @@
-    <div id="form">
-        <form action="#">
-            <div id="form-intro">
-                Το Γραφείο Τουριστικής Ανάπτυξης του Δήμου Σαντοκρητών βρίσκεται πάντα στην υπηρεσία του επισκέπτη.
-            </div>
-            <div id="form-details">
-                <section id="names">
-                    <div>
-                        <label for="first_name">Ονοματεπώνυμο</label>
-                    </div>
-                    <div>
-                        <input id="first_name" type="text" name="first_name" placeholder="Όνομα">
-                        <input type="text" name="last_name" placeholder="Επώνυμο">
-                    </div>
-                </section>
-                <section id="contact-info">
-                    <div>
-                        <label for="telephone">Στοιχεία επικοινωνίας</label>
-                    </div>
-                    <div>
-                        <input type="tel" id="telephone" name="telephone" placeholder="Τηλέφωνο">
-                        <input required type="email" name="email" placeholder="Διεύθυνση μέιλ">
-                    </div>
-                </section>
-                <section id="personal-message">
-                    <div>
-                        <label for="message">Μήνυμα</label>
-                    </div>
-                    <div>
-                        <textarea required id="message" name="message"></textarea>
-                    </div>
-                </section>
-            </div>
-            <input id="submit" type="submit" value="Αποστολή μηνύματος">
-        </form>
-    </div>
+
+
+<div id="form">
+    <form action="#">
+        <div id="form-intro">
+            {{introContact}}
+        </div>
+        <div id="form-details">
+            <section id="names">
+                <div>
+                    <label for="first_name">{{name}}</label>
+                </div>
+                <div>
+                    <input
+                        id="first_name"
+                        type="text"
+                        name="first_name"
+                        placeholder={{firstName}}
+                    />
+                    <input type="text" name="last_name" placeholder={{lastName}} />
+                </div>
+            </section>
+            <section id="contact-info">
+                <div>
+                    <label for="telephone">{{contactInformation}}</label>
+                </div>
+                <div>
+                    <input
+                        type="tel"
+                        id="telephone"
+                        name="telephone"
+                        placeholder={{telephone}}
+                    />
+                    <input
+                        required
+                        type="email"
+                        name="email"
+                        placeholder={{email}}
+                    />
+                </div>
+            </section>
+            <section id="personal-message">
+                <div>
+                    <label for="message">{{contactMessage}}</label>
+                </div>
+                <div>
+                    <textarea required id="message" name="message"></textarea>
+                </div>
+            </section>
+        </div>
+        <input id="submit" type="submit" value="Αποστολή μηνύματος" />
+    </form>
+</div>

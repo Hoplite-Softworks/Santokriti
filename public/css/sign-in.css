@@ -94,6 +94,27 @@ select {
     border-radius: 3px;
 }
 
+#isShopKeeperGroup {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+#isShopKeeperGroup label {
+    margin: 0.2rem;
+    padding-right: 1rem;
+}
+
+#loginOrRegister {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 80%;
+}
+
+
 button {
     width: 100px;
     display: block;
@@ -103,6 +124,7 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    margin-right: 1rem;
 }
 
 button:hover {

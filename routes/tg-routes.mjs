@@ -13,13 +13,9 @@ const logInController = await import(`../controller/login-controller-password.mj
 //Καταχώριση συμπεριφοράς σε διάφορα path
 router.route('/').get((req, res) => { res.redirect('/home');});
 
-router.get('/home', tgController.listHome);
+router.get('/home', tgController.home);
 
-/*router.get('/', (req, res) => {
-    res.render('home', {
-        title: req.__('title')
-    });
-});*/
+router.get('/place/:placeId', tgController.placeInfo);
 
 router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
 router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);

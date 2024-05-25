@@ -1,25 +1,242 @@
-<div class="row mt-5">
-    <div class="col-6 offset-3">
-        <form action="/register" method="post">
-            <h2 class="text-center">Εγγραφή</h2>
-            <div class="form-group">
-                <div>
-                    <input type="text" class="form-control" name="username" placeholder="Όνομα χρήστη"
-                        required="required">
-                </div>
-            </div>
-            {{#if message}}
-                <div class="alert alert-primary" role="alert">
-                    {{message}}
-                </div>
-            {{/if}}
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary login-btn btn-block">Εγγραφή</button>
-            </div>
-            {{!-- <div class="form-group text-center">
-                <a href="#" class="pull-right">Επαναφορά κωδικού</a>
-            </div> --}}
-        </form>
-        <p class="text-center text-muted small"><a href="/login">Είσοδος</a></p>
+<!--
+<h1>Ξεκινήστε να σχεδιάζετε το ταξίδι σας στη Σαντοκρήτη!</h1>
+<hr style="margin-left: 100px; margin-right: 100px;" />
+-->
+<div id="container">
+    <div id="form-intro">
+        {{introRegister}}
     </div>
+    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
+    <form id="registrationForm" action="home.html">
+        <label for="username">{{register}}:</label>
+        <input type="text" id="username" name="username" required />
+
+        <label for="password">{{password}}:</label>
+        <input type="password" id="password" name="password" required />
+
+        <label for="email">{{email}}:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">{{telephone}}:</label>
+        <input type="tel" id="phone" name="phone" required />
+
+        <div id="isShopKeeperGroup">
+            <label for="isShopKeeper">{{shopKeeperQuestion}}</label>
+            <input
+                type="checkbox"
+                id="isShopKeeper"
+                name="isShopKeeper"
+                required
+            />
+        </div>
+
+        <label for="country">{{country}}:</label>
+        <select id="country" name="country" required>
+            <option value="">-</option>
+            <option value="Afghanistan">افغانستان</option>
+            <option value="Albania">Shqipëri</option>
+            <option value="Algeria">الجزائر</option>
+            <option value="Andorra">Andorra</option>
+            <option value="Angola">Angola</option>
+            <option value="Antigua and Barbuda">Antigua y Barbuda</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Armenia">Հայաստան</option>
+            <option value="Australia">Australia</option>
+            <option value="Austria">Österreich</option>
+            <option value="Azerbaijan">Azərbaycan</option>
+            <option value="Bahamas">Bahamas</option>
+            <option value="Bahrain">‏البحرين</option>
+            <option value="Bangladesh">বাংলাদেশ</option>
+            <option value="Barbados">Barbados</option>
+            <option value="Belarus">Беларусь</option>
+            <option value="Belgium">België</option>
+            <option value="Belize">Belize</option>
+            <option value="Benin">Bénin</option>
+            <option value="Bhutan">འབྲུག་ཡུལ</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="Bosnia and Herzegovina">Bosna i Hercegovina</option>
+            <option value="Botswana">Botswana</option>
+            <option value="Brazil">Brasil</option>
+            <option value="Brunei">Brunei</option>
+            <option value="Bulgaria">България</option>
+            <option value="Burkina Faso">Burkina Faso</option>
+            <option value="Burundi">Uburundi</option>
+            <option value="Cabo Verde">Cabo Verde</option>
+            <option value="Cambodia">កម្ពុជា</option>
+            <option value="Cameroon">Cameroun</option>
+            <option value="Canada">Canada</option>
+            <option value="Central African Republic">République centrafricaine</option>
+            <option value="Chad">Tchad</option>
+            <option value="Chile">Chile</option>
+            <option value="China">中国</option>
+            <option value="Colombia">Colombia</option>
+            <option value="Comoros">جزر القمر</option>
+            <option value="Congo, Democratic Republic of the">République démocratique du Congo</option>
+            <option value="Congo, Republic of the">République du Congo</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Croatia">Hrvatska</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Cyprus">Κύπρος</option>
+            <option value="Czech Republic">Česká republika</option>
+            <option value="Denmark">Danmark</option>
+            <option value="Djibouti">Djibouti</option>
+            <option value="Dominica">Dominica</option>
+            <option value="Dominican Republic">República Dominicana</option>
+            <option value="East Timor">Timor-Leste</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Egypt">مصر‎</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Equatorial Guinea">Guinea Ecuatorial</option>
+            <option value="Eritrea">ኤርትራ</option>
+            <option value="Estonia">Eesti</option>
+            <option value="Eswatini">Eswatini</option>
+            <option value="Ethiopia">ኢትዮጵያ</option>
+            <option value="Fiji">Fiji</option>
+            <option value="Finland">Suomi</option>
+            <option value="France">France</option>
+            <option value="Gabon">Gabon</option>
+            <option value="Gambia">Gambia</option>
+            <option value="Georgia">საქართველო</option>
+            <option value="Germany">Deutschland</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Greece">Ελλάδα</option>
+            <option value="Grenada">Grenada</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Guinea">Guinée</option>
+            <option value="Guinea-Bissau">Guiné-Bissau</option>
+            <option value="Guyana">Guyana</option>
+            <option value="Haiti">Haïti</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Hungary">Magyarország</option>
+            <option value="Iceland">Ísland</option>
+            <option value="India">भारत</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Iran">ایران</option>
+            <option value="Iraq">‏العراق</option>
+            <option value="Ireland">Éire</option>
+            <option value="Israel">ישראל</option>
+            <option value="Italy">Italia</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Japan">日本</option>
+            <option value="Jordan">‏الأردن</option>
+            <option value="Kazakhstan">Қазақстан</option>
+            <option value="Kenya">Kenya</option>
+            <option value="Kiribati">Kiribati</option>
+            <option value="Korea, North">북한</option>
+            <option value="Korea, South">대한민국</option>
+            <option value="Kosovo">Kosova</option>
+            <option value="Kuwait">‏الكويت</option>
+            <option value="Kyrgyzstan">Кыргызстан</option>
+            <option value="Laos">ລາວ</option>
+            <option value="Latvia">Latvija</option>
+            <option value="Lebanon">‏لبنان</option>
+            <option value="Lesotho">Lesotho</option>
+            <option value="Liberia">Liberia</option>
+            <option value="Libya">‏ليبيا</option>
+            <option value="Liechtenstein">Liechtenstein</option>
+            <option value="Lithuania">Lietuva</option>
+            <option value="Luxembourg">Lëtzebuerg</option>
+            <option value="Madagascar">Madagasikara</option>
+            <option value="Malawi">Malawi</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Maldives">Maldives</option>
+            <option value="Mali">Mali</option>
+            <option value="Malta">Malta</option>
+            <option value="Marshall Islands">Marshall Islands</option>
+            <option value="Mauritania">‏موريتانيا</option>
+            <option value="Mauritius">Moris</option>
+            <option value="Mexico">México</option>
+            <option value="Micronesia">Micronesia</option>
+            <option value="Moldova">Republica Moldova</option>
+            <option value="Monaco">Monaco</option>
+            <option value="Mongolia">Монгол улс</option>
+            <option value="Montenegro">Crna Gora</option>
+            <option value="Morocco">المغرب</option>
+            <option value="Mozambique">Moçambique</option>
+            <option value="Myanmar">မြန်မာ</option>
+            <option value="Namibia">Namibia</option>
+            <option value="Nauru">Nauru</option>
+            <option value="Nepal">नेपाल</option>
+            <option value="Netherlands">Nederland</option>
+            <option value="New Zealand">Aotearoa</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Niger">Niger</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="North Macedonia">Северна Македонија</option>
+            <option value="Norway">Norge</option>
+            <option value="Oman">‏عُمان</option>
+            <option value="Pakistan">پاکستان</option>
+            <option value="Palau">Palau</option>
+            <option value="Palestine">‏فلسطين</option>
+            <option value="Panama">Panamá</option>
+            <option value="Papua New Guinea">Papua Niugini</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Peru">Perú</option>
+            <option value="Philippines">Pilipinas</option>
+            <option value="Poland">Polska</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Qatar">‏قطر</option>
+            <option value="Romania">România</option>
+            <option value="Russia">Россия</option>
+            <option value="Rwanda">Rwanda</option>
+            <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+            <option value="Saint Lucia">Saint Lucia</option>
+            <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+            <option value="Samoa">Samoa</option>
+            <option value="San Marino">San Marino</option>
+            <option value="Sao Tome and Principe">São Tomé e Príncipe</option>
+            <option value="Saudi Arabia">‏المملكة العربية السعودية</option>
+            <option value="Senegal">Sénégal</option>
+            <option value="Serbia">Србија</option>
+            <option value="Seychelles">Seychelles</option>
+            <option value="Sierra Leone">Sierra Leone</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Slovakia">Slovensko</option>
+            <option value="Slovenia">Slovenija</option>
+            <option value="Solomon Islands">Solomon Islands</option>
+            <option value="Somalia">Soomaaliya</option>
+            <option value="South Africa">Suid-Afrika</option>
+            <option value="South Sudan">South Sudan</option>
+            <option value="Spain">España</option>
+            <option value="Sri Lanka">ශ්‍රී ලංකාව</option>
+            <option value="Sudan">‏السودان</option>
+            <option value="Suriname">Suriname</option>
+            <option value="Sweden">Sverige</option>
+            <option value="Switzerland">Schweiz</option>
+            <option value="Syria">‏سوريا</option>
+            <option value="Taiwan">臺灣</option>
+            <option value="Tajikistan">Тоҷикистон</option>
+            <option value="Tanzania">Tanzania</option>
+            <option value="Thailand">ประเทศไทย</option>
+            <option value="Togo">Togo</option>
+            <option value="Tonga">Tonga</option>
+            <option value="Trinidad and Tobago">Trinidad y Tobago</option>
+            <option value="Tunisia">تونس</option>
+            <option value="Turkey">Türkiye</option>
+            <option value="Turkmenistan">Türkmenistan</option>
+            <option value="Tuvalu">Tuvalu</option>
+            <option value="Uganda">Uganda</option>
+            <option value="Ukraine">Україна</option>
+            <option value="United Arab Emirates">‏الإمارات العربية المتحدة</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="United States">United States</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Uzbekistan">O‘zbekiston</option>
+            <option value="Vanuatu">Vanuatu</option>
+            <option value="Vatican City">Città del Vaticano</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Vietnam">Việt Nam</option>
+            <option value="Yemen">‏اليمن</option>
+            <option value="Zambia">Zambia</option>
+            <option value="Zimbabwe">Zimbabwe</option>
+
+        </select>
+        <div id="loginOrRegister">
+            <button type="submit">{{register}}</button>
+            <label id="signInLabel">{{alreadyAccount}}
+                <a href="/login" id="toggleSignIn">{{login}}</a></label>
+        </div>
+    </form>
 </div>
