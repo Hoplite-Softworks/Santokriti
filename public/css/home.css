@@ -112,13 +112,13 @@
 }
 
 .floating-container {
-    position: fixed; /* Fixed positioning */
-    bottom: 20px; /* Position from the bottom */
-    right: 20px; /* Position from the right */
-    width: 300px; /* Set your desired width */
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    position: absolute;
+    top: 1rem; /* Position from the bottom */
+    right: 1rem; /* Position from the right */
+    width: 40%; /* Set your desired width */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-    padding: 20px; /* Padding inside the container */
+    padding: 0.5rem; /* Padding inside the container */
     border-radius: 8px; /* Rounded corners */
     z-index: 1050;
 }

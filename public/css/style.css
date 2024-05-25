@@ -24,6 +24,6 @@
     background-image: url(/images/background-image-2.jpg);
     background-size: cover;
     background-position: center;
-    height: auto;
+    height:100vh;
     background-repeat: repeat;
 }
