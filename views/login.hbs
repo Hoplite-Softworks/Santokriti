@@ -1,18 +1,18 @@
-
-<div id="container">
-    <div id="form-intro">
-        {{introLogin}}
-    </div>
-    {{#if message}}
-        <p>{{message}}</p>
-    {{/if}}
-    <form id="signInForm" action="home.html">
-        <label for="username">{{username}}:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">{{password}}:</label>
-        <input type="password" id="password" name="password" required />
-        <div id="loginOrRegister">
-            <button type="submit">{{login}}</button>
+<div class="row-auto justify-content-center contact-row">
+    <p class="form-info mt-4">{{introLogin}}</p>
+    <form action="#">
+        <div class="form-row mt-4">
+            <div class="form-group col-12 col-md-12 d-flex">
+                <label for="username">{{username}}:</label>
+                <input type="text" id="username" name="username" required />
+            </div>
+            <div class="form-group col-12 col-md-12 d-flex">
+                <label for="password">{{password}}:</label>
+                <input type="password" id="password" name="password" required />
+            </div>
+        </div>
+        <div class="form-group col-12 col-md-12 d-flex align-items-center">
+            <button type="submit" class="btn btn-primary">{{login}}</button>
             <label id="registerLabel">{{noAccountYet}}
                 <a href="/register" id="toggleRegistration">{{register}}</a></label>
         </div>

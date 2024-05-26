@@ -1,3 +1,6 @@
+import * as model from "../model-old/sqlite-async/tg-model-sqlite-async.mjs";
+//import * as model from "../model/postgres/tg-model-postgres.mjs";
+
 const commonLocalizedUIStringsKeys = [
     "islandName",
     "islandSlogan",
@@ -49,11 +52,6 @@ export async function home(req, res, next) {
     }
 }
 
-/*
- 
- */
-//import { Bookmark as MyBookmark } from '../model/bookmark.js';
-import * as model from "../model/sqlite-async/tg-model-sqlite-async.mjs";
 
 export async function listAllBookmarksRender(req, res, next) {
     const userId = req.session.loggedUserId;

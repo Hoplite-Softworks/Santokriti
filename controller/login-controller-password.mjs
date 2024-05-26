@@ -1,8 +1,12 @@
 import bcrypt from "bcrypt";
 
-import * as userModel from "../model/sqlite-async/tg-model-sqlite-async.mjs";
+//import * as userModel from "../model/postgres/tg-model-postgres.mjs";
+import * as userModel from "../model-old/sqlite-async/tg-model-sqlite-async.mjs";
 
 const commonLocalizedUIStringsKeys = [
+    "islandName",
+    "islandSlogan",
+    "menuText",
     "menuOptionMap",
     "menuOptionInfo",
     "menuOptionContact",

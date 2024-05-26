@@ -1,141 +1,63 @@
-body {
-    background-image: url("../images/background-image-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+.form-row label {
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.2rem;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
 
-#logo {
-    text-align: center;
-    margin-top: 30px;
-}
-
-/*#logo div {
-    width: 320px;
-    position: fixed;
-    top: 0;
-    right: 0; 
-}*/
-
-#navbar {
-    text-align: center;
-    padding: 0;
-}
-
-#navbar ul {
-    padding: 0;
-    text-align: center;
-}
-
-.navitem {
-    display: inline-block;
-    margin-left: 20px;
-    margin-right: 20px;
-
-    color: white;
-    font-weight:  bold;
-    font-size: 20px;
-}
-
-.navitem a {
-    text-decoration: none;
-    color: white;
-    font-weight:  bold;
-    font-size: 20px;
-}
-
-#bookmarks a {
-    color: grey;
-}
-
-h1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    margin-left: 150px;
-    margin-bottom: 0;
-    margin-top: 70px;
-}
-
-div {
-    color: navy;
-}
-
-#container {
-    background-color: rgba(255, 255, 255, 0.8);
-    padding-bottom: 100px;
-    padding-left: 100px;
-    margin-right: 400px;
-    margin-left: 400px;
-}
-
-#form-intro {
-    padding-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    padding-bottom: 20px;
-}
-
-
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="tel"],
-select {
-    width: 80%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-#isShopKeeperGroup {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 80%;
-    margin-bottom: 10px;
-}
-
-#isShopKeeperGroup label {
-    margin: 0.2rem;
-    padding-right: 1rem;
-}
-
-#loginOrRegister {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    width: 80%;
-}
-
-
-button {
-    width: 100px;
-    display: block;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
     margin-right: 1rem;
+    width: 12ch;
+    text-align: center;
 }
 
-button:hover {
-    background-color: #0056b3;
+#registerLabel {
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+
+    text-align: center;
+    justify-content: center;
+    width: max-content;
+
 }
 
-a {
-    color: #007bff;
+#registerLabel a {
+    cursor: pointer;
     text-decoration: none;
+    color: cyan;
 }
 
-a:hover {
-    text-decoration: underline;
+
+.form-info {
+        border: 0.1rem solid whitesmoke;
+        border-radius: 1rem;
+        background-color: rgba(0, 0, 0, 0.2);
+    
+        color: whitesmoke;
+        padding: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: inline;
+}
+
+/* Media queries for desktop vs mobile */
+@media (max-width: 767.98px) {
+
+}
+
+@media (min-width: 768px) {
+
+    .contact-row {
+        justify-self: center;
+        max-width: 70%;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        justify-content: center;
+    }
 }

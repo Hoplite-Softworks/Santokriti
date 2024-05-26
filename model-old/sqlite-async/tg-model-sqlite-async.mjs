@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 
 let sql;
 try {
-    sql = await Database.open('model/db/tg.db');
+    sql = await Database.open('model-old/db/tg.db');
 } catch (error) {
     throw Error('Δεν ήταν δυνατό να ανοίξει η βάση δεδομένων.' + error);
 }
