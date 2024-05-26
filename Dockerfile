@@ -36,4 +36,4 @@ COPY --from=build / /
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "node", "start.mjs" ]
+CMD ["sh", "-c", "psql postgres://postgres:69rOPfxWJNoVLuZ@santokriti-db.flycast:5432/santokriti?sslmode=disable -f /docker-entrypoint-initdb.d/create_tables.sql && node start.mjs"]
