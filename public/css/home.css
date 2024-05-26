@@ -111,9 +111,31 @@
     /* This means "100% of the width of its container", the .col-md-8 */
 }
 
+#filter-button {
+    position: absolute;
+    color: blue;
+    top: 0.5rem; /* Position from the bottom */
+    right: 1rem; /* Position from the right */
+    width: 3.2rem; /* Set your desired width */
+    height: 2rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+    padding: 0.5rem; /* Padding inside the container */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1050;
+    pointer-events: auto;
+    align-content:center;
+    margin: 0;
+    padding: 0;
+    background-image: url(/images/menu.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat
+}
+
 .floating-container {
     position: absolute;
-    top: 1rem; /* Position from the bottom */
+    top: 2.5rem; /* Position from the bottom */
     right: 1rem; /* Position from the right */
     width: 40%; /* Set your desired width */
     background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
@@ -121,4 +143,5 @@
     padding: 0.5rem; /* Padding inside the container */
     border-radius: 8px; /* Rounded corners */
     z-index: 1050;
+    pointer-events: auto;
 }
