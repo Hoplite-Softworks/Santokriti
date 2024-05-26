@@ -9,7 +9,7 @@ import * as logInController from '../controller/login-controller-password.mjs';
 //Καταχώριση συμπεριφοράς σε διάφορα path
 router.route('/').get((req, res, next) => {
     //throw new Error('Panos Lelakis 1083712 :)'); 
-    res.redirect('/login');
+    res.redirect('/map');
 });
 
 router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
