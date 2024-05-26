@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import fs from 'fs';
+import path from 'path';
 
 const { Pool } = pkg;
 
