@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import fs from 'fs';
-import path from 'path';
 
 const { Pool } = pkg;
 
@@ -26,7 +25,7 @@ export let connect = async () => {
 
 export let initializeDatabase = async () => {
     try {
-        const sql = fs.readFileSync(path.join(__dirname, '../db/create_tables.sql'), 'utf8');
+        const sql = fs.readFileSync('create_tables.sql', 'utf8');
         await pool.query(sql);
         console.log('Database initialization complete.');
         return true;
