@@ -11,9 +11,11 @@ const commonLocalizedUIStringsKeys = [
     "menuOptionInfo",
     "menuOptionContact",
     "menuOptionBookmarks",
+    "menuOptionOwned",
     "menuOptionRegister",
     "menuOptionLogin",
 ];
+
 
 const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};

@@ -56,9 +56,12 @@
                             aria-expanded="false"
                             id="menu-button"
                         >
-                            <p class="fs-6 d-none d-md-inline" style="margin: 0.2rem; margin-right: 0.5rem; display:inline">
-                            {{menuText}}
-                        </p>
+                            <p
+                                class="fs-6 d-none d-md-inline"
+                                style="margin: 0.2rem; margin-right: 0.5rem; display:inline"
+                            >
+                                {{menuText}}
+                            </p>
                             <i class="fa fa-bars"></i>
                         </button>
                         <div class="dropdown-menu" id="menu-container">
@@ -74,6 +77,9 @@
                                     >{{menuOptionContact}}</a></li>
                                 <li class="navitem" id="bookmarks"><a
                                     >{{menuOptionBookmarks}}</a></li>
+                                {{#if session.isShopKeeper}}
+                                    <li><a href="/owned">{{menuOptionOwned}}</a></li>
+                                {{/if}}
                                 <li class="navitem" id="loginlogout">
                                     {{#if session.loggedUserId}}
                                         <a
@@ -99,8 +105,8 @@
             {{{body}}}
             <div class="row-auto">
                 <div class="col-auto">
-                    <p class="fs-5 mb-1" id="credits">©
-                        Lefteris Gkliatis, Panos Lelakis, 2024</p>
+                    <p class="fs-5 mb-1" id="credits">© Lefteris Gkliatis, Panos
+                        Lelakis, 2024</p>
                 </div>
             </div>
         </div>

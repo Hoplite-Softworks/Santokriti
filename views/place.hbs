@@ -1,31 +1,19 @@
-<body>
-    <div id="header-navbar-placeholder"></div>
-    <h1>{{place.name}}</h1>
-    <hr style="margin-left: 100px; margin-right: 100px;">
-    <article>
-        <div id="ancient-image">
-            <img src="{{place.markerImage}}" height="400px">
+div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-2">
+            <p class="title fs-3 text-center m-0 mt-2">{{place.name}}</p>
         </div>
-        <div id="ancient-info">
-            <!--<h2>Ελάτε και εσείς στη βασίλισσα της θαλλασινής γεύσης!</h2>
-            <p class="info">Μια γραφική ταβέρνα που βρίσκεται κατά μήκος της ακτογραμμής, προσφέροντας μια μαγευτική θέα στο γαλάζιο του Αιγαίου. Εδώ θα απολαύσετε μια μεγάλη ποικιλία από φρέσκα θαλασσινά, προετοιμασμένα με τις παραδοσιακές συνταγές και τις μυστικές μας μαρινάδες. Επιπλέον, η ταβέρνα μας προσφέρει επίσης εκλεκτές επιλογές από τοπικά ελληνικά πιάτα, όπως μεζέδες, ψητά κρέατα και φρέσκες σαλάτες, πάντα σε συνδυασμό με εξαιρετική εξυπηρέτηση και φιλική ατμόσφαιρα.</p>
-            <p class="info">"Η Αιγαιοπελαγίτισσα" είναι γνωστή για την πλούσια και ποικίλη γκάμα γεύσεων που προσφέρει. Στο μενού της ταβέρνας θα βρείτε φρέσκα θαλασσινά όπως γαρίδες, καλαμάρια, μύδια και ψάρια της ημέρας, προετοιμασμένα με παραδοσιακούς τρόπους μαγειρέματος. Επίσης, η ταβέρνα προσφέρει μια εκτενή επιλογή από τοπικά πιάτα, όπως μεζέδες, ψητά κρέατα, λαχανικά και φρέσκες σαλάτες. Όλα τα πιάτα είναι προετοιμασμένα με φρέσκα συστατικά και παρουσιάζονται με μοναδική προσοχή στη λεπτομέρεια και τη γεύση. Επιπλέον, η ταβέρνα προσφέρει μια εκλεκτή λίστα από τοπικά κρασιά και άλλα ποτά, που συνοδεύουν τα πιάτα με τον καλύτερο τρόπο. Με φιλόξενη ατμόσφαιρα και εξυπηρετικό προσωπικό, η Αιγαιοπελαγίτισσα προσφέρει μια αξέχαστη γαστρονομική εμπειρία σε κάθε επισκέπτη.</p>-->
-            <p>{{place.description}}</p>
-            <p>Keywords: {{place.keywords}}</p>
+    </div>
+    <div class="row m-0 p-2 pt-3">
+        <div class="col">
+            <div class="slick-carousel">
+                {{#each place.images}}
+                <div><img src="{{this}}" alt="{{../place.name}}" class="info-image float-start mb-3 place-image"></div>
+                {{/each}}
+            </div>
+            <p class="info-text fs-5">{{place.description}}</p>
+            <p class="info-text fs-5">{{place.keywords}}</p>
+            <a href="/home">{{backToMap}}</a>
         </div>
-        <div class="gallery">
-            <!--<img src="images/place1-1.jpeg" height="150px">
-            <img src="images/place1-2.jpg" height="150px">
-            <img src="images/place2.jpg" height="150px">-->
-        </div>
-        <a href="/home">{{backToMap}}</a>
-    </article>
-</body>
-</html>
-
-<!--<h3>{{place.name}} - στη Σαντοκρήτη</h3>
-<p>{{place.name}}</p>
-<p>{{place.description}}</p>
-<p>Keywords: {{place.keywords}}</p>
-<img src="{{place.markerImage}}" alt="{{place.name}}">
-<a href="/map">Back to map</a>-->
+    </div>
+</div>

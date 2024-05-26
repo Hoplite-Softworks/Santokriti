@@ -9,6 +9,7 @@ const commonLocalizedUIStringsKeys = [
     "menuOptionInfo",
     "menuOptionContact",
     "menuOptionBookmarks",
+    "menuOptionOwned",
     "menuOptionRegister",
     "menuOptionLogin",
 ];
