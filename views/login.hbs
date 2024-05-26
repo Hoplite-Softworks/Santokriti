@@ -1,5 +1,8 @@
 <div class="row-auto justify-content-center contact-row">
     <p class="form-info mt-4">{{introLogin}}</p>
+    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
     <form action="#">
         <div class="form-row mt-4">
             <div class="form-group col-12 col-md-12 d-flex">

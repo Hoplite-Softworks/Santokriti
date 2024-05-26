@@ -47,6 +47,7 @@ export let showRegisterForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleRegister",
         "register",
+        "username",
         "password",
         "email",
         "telephone",
@@ -60,7 +61,7 @@ export let showRegisterForm = function (req, res) {
     res.render("register", {
         ...localizedUIStrings,
         title: localizedUIStrings["titleRegister"],
-        pageSpecificCSS: "/css/sign-in.css",
+        pageSpecificCSS: "/css/register.css",
         locale: req.getLocale(),
         model: process.env.MODEL,
     });
@@ -78,6 +79,7 @@ export let doRegister = async function (req, res) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleRegister",
                 "register",
+                "username",
                 "password",
                 "email",
                 "telephone",
@@ -91,7 +93,7 @@ export let doRegister = async function (req, res) {
             res.render("register", {
                 ...localizedUIStrings,
                 title: localizedUIStrings["titleRegister"],
-                pageSpecificCSS: "/css/sign-in.css",
+                pageSpecificCSS: "/css/register.css",
                 message: registrationResult.message,
                 locale: req.getLocale(),
                 model: process.env.MODEL,
@@ -106,6 +108,7 @@ export let doRegister = async function (req, res) {
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleRegister",
             "register",
+            "username",
             "password",
             "email",
             "telephone",
@@ -120,7 +123,7 @@ export let doRegister = async function (req, res) {
         res.render("register", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleRegister"],
-            pageSpecificCSS: "/css/sign-in.css",
+            pageSpecificCSS: "/css/register.css",
             message: localizedUIStrings["messageRegistrationError"],
             locale: req.getLocale(),
             model: process.env.MODEL,
