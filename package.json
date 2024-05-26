@@ -23,6 +23,7 @@
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "express-session": "^1.18.0",
+    "fs": "*",
     "hbs": "^4.2.0",
     "jquery": "^3.7.1",
     "jQuery": "^1.7.4",
