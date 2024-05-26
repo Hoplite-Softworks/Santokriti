@@ -31,10 +31,10 @@ export let initializeDatabase = async () => {
         return true;
     } catch (error) {
         console.error('Error initializing database:', error);
-    } finally {
+    } //finally {
         // Close the database connection pool
-        await pool.end();
-    }
+        //await pool.end();
+    //}
 }
 
 export let getAllPlaces = async () => {
