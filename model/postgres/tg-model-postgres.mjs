@@ -10,7 +10,7 @@ dotenv.config();
 //const pool = new pg.Pool(); //οι παράμετροι ορίζονται ως μεταβλητές περιβάλλοντος
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, //μεταβλητή περιβάλλοντος
-    ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
+    //ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
 });
 
 export let connect = async () => {

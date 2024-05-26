@@ -29,5 +29,8 @@
     "pg-promise": "^11.6.0",
     "slick-carousel": "^1.8.1",
     "sqlite-async": "^1.2.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.7"
   }
 }
