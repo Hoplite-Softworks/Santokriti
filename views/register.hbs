@@ -3,7 +3,7 @@
     {{#if message}}
         <p>{{message}}</p>
     {{/if}}
-    <form action="#">
+    <form action="/register" method="post">
         <div class="form-row mt-4">
             <div class="form-group col-12 col-md-12 d-flex align-items-center">
                 <label for="username">{{username}}:</label>
@@ -35,7 +35,7 @@
                 <button type="submit" class="btn btn-primary">{{register}}</button>
                 <label id="registerLabel">{{alreadyAccount}}
                     <a
-                        href="/register"
+                        href="/login"
                         id="toggleRegistration"
                     >{{login}}</a></label>
             </div>
