@@ -77,7 +77,7 @@ export let getAllPlaces = async () => {
     const params = [];
     try {
         const client = await connect();
-        await initializeDatabase();
+        //await initializeDatabase();
         await populatePlaceAndOwnsTables(); // Ensure tables are populated if empty
         const places = await client.query(sql, params);
         await client.release();
