@@ -1,41 +1,45 @@
+-- Create User table
 CREATE TABLE IF NOT EXISTS "User" (
-	"userId" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"name" STRING,
-	"email" STRING UNIQUE,
-	"password" STRING,
-	"isShopKeeper" BINARY
+    "userId" SERIAL PRIMARY KEY,
+    "name" VARCHAR(255),
+    "email" VARCHAR(255) UNIQUE,
+    "password" VARCHAR(255),
+    "isShopKeeper" BOOLEAN
 );
 
+-- Create Place table
 CREATE TABLE IF NOT EXISTS "Place" (
-	"placeId" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"name" STRING,
-	"lat" REAL,
-	"lng" REAL,
-	"markerImage" TEXT,
-	"keywords" TEXT,
-	"description" TEXT
+    "placeId" SERIAL PRIMARY KEY,
+    "name" VARCHAR(255),
+    "lat" DOUBLE PRECISION,
+    "lng" DOUBLE PRECISION,
+    "markerImage" TEXT,
+    "keywords" TEXT,
+    "description" TEXT
 );
 
+-- Create Bookmark table
 CREATE TABLE IF NOT EXISTS "Bookmark" (
-	"bookmarkId" INTEGER PRIMARY KEY AUTOINCREMENT,
-	"date" DATETIME,
-	"userId" INTEGER,
-	"placeId" INTEGER,
-	FOREIGN KEY ("userId") REFERENCES "User" ("userId")
-            ON UPDATE CASCADE
-            ON DELETE CASCADE,
-	FOREIGN KEY ("placeId") REFERENCES "Place" ("placeId")
-            ON UPDATE CASCADE
-            ON DELETE CASCADE
+    "bookmarkId" SERIAL PRIMARY KEY,
+    "date" TIMESTAMP,
+    "userId" INTEGER,
+    "placeId" INTEGER,
+    FOREIGN KEY ("userId") REFERENCES "User" ("userId")
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY ("placeId") REFERENCES "Place" ("placeId")
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
+-- Create Owns table
 CREATE TABLE IF NOT EXISTS "Owns" (
-	"userId" INTEGER,
-	"placeId" INTEGER,
-	FOREIGN KEY ("userId") REFERENCES "User" ("userId")
-            ON UPDATE CASCADE
-            ON DELETE SET NULL,
-	FOREIGN KEY ("placeId") REFERENCES "Place" ("placeId")
-            ON UPDATE CASCADE
-            ON DELETE SET NULL
+    "userId" INTEGER,
+    "placeId" INTEGER,
+    FOREIGN KEY ("userId") REFERENCES "User" ("userId")
+        ON UPDATE CASCADE
+        ON DELETE SET NULL,
+    FOREIGN KEY ("placeId") REFERENCES "Place" ("placeId")
+        ON UPDATE CASCADE
+        ON DELETE SET NULL
 );

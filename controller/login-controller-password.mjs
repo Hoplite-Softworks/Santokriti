@@ -1,8 +1,9 @@
 import bcrypt from 'bcrypt'
-import * as userModel from '../model/sqlite-async/tg-model-sqlite-async.mjs';
+import * as userModel from '../model/postgres/tg-model-postgres.mjs';
 
 export let showLogInForm = function (req, res) {
-    res.render('login', { model: process.env.MODEL });
+    const message = req.query.message;
+    res.render('login', { model: process.env.MODEL, message: message });
 }
 
 export let showRegisterForm = function (req, res) {
@@ -16,7 +17,7 @@ export let doRegister = async function (req, res) {
             res.render('register', { message: registrationResult.message })
         }
         else {
-            res.redirect('/login');
+            res.redirect('/login?message=Successful%20registration');
         }
     } catch (error) {
         console.error('registration error: ' + error);

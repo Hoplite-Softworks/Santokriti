@@ -1,4 +1,4 @@
-import * as model from '../model/sqlite-async/tg-model-sqlite-async.mjs';
+import * as model from '../model/postgres/tg-model-postgres.mjs';
 
 export async function listAllBookmarksRender(req, res, next) {
    const userId = req.session.loggedUserId;
@@ -81,7 +81,7 @@ export async function placeInfo(req, res, next) {
 export async function listOwnedPlaces(req, res, next) {
    const userId = req.session.loggedUserId;
    try {
-       const ownedPlaces = await model.getOwnedPlacesWithBookmarkCounts(userId);
+       const ownedPlaces = await model.getOwnedPlaces(userId);
        res.render('owned', { ownedPlaces, model: process.env.MODEL, session: req.session });
    } catch (error) {
        next(error);
