@@ -6,6 +6,7 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 dotenv.config();
+initializeDatabase();
 
 //const pool = new pg.Pool(); //οι παράμετροι ορίζονται ως μεταβλητές περιβάλλοντος
 const pool = new Pool({
@@ -19,6 +20,19 @@ export let connect = async () => {
         return client;
     } catch (error) {
         throw new Error('Unable to connect to the database: ' + error);
+    }
+}
+
+export let initializeDatabase = async () => {
+    try {
+        const sql = fs.readFileSync('/model/db/create_tables.sql', 'utf8');
+        await pool.query(sql);
+        console.log('Database initialization complete.');
+    } catch (error) {
+        console.error('Error initializing database:', error);
+    } finally {
+        // Close the database connection pool
+        await pool.end();
     }
 }
 
