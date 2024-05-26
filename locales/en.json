@@ -1,4 +1,7 @@
-{
+{	
+	"islandName": "SANTOKRITI",
+    "islandSlogan": "The hidden paradise of the Ionian Sea",
+
     "titleHome": "Σαντοκρήτη - The Hidden Paradise of the Ionian",
     "titleInfo": "Santokriti at a Glance - Past, Present, Future",
     "titleContact": "Contact Municipality of Santokriti",
@@ -6,6 +9,7 @@
     "titleRegister": "Register - Start Planning Your Trip to Santokriti!",
     "titleLogin": "Login - Continue Planning Your Trip to Santokriti!",
 
+	"menuText": "Menu",
     "menuOptionMap": "Map",
     "menuOptionInfo": "Information",
     "menuOptionContact": "Contact",
@@ -28,12 +32,15 @@
     "lastName": "Last name",
     "name": "Full name",
 
+
     "introContact": "The Tourist Development Office of the Municipality of Santokriti is always at your service.",
     "contactInformation": "Contact Information",
     "telephone": "Telephone Number",
     "email": "E-mail address",
     "contactMessage": "Your message",
+	"sendMessage" : "Send message",
 
+	"filtersPopupText": "Filters",
     "foodFilterOption": "Food",
     "beachFilterOption": "Beaches",
     "StayingFilterOption": "Hotels & Apartments",

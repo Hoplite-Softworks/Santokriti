@@ -1,87 +1,75 @@
+<div class="row m-1">
+    <div class="col p-0">
+        <p class="intro-info fs-5">{{introInfo}}</p>
+    </div>
+</div>
 
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-2">
+            <p class="title fs-3 text-center m-0 mt-2">{{infoAncientTitle}}</p>
+        </div>
+    </div>
+    <div class="row m-0 p-2 pt-3">
+        <div class="col">
+            <img class="info-image float-start mb-3" src="images/ancient.jpg" />
+            <p class="info-text fs-5">{{infoAncient}}</p>
+        </div>
+    </div>
+</div>
 
-<section id="intro">{{introInfo}}</section>
-<section>
-    <!--<h1>Η ΣΑΝΤΟΚΡΗΤΗ ΜΕ ΜΙΑ ΜΑΤΙΑ</h1>
-    <hr style="margin-left: 100px; margin-right: 100px;" />-->
-    <article>
-        <div id="ancient-image">
-            <img src="images/ancient.jpg" height="10rem" />
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-2">
+            <p class="title fs-3 text-center m-0 mt-2">{{infoMedievalTitle}}</p>
         </div>
-        <div id="ancient-info">
-            <h2>{{infoAncientTitle}}</h2>
-            <p class="info">{{infoAncient}}</p>
+    </div>
+    <div class="row m-0 p-2 pt-3">
+        <div class="col">
+            <img class="info-image float-start mb-3" src="images/medieval.jpg" />
+            <p class="info-text fs-5">{{infoMedieval}}</p>
         </div>
-    </article>
-    <article>
-        <div id="medieval-image">
-            <img src="images/medieval.jpg" height="10rem" />
-        </div>
-        <div id="medieval-info">
-            <h2>{{infoMedievalTitle}}</h2>
-            <p class="info">{{infoMedieval}}</p>
-        </div>
-    </article>
-    <article>
-        <div id="modern-image">
-            <img src="images/now-1.jpg" height="400px" />
-        </div>
-        <div id="modern-info">
-            <h2>{{infoModernTitle}}</h2>
-            <p class="info">{{infoModern}}</p>
-        </div>
-    </article>
-</section>
+    </div>
+</div>
 
-<!--<section>
-    <h1>ΧΑΙΡΕΤΙΣΜΟΙ</h1>
-    <hr style="margin-left: 100px; margin-right: 100px;" />
-    <article>
-        <div id="mayor-image">
-            <img src="" height="400px" />
+<div class="row m-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-2">
+            <p class="title fs-3 text-center m-0 mt-2">{{infoModernTitle}}</p>
         </div>
-        <div id="mayor-greeting">
-            <h2>Λάλος Πενάκης</h2>
-            <h3>Δήμαρχος Σαντοκρητών</h3>
-            <p class="info">Αγαπητοί φίλοι,<br /><br />
+    </div>
+    <div class="row m-0 p-2 pt-3">
+        <div class="col">
+            <img class="info-image float-start mb-3" src="images/now-1.jpg" />
+            <p class="info-text fs-5">{{infoModern}}</p>
+        </div>
+    </div>
+</div>
 
-                Καλωσορίσατε στη Σαντοκρήτη, έναν μαγικό προορισμό που συνδυάζει
-                τον αρχαίο πολιτισμό με τη σύγχρονη ζωή. Είναι μεγάλη μου χαρά
-                και τιμή να σας υποδεχθώ σε αυτό το εκπληκτικό νησί που
-                αναδεικνύει τον πλούτο της φύσης και την πολιτιστική κληρονομιά
-                του. Με περηφάνια σας προσκαλώ να εξερευνήσετε τις ακτές μας, να
-                γευτείτε τις νοστιμιές μας και να ανακαλύψετε την ομορφιά που
-                κρύβει κάθε γωνιά της Σαντοκρήτης. Ελπίζω να περάσετε μια
-                αξέχαστη διαμονή και να φύγετε με μοναδικές εμπειρίες και
-                αναμνήσεις που θα διαρκέσουν εφ' όρου ζωής.
+<!--<div class="row">
+    <div class="col">
+        <p class="title">{{infoMedievalTitle}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <img class="info-image" src="images/medieval.jpg" />
+    </div>
+    <div class="col">
+        <p class="info">{{infoMedieval}}</p>
+    </div>
+</div>
 
-                <br /><br />Με εκτίμηση,
-                <br />Λάλος Πενάκης</p>
-        </div>
-    </article>
-    <article>
-        <div id="other-image">
-            <img src="" height="400px" />
-        </div>
-        <div id="other-greeting">
-            <h2>Λευτέρπη Σαντοκρητάκη</h2>
-            <h3>Πρόεδρος Ένωσης Επιχειρηματιών Σαντοκρήτης</h3>
-            <p class="info">
-                Αγαπητοί επισκέπτες και φίλοι της Σαντοκρήτης,<br /><br />
-
-                Είναι μεγάλη χαρά και τιμή μας να σας καλωσορίζουμε στο
-                πανέμορφο νησί μας, όπου η φιλοξενία συναντά την επιχειρηματική
-                δυναμικότητα. Ως πρόεδρος της Ένωσης Επιχειρηματιών Σαντοκρήτης,
-                είναι μεγάλη μου χαρά να σας προσκαλέσω να ανακαλύψετε την
-                ποικιλία των επιχειρήσεων και των υπηρεσιών που προσφέρει ο
-                τόπος μας. Από τα μικρά οικογενειακά καταστήματα έως τα πολυτελή
-                ξενοδοχεία και εστιατόρια, η Σαντοκρήτη διαθέτει κάτι για κάθε
-                γούστο και προτίμηση. Ελπίζουμε ότι η διαμονή σας θα είναι
-                ευχάριστη και αξέχαστη, γεμάτη με μοναδικές εμπειρίες και
-                ευκαιρίες ανακάλυψης.
-                <br /><br />Καλώς ήλθατε!
-                <br />Με εκτίμηση,
-                <br />Λευτέρπη Σαντοκρητάκη</p>
-        </div>
-    </article>
-</section>-->
+<div class="row">
+    <div class="col">
+        <p class="title">{{infoModernTitle}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <img class="info-image" src="images/now-1.jpg" />
+    </div>
+    <div class="col">
+        <p class="info">{{infoModern}}</p>
+    </div>
+</div>-->

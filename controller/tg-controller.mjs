@@ -1,4 +1,7 @@
 const commonLocalizedUIStringsKeys = [
+    "islandName",
+    "islandSlogan",
+    "menuText",
     "menuOptionMap",
     "menuOptionInfo",
     "menuOptionContact",
@@ -22,6 +25,7 @@ export async function home(req, res, next) {
 
         const keys = [
             "titleHome",
+            "filtersPopupText",
             "foodFilterOption",
             "beachFilterOption",
             "StayingFilterOption",
@@ -125,8 +129,16 @@ export async function removeBookmark(req, res, next) {
 
 export async function info(req, res, next) {
     try {
-        const keys = ["titleInfo" ,"introInfo", "infoAncientTitle", "infoAncient", "infoMedievalTitle", "infoMedieval", "infoModernTitle", "infoModern"]
-        .concat(commonLocalizedUIStringsKeys);
+        const keys = [
+            "titleInfo",
+            "introInfo",
+            "infoAncientTitle",
+            "infoAncient",
+            "infoMedievalTitle",
+            "infoMedieval",
+            "infoModernTitle",
+            "infoModern",
+        ].concat(commonLocalizedUIStringsKeys);
         const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
         res.render("info", {
@@ -153,6 +165,7 @@ export async function contact(req, res, next) {
             "telephone",
             "email",
             "contactMessage",
+            "sendMessage",
         ].concat(commonLocalizedUIStringsKeys);
         const localizedUIStrings = getLocalizedUIStrings(req, keys);
         res.render("contact", {

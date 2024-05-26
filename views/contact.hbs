@@ -1,53 +1,28 @@
-
-
-<div id="form">
+<div class="row-auto contact-row">
+    <p class="form-info">{{introContact}}</p>
     <form action="#">
-        <div id="form-intro">
-            {{introContact}}
+      <div class="form-row">
+        <div class="form-group col-12 col-md-12">
+          <label for="firstName">{{firstName}}</label>
+          <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
         </div>
-        <div id="form-details">
-            <section id="names">
-                <div>
-                    <label for="first_name">{{name}}</label>
-                </div>
-                <div>
-                    <input
-                        id="first_name"
-                        type="text"
-                        name="first_name"
-                        placeholder={{firstName}}
-                    />
-                    <input type="text" name="last_name" placeholder={{lastName}} />
-                </div>
-            </section>
-            <section id="contact-info">
-                <div>
-                    <label for="telephone">{{contactInformation}}</label>
-                </div>
-                <div>
-                    <input
-                        type="tel"
-                        id="telephone"
-                        name="telephone"
-                        placeholder={{telephone}}
-                    />
-                    <input
-                        required
-                        type="email"
-                        name="email"
-                        placeholder={{email}}
-                    />
-                </div>
-            </section>
-            <section id="personal-message">
-                <div>
-                    <label for="message">{{contactMessage}}</label>
-                </div>
-                <div>
-                    <textarea required id="message" name="message"></textarea>
-                </div>
-            </section>
+        <div class="form-group col-12 col-md-12">
+          <label for="lastName">{{lastName}}</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
         </div>
-        <input id="submit" type="submit" value="Αποστολή μηνύματος" />
+      </div>
+      <div class="form-group">
+        <label for="telephone">{{telephone}}</label>
+        <input type="tel" class="form-control" id="telephone" placeholder="Telephone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">{{email}}</label>
+        <input type="email" class="form-control" id="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <label for="message">{{contactMessage}}</label>
+        <textarea class="form-control" id="message" rows="5" placeholder="Your message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">{{sendMessage}}</button>
     </form>
-</div>
+  </div>

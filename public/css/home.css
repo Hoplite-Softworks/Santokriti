@@ -105,43 +105,47 @@
     position: relative;
     border: 1px solid black;
     border-radius: 8px;
-    height: 75vh;
+    height: 80vh;
     /* or as desired */
     width: 100%;
     /* This means "100% of the width of its container", the .col-md-8 */
 }
 
-#filter-button {
+#filter {
     position: absolute;
-    color: blue;
-    top: 0.5rem; /* Position from the bottom */
-    right: 1rem; /* Position from the right */
-    width: 3.2rem; /* Set your desired width */
-    height: 2rem;
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
-    padding: 0.5rem; /* Padding inside the container */
-    border-radius: 8px; /* Rounded corners */
+    bottom: 0; /* Position from the bottom */
+    right: 0; /* Position from the right */
     z-index: 1050;
-    pointer-events: auto;
-    align-content:center;
-    margin: 0;
-    padding: 0;
-    background-image: url(/images/menu.svg);
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat
 }
 
-.floating-container {
+#filter-button {
     position: absolute;
-    top: 2.5rem; /* Position from the bottom */
-    right: 1rem; /* Position from the right */
-    width: 40%; /* Set your desired width */
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    bottom:2rem;
+    right: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
     padding: 0.5rem; /* Padding inside the container */
     border-radius: 8px; /* Rounded corners */
     z-index: 1050;
+    color: rgb(0,49,59);
+    background-color: whitesmoke;
     pointer-events: auto;
+    align-content:center;
+
+}
+
+#floating-container {
+    position: relative;
+    width:max-content; /* Set your desired width */
+    height: max-content;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1050;
+
+    pointer-events: auto;
+
+    padding: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    margin-right: 1.4rem;
 }
