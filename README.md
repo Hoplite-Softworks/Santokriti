@@ -1,3 +1,7 @@
+SANTOKRITI
+-------TRAVEL GUIDE
+
+Lefteris and Panos welcome you to the mythical island of Santokriti!
 
 If you want to run the app locally on your computer (which isn't advised btw :( ),
 you need to install PostgreSQL and create a database.
