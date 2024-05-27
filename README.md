@@ -1,3 +1,5 @@
+POSTGRES BRANCH CONTAINS FINAL VERSION
+
 Main and Postgres branches contain the code for the FLY.IO app.
 If you want to run the app locally on your computer (which isn't advised btw :( ),
 you need to install PostgreSQL and create a database.
