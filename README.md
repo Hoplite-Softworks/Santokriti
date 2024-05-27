@@ -1,6 +1,7 @@
 POSTGRES BRANCH CONTAINS FINAL VERSION
 
-Main and Postgres branches contain the code for the FLY.IO app.
+WARNING: MAIN BRANCH IS OLD
+Postgres branch contains the code for the FLY.IO app.
 If you want to run the app locally on your computer (which isn't advised btw :( ),
 you need to install PostgreSQL and create a database.
 After you download the code as ZIP from this GitHub repo, unzip it and run npm install
