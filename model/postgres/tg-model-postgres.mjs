@@ -64,8 +64,9 @@ export let populatePlaceAndOwnsTables = async () => {
         const res = await client.query(placeCheckSql, params);
         if (parseInt(res.rows[0].count, 10) === 0) {
             //await client
-            await client.query(insertPlaceSql, params); // insert to "Place" table
-            await client.query(insertOwnsSql, params); // insert to "Owns" table
+            //await client.query(insertPlaceSql, params); // insert to "Place" table
+            //await client.query(insertOwnsSql, params); // insert to "Owns" table
+            //await client.query(`INSERT INTO "Place"`, params);
             console.log('Place and Owns tables have been populated.');
         } else {
             console.log('Place table is not empty, skipping population.');
@@ -86,6 +87,7 @@ export let getAllPlaces = async () => {
         const client = await connect();
         //await initializeDatabase();
         //await populatePlaceAndOwnsTables(); // ensure tables are populated if empty
+        
         const places = await client.query(sql, params);
         await client.release();
         return places.rows; // return the result
@@ -212,6 +214,9 @@ export let registerUser = async function (name, email, password, isShopKeeper) {
                 VALUES ($1, $2, $3, $4)
                 RETURNING "userId"
             `;
+            if (isShopKeeper == null || isShopKeeper == undefined) {
+                isShopKeeper = 0;
+            }
             const params = [name, email, hashedPassword, isShopKeeper];
             const client = await connect();
             const result = await client.query(sql, params);

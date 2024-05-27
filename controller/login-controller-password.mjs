@@ -73,12 +73,19 @@ export let showRegisterForm = function (req, res) {
 // register new user
 export let doRegister = async function (req, res) {
     // checks if a user exists by the given email
+    let shopkeeper = req.body.isShopKeeper;
+    if (shopkeeper == null || shopkeeper == undefined) {
+        shopkeeper = 0;
+    }
+    if (shopkeeper == 'on') {
+        shopkeeper = 1;
+    }
     try {
         const registrationResult = await userModel.registerUser(
             req.body.name,
             req.body.email,
             req.body.password,
-            req.body.isShopKeeper
+            shopkeeper
         );
         if (registrationResult.message) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
@@ -106,7 +113,7 @@ export let doRegister = async function (req, res) {
             console.log( req.body.name,
                 req.body.email,
                 req.body.password,
-                req.body.isShopKeeper)
+                shopkeeper)
             res.redirect('/login?message=Successful%20registration');
         }
     } catch (error) {
