@@ -11,7 +11,8 @@ const commonLocalizedUIStringsKeys = [
    "menuOptionOwned",
    "menuOptionRegister",
    "menuOptionLogin",
-   "menuOptionOwned"
+   "menuOptionOwned",
+   "menuOptionLogout",
 ];
 
 const getLocalizedUIStrings = (req, keys) => {
@@ -22,6 +23,7 @@ const getLocalizedUIStrings = (req, keys) => {
    return localizedStrings;
 };
 
+// give all needed info to the bookmarks page
 export async function listAllBookmarksRender(req, res, next) {
    const userId = req.session.loggedUserId;
    try {
@@ -44,6 +46,7 @@ export async function listAllBookmarksRender(req, res, next) {
    }
 }
 
+// add bookmark page
 export async function addBookmark(req, res, next) {
    const placeId = req.params.placeId;
    const userId = req.session.loggedUserId;
@@ -81,6 +84,8 @@ export async function addBookmark(req, res, next) {
    }
 }
 
+
+// remove bookmark page
 export async function removeBookmark(req, res, next) {
    const placeId = req.params.placeId;
    const userId = req.session.loggedUserId;
@@ -107,6 +112,8 @@ export async function removeBookmark(req, res, next) {
    }
 }
 
+
+// for the info page
 export async function info(req, res, next) {
    try {
       const keys = [
@@ -134,6 +141,8 @@ export async function info(req, res, next) {
    }
 }
 
+
+// for the contact page
 export async function contact(req, res, next) {
    try {
       const keys = [
@@ -160,6 +169,8 @@ export async function contact(req, res, next) {
    }
 }
 
+
+// give all the needed place info to the map page
 export async function map(req, res, next) {
    try {
       const places = await model.getAllPlaces();
@@ -190,6 +201,8 @@ export async function map(req, res, next) {
    }
 }
 
+
+// give specific place info to the place page
 export async function placeInfo(req, res, next) {
    const placeId = req.params.placeId;
    try {
@@ -215,6 +228,8 @@ export async function placeInfo(req, res, next) {
    }
 }
 
+
+// list owned places for an owner
 export async function listOwnedPlaces(req, res, next) {
    const userId = req.session.loggedUserId;
    try {
@@ -223,13 +238,12 @@ export async function listOwnedPlaces(req, res, next) {
       const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
       const ownedPlaces = await model.getOwnedPlaces(userId);
-      res.render('owned', { ownedPlaces, model: process.env.MODEL, session: req.session });
       res.render("owned", {
          ...localizedUIStrings,
          title: localizedUIStrings["titleOwned"],
          locale: req.getLocale(),
          pageSpecificCSS: "/css/owned.css",
-         place: place,
+         ownedPlaces: ownedPlaces,
          model: process.env.MODEL,
          session: req.session
       });

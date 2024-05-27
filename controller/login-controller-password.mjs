@@ -12,6 +12,7 @@ const commonLocalizedUIStringsKeys = [
     "menuOptionOwned",
     "menuOptionRegister",
     "menuOptionLogin",
+    "menuOptionLogout",
 ];
 
 
@@ -23,6 +24,7 @@ const getLocalizedUIStrings = (req, keys) => {
     return localizedStrings;
 };
 
+// login form
 export let showLogInForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleLogin",
@@ -44,6 +46,8 @@ export let showLogInForm = function (req, res) {
     });
 };
 
+
+// registration form
 export let showRegisterForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleRegister",
@@ -67,13 +71,23 @@ export let showRegisterForm = function (req, res) {
     });
 };
 
+
+// register new user
 export let doRegister = async function (req, res) {
+    // checks if a user exists by the given email
+    let shopkeeper = req.body.isShopKeeper;
+    if (shopkeeper == null || shopkeeper == undefined) {
+        shopkeeper = 0;
+    }
+    if (shopkeeper == 'on') {
+        shopkeeper = 1;
+    }
     try {
         const registrationResult = await userModel.registerUser(
             req.body.name,
             req.body.email,
             req.body.password,
-            req.body.isShopKeeper
+            shopkeeper
         );
         if (registrationResult.message) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
@@ -101,7 +115,7 @@ export let doRegister = async function (req, res) {
             console.log( req.body.name,
                 req.body.email,
                 req.body.password,
-                req.body.isShopKeeper)
+                shopkeeper)
             res.redirect('/login?message=Successful%20registration');
         }
     } catch (error) {
@@ -131,9 +145,10 @@ export let doRegister = async function (req, res) {
     }
 };
 
+
+// login user
 export let doLogin = async function (req, res) {
-    //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
-    //συνάρτηση επιστροφής authenticated
+    // checks if username and password are correct
     console.log(req.body.email)
 
     const user = await userModel.getUserByEmail(req.body.email);
@@ -162,12 +177,9 @@ export let doLogin = async function (req, res) {
     } else {
         const match = await bcrypt.compare(req.body.password, user.password);
         if (match) {
-            //if (req.body.password == user.password) {
-            //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
+            // loggedUserId and isShopKeeper are used in session (eg in navbar)
             req.session.loggedUserId = user.userId;
 	        req.session.isShopKeeper = user.isShopKeeper;
-            //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/"
-            // res.redirect("/");
             const redirectTo = req.session.originalUrl || "/bookmarks";
 
             res.redirect(redirectTo);
@@ -194,34 +206,36 @@ export let doLogin = async function (req, res) {
     }
 };
 
+
+// logout user
 export let doLogout = (req, res) => {
-    //Σημειώνουμε πως ο χρήστης δεν είναι πια συνδεδεμένος
+    // user isn't logged in anymore
     req.session.destroy();
     res.redirect('/');
 }
 
-//Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
+
+// check if user is logged in
 export let checkAuthenticated = function (req, res, next) {
-    //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
     if (req.session.loggedUserId) {
         console.log("user is authenticated", req.originalUrl);
-        //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
         next();
     }
     else {
-        //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
-        //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
+        // user isn't logged in, so he is prompted to do so
         if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
             next()
         }
         else {
-            //Στείλε το χρήστη στη "/login" 
+            // redirect the user to the login page
             console.log("not authenticated, redirecting to /login")
             res.redirect('/login');
         }
     }
 }
 
+
+// check if the logged in (or not) user is a shop keeper
 export let checkShopKeeper = function (req, res, next) {
     if (req.session.isShopKeeper) {
         next();

@@ -2,13 +2,10 @@ import express from 'express';
 const router = express.Router();
 
 import * as tgController from '../controller/tg-controller.mjs';
-
-//Για την υποστήριξη σύνδεσης/αποσύνδεσης χρηστών
 import * as logInController from '../controller/login-controller-password.mjs';
 
-//Καταχώριση συμπεριφοράς σε διάφορα path
+// main path
 router.route('/').get((req, res, next) => {
-    //throw new Error('Panos Lelakis 1083712 :)'); 
     res.redirect('/map');
 });
 
@@ -18,17 +15,13 @@ router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgCont
 
 router.get('/owned', logInController.checkAuthenticated, logInController.checkShopKeeper, tgController.listOwnedPlaces);
 
-//Αιτήματα για σύνδεση
-//Δείξε τη φόρμα σύνδεσης.
 router.route('/login').get(logInController.showLogInForm);
 
-// // //Αυτή η διαδρομή καλείται όταν η φόρμα φτάσει στον εξυπηρετητή με POST στο /login. Διεκπεραιώνει τη σύνδεση (login) του χρήστη
+// after receiving POST from the login form
 router.route('/login').post(logInController.doLogin);
 
-// //Αποσυνδέει το χρήστη
 router.route('/logout').get(logInController.doLogout);
 
-// //Εγγραφή νέου χρήστη
 router.route('/register').get(logInController.showRegisterForm);
 
 router.post('/register', logInController.doRegister);

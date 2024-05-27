@@ -1,7 +1,3 @@
-//Χρησιμοποιούμε το πακέτο dotenv
-//Αν η μεταβλητή περιβάλλοντος 'NODE_ENV' δεν έχει τιμή 'production', τότε
-//θα φορτωθούν οι ρυθμίσεις από το dotenv,
-//δηλ οι μεταβλητές που ορίζονται στο αρχείο '.env'
 import dotenv from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
@@ -11,10 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 import { tg } from './app.mjs';
 
-/**
- * Αν υπάρχει η μεταβλητή περιβάλλοντος 'PORT' χρησιμοποίησε την τιμή της,
- * αλλιώς χρησιμοποίησε τη θύρα 3000.
- */
+// if PORT is specified in the .env file, use that. Else, use port 3000
 const port = process.env.PORT || '3000';
 
 const server = tg.listen(port, () => {

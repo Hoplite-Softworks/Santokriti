@@ -4,25 +4,29 @@ import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import fs from 'fs';
 
-const { Pool } = pkg;
 
-dotenv.config();
+const { Pool } = pkg; // get Pool from pg package
 
-//const pool = new pg.Pool(); //οι παράμετροι ορίζονται ως μεταβλητές περιβάλλοντος
+dotenv.config(); // load environment variables from .env file
+
+// initialize connection pool using environment variables
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL, //μεταβλητή περιβάλλοντος
-    ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
+    connectionString: process.env.DATABASE_URL, // environment variable (database connection string)
+    //ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false }
 });
 
+// connect to PostgreSQL database
 export let connect = async () => {
     try {
-        const client = await pool.connect();
+        const client = await pool.connect(); // get client from the pool
         return client;
     } catch (error) {
         throw new Error('Unable to connect to the database: ' + error);
     }
 }
 
+
+// initialize database
 export let initializeDatabase = async () => {
     try {
         const sql = fs.readFileSync('/model/postgres/create_tables.sql', 'utf8');
@@ -34,6 +38,7 @@ export let initializeDatabase = async () => {
     }
 }
 
+// populate database
 export let populatePlaceAndOwnsTables = async () => {
     const placeCheckSql = `SELECT COUNT(*) FROM "Place"`;
     const insertPlaceSql = `
@@ -61,8 +66,9 @@ export let populatePlaceAndOwnsTables = async () => {
         const res = await client.query(placeCheckSql, params);
         if (parseInt(res.rows[0].count, 10) === 0) {
             //await client
-            await client.query(insertPlaceSql, params);
-            await client.query(insertOwnsSql, params);
+            //await client.query(insertPlaceSql, params); // insert to "Place" table
+            //await client.query(insertOwnsSql, params); // insert to "Owns" table
+            //await client.query(`INSERT INTO "Place"`, params);
             console.log('Place and Owns tables have been populated.');
         } else {
             console.log('Place table is not empty, skipping population.');
@@ -73,6 +79,7 @@ export let populatePlaceAndOwnsTables = async () => {
     }
 };
 
+// get all info for all places
 export let getAllPlaces = async () => {
     const sql = `
         SELECT * FROM "Place"
@@ -81,15 +88,17 @@ export let getAllPlaces = async () => {
     try {
         const client = await connect();
         //await initializeDatabase();
-        //await populatePlaceAndOwnsTables(); // Ensure tables are populated if empty
+        //await populatePlaceAndOwnsTables(); // ensure tables are populated if empty
+        
         const places = await client.query(sql, params);
         await client.release();
-        return places.rows; // Return the result
+        return places.rows; // return the result
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err; // throw the error to be handled by the caller
     }
 }
 
+// get all bookmarks for a given user with their associated place info
 export let getAllBookmarksWithPlaces = async (userId) => {
     const sql = `
         SELECT b."bookmarkId", b."date", b."userId", b."placeId", p."name" as "placeName", p."description"
@@ -102,12 +111,13 @@ export let getAllBookmarksWithPlaces = async (userId) => {
         const client = await connect();
         const bookmarks = await client.query(sql, params);
         await client.release();
-        return bookmarks.rows; // Return the result
+        return bookmarks.rows;
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// get info of a specific place
 export let getPlace = async (placeId) => {
     const sql = `
         SELECT * FROM "Place" WHERE "placeId" = $1
@@ -117,12 +127,13 @@ export let getPlace = async (placeId) => {
         const client = await connect();
         const place = await client.query(sql, params);
         await client.release();
-        return place.rows[0]; // Return the result
+        return place.rows[0];
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// add a bookmark
 export let addBookmark = async (userId, placeId) => {
     const bookmarkAlreadyExists = await bookmarkExists(userId, placeId);
     if (bookmarkAlreadyExists) {
@@ -139,11 +150,11 @@ export let addBookmark = async (userId, placeId) => {
         await client.release();
         return true;
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 };
 
-
+// remove a bookmark
 export let removeBookmark = async (placeId, userId) => {
     const sql = `
         DELETE FROM "Bookmark" WHERE "placeId" = $1 AND "userId" = $2
@@ -155,10 +166,11 @@ export let removeBookmark = async (placeId, userId) => {
         await client.release();
         return true;
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// get a user's info given his email
 export let getUserByEmail = async (email) => {
     const sql = `
         SELECT "userId", "email", "password", "isShopKeeper" FROM "User" WHERE "email" = $1 LIMIT 1
@@ -169,12 +181,13 @@ export let getUserByEmail = async (email) => {
         const user = await client.query(sql, params);
         //await client.release();
         client.release();
-        return user.rows[0]; // Return the result
+        return user.rows[0];
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// check if a user exists given his email
 export let userExistsByEmail = async (email) => {
     const sql = `
         SELECT 1 FROM "User" WHERE "email" = $1 LIMIT 1
@@ -184,12 +197,13 @@ export let userExistsByEmail = async (email) => {
         const client = await connect();
         const result = await client.query(sql, params);
         await client.release();
-        return !!result.rows.length; // Return true if user exists
+        return !!result.rows.length; // return true if user exists
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// register new user
 export let registerUser = async function (name, email, password, isShopKeeper) {
     const userExists = await userExistsByEmail(email);
     if (userExists) {
@@ -202,20 +216,25 @@ export let registerUser = async function (name, email, password, isShopKeeper) {
                 VALUES ($1, $2, $3, $4)
                 RETURNING "userId"
             `;
+            if (isShopKeeper == null || isShopKeeper == undefined) {
+                isShopKeeper = 0;
+            }
             const params = [name, email, hashedPassword, isShopKeeper];
             const client = await connect();
             const result = await client.query(sql, params);
             await client.release();
-            return result.rows[0].userId; // Return the new user's ID
+            return result.rows[0].userId; // return the new user's ID
         } catch (error) {
             throw error;
         }
     }
 }
 
+
+// get info and bookmark count of owned places of a shop keeper
 export let getOwnedPlaces = async (userId) => {
     const sql = `
-        SELECT p.*, COUNT(b."bookmarkId") AS "bookmarkCount"
+        SELECT p."placeId", p."name", COUNT(b."bookmarkId") AS "bookmarkCount"
         FROM "Place" p
         LEFT JOIN "Bookmark" b ON p."placeId" = b."placeId"
         JOIN "Owns" o ON p."placeId" = o."placeId"
@@ -227,12 +246,13 @@ export let getOwnedPlaces = async (userId) => {
         const client = await connect();
         const places = await client.query(sql, params);
         await client.release();
-        return places.rows; // Return the result
+        return places.rows;
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 }
 
+// check if a bookmark exists for a given place and user
 export let bookmarkExists = async (userId, placeId) => {
     const sql = `
         SELECT 1 FROM "Bookmark" WHERE "userId" = $1 AND "placeId" = $2
@@ -242,8 +262,8 @@ export let bookmarkExists = async (userId, placeId) => {
         const client = await connect();
         const result = await client.query(sql, params);
         await client.release();
-        return !!result.rows.length; // Return true if bookmark exists
+        return !!result.rows.length;
     } catch (err) {
-        throw err; // Throw the error to be handled by the caller
+        throw err;
     }
 };
