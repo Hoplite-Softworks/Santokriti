@@ -39,7 +39,6 @@ app.use(tgSession);
 // load public folder for templates etc
 app.use(express.static('public'))
 
-// session info
 app.use((req, res, next) => {
    if (req.session) {
       res.locals.userId = req.session.loggedUserId;
@@ -51,7 +50,7 @@ app.use((req, res, next) => {
    next();
 });
 
-// locale info
+
 app.use((req, res, next) => {
    const lang = req.query.lang || req.cookies.locale || 'en';
    res.cookie('locale', lang, { maxAge: 900000, httpOnly: true });
@@ -59,11 +58,10 @@ app.use((req, res, next) => {
    next();
 });
 
-// routes
+
 import routes from './routes/tg-routes.mjs';
 app.use('/', routes);
 
-// error Handler
 app.use((err, req, res, next) => {
    if (res.headersSent) {
       return next(err);
@@ -72,8 +70,9 @@ app.use((err, req, res, next) => {
    res.render('error', { message: err.message, stacktrace: err.stack });
 });
 
-// load views folder
+
 app.engine('hbs', exphbs.engine({ extname: 'hbs', })); // .handlebars = .hbs
+
 app.set('view engine', 'hbs');
 
 export { app as tg };

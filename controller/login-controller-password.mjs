@@ -46,6 +46,7 @@ export let showLogInForm = function (req, res) {
     });
 };
 
+
 // registration form
 export let showRegisterForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
@@ -69,6 +70,7 @@ export let showRegisterForm = function (req, res) {
         model: process.env.MODEL
     });
 };
+
 
 // register new user
 export let doRegister = async function (req, res) {
@@ -143,6 +145,7 @@ export let doRegister = async function (req, res) {
     }
 };
 
+
 // login user
 export let doLogin = async function (req, res) {
     // checks if username and password are correct
@@ -203,12 +206,14 @@ export let doLogin = async function (req, res) {
     }
 };
 
+
 // logout user
 export let doLogout = (req, res) => {
     // user isn't logged in anymore
     req.session.destroy();
     res.redirect('/');
 }
+
 
 // check if user is logged in
 export let checkAuthenticated = function (req, res, next) {
@@ -228,6 +233,7 @@ export let checkAuthenticated = function (req, res, next) {
         }
     }
 }
+
 
 // check if the logged in (or not) user is a shop keeper
 export let checkShopKeeper = function (req, res, next) {

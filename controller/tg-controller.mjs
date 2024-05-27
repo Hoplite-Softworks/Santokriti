@@ -84,6 +84,7 @@ export async function addBookmark(req, res, next) {
    }
 }
 
+
 // remove bookmark page
 export async function removeBookmark(req, res, next) {
    const placeId = req.params.placeId;
@@ -110,6 +111,7 @@ export async function removeBookmark(req, res, next) {
       next(error);
    }
 }
+
 
 // for the info page
 export async function info(req, res, next) {
@@ -139,6 +141,7 @@ export async function info(req, res, next) {
    }
 }
 
+
 // for the contact page
 export async function contact(req, res, next) {
    try {
@@ -165,6 +168,7 @@ export async function contact(req, res, next) {
       next(error);
    }
 }
+
 
 // give all the needed place info to the map page
 export async function map(req, res, next) {
@@ -197,6 +201,7 @@ export async function map(req, res, next) {
    }
 }
 
+
 // give specific place info to the place page
 export async function placeInfo(req, res, next) {
    const placeId = req.params.placeId;
@@ -223,6 +228,7 @@ export async function placeInfo(req, res, next) {
    }
 }
 
+
 // list owned places for an owner
 export async function listOwnedPlaces(req, res, next) {
    const userId = req.session.loggedUserId;
@@ -232,7 +238,6 @@ export async function listOwnedPlaces(req, res, next) {
       const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
       const ownedPlaces = await model.getOwnedPlaces(userId);
-      console.log(ownedPlaces);
       res.render("owned", {
          ...localizedUIStrings,
          title: localizedUIStrings["titleOwned"],

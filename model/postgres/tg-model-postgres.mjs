@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import fs from 'fs';
 
+
 const { Pool } = pkg; // get Pool from pg package
 
 dotenv.config(); // load environment variables from .env file
@@ -23,6 +24,7 @@ export let connect = async () => {
         throw new Error('Unable to connect to the database: ' + error);
     }
 }
+
 
 // initialize database
 export let initializeDatabase = async () => {
@@ -227,6 +229,7 @@ export let registerUser = async function (name, email, password, isShopKeeper) {
         }
     }
 }
+
 
 // get info and bookmark count of owned places of a shop keeper
 export let getOwnedPlaces = async (userId) => {
