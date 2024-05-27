@@ -1,0 +1,33 @@
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
+{{#if bookmarks.length}}
+{{#each bookmarks}}
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-1">
+            <p class="title text-center m-0 mt-2"><a href="/place/{{this.placeId}}">{{this.placeName}}</a></p>
+        </div>
+    </div>
+    <div class="row m-0 p-1 pt-1">
+        <div class="col">
+            <p class="info-text">{{this.description}}</p>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <p class="date">{{dateAdded}}:<br>{{this.date}}</p>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col">
+            <p class="remove-place"><a href="/bookmarks/remove/{{this.placeId}}">
+                    <i class="fa fa-trash"></i>
+                </a></p>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{else}}
+<p class="date">{{NoBookmarksYet}}</p>
+{{/if}}

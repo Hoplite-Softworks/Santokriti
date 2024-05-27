@@ -1,0 +1,72 @@
+    {{#if message}}
+        <p>{{message}}</p>
+    {{/if}}
+
+    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
+    <div class="row">
+    <div class="col">
+        <div id="map">
+            <div id="filter" class="btn-group dropup">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" id="filter-button">
+                    <p class="fs-5 d-none d-md-inline" style="margin: 0.2rem; margin-right: 0.5rem; display:inline">
+                        {{filtersPopupText}}
+                    </p>
+                    <i class="fa fa-filter"></i>
+                </button>
+                <div class="dropdown-menu floating-container" id="floating-container">
+                    <div><input id="food" type="checkbox" />
+                        <label for="food">{{foodFilterOption}}</label>
+                    </div>
+                    <div><input id="beach" type="checkbox" />
+                        <label for="beach">{{beachFilterOption}}</label>
+                    </div>
+                    <div><input id="hotel" type="checkbox" />
+                        <label for="hotel">{{StayingFilterOption}}</label>
+                    </div>
+                    <div><input id="fun" type="checkbox" />
+                        <label for="fun">{{FunFilterOption}}</label>
+                    </div>
+                    <div><input id="sight" type="checkbox" />
+                        <label for="sight">{{SightsFilterOption}}</label>
+                    </div>
+                    <div><input id="medical" type="checkbox" />
+                        <label for="medical">{{AidFilterOption}}</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    
+    <script>
+        document.querySelectorAll('.dropdown-menu input[type="checkbox"], .dropdown-menu label').forEach(element => {
+            element.addEventListener('click', function (event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>const places = {{{places}}}; // Pass places data to JavaScript</script>
+    <script>
+        // Detect user agent to determine whether to load desktop or mobile map script
+        var $jq = jQuery.noConflict();
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            document.write('<script src="/js/map-mobile.js"><\/script>');
+        } else {
+            document.write('<script src="/js/map-desktop.js"><\/script>');
+        }
+    </script>
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

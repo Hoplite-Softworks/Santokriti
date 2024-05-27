@@ -1,0 +1,67 @@
+
+#map {
+    position: relative;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 80vh;
+    /* or as desired */
+    width: 100%;
+    /* This means "100% of the width of its container", the .col-md-8 */
+}
+
+#filter {
+    position: absolute;
+    bottom: 0; /* Position from the bottom */
+    right: 0; /* Position from the right */
+    z-index: 1050;
+}
+
+#filter-button {
+    position: absolute;
+    bottom:2rem;
+    right: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+    padding: 0.5rem; /* Padding inside the container */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1050;
+    color: rgb(0,49,59);
+    background-color: whitesmoke;
+    pointer-events: auto;
+    align-content:center;
+
+}
+
+#floating-container {
+    position: relative;
+    width:max-content; /* Set your desired width */
+    height: max-content;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1050;
+
+    pointer-events: auto;
+
+    padding: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    margin-right: 1.4rem;
+}
+
+.marker-image {
+    width: 0.5rem;
+    height: auto;
+}
+
+.leaflet-popup-content {
+    width: 0.5rem;
+}
+
+.leaflet-popup-content .marker-text{
+    margin:0
+}
+
+.leaflet-popup-content .carousel{
+    margin:0;
+    margin-right: 0.5rem;
+}

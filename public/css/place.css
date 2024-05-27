@@ -1,0 +1,112 @@
+.info-core {
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    font-family: OpenSans;
+    color: rgb(0, 49, 59);
+}
+
+.title {
+    font-size: 1.3rem;
+}
+
+.title a {
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(4, 69, 82);
+}
+
+.info-text {
+    padding: 0;
+    width: inherit;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.keywords-text {
+    width: inherit;
+    font-size: 1rem;
+    color: rgb(70, 70, 70);
+}
+
+
+.remove-place {
+    float: right;
+}
+
+.remove-place a {
+    font-size: 1.4rem;
+    color: rgb(48, 12, 12);
+}
+
+.add-text a {
+    text-decoration: none;
+}
+
+.add-text {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.span-text {
+    text-decoration: underline;
+    font-size: 1.2rem;
+}
+
+
+.slick-slide img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Media queries for desktop vs mobile */
+@media (max-width: 767.98px) {
+
+    .info-image {
+        width: inherit;
+        border-radius: 1rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .slick-carousel {
+        width: 20rem;
+        /* Center align the carousel images */
+        text-align: center;
+    }
+
+    .slick-slide {
+        display: inline-block;
+        /* Ensure each slide appears in line */
+    }
+
+}
+
+
+@media (min-width: 768px) {
+
+    .info-core {
+        margin-left: 30rem;
+        margin-right: 30rem;
+    }
+
+
+    .slick-carousel {
+        margin: 0 10rem;
+        width: 40rem;
+        /* Center align the carousel images */
+        text-align: center;
+    }
+
+    .slick-slide {
+        display: inline-block;
+        /* Ensure each slide appears in line */
+    }
+
+    .info-image {
+        width: inherit;
+        margin-right: 1rem;
+        border-radius: 1rem;
+        text-align: center;
+    }
+
+}

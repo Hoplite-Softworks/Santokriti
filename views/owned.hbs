@@ -1,0 +1,26 @@
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
+
+{{#if ownedPlaces.length}}
+ {{#each ownedPlaces}}
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-1">
+            <p class="title text-center m-0 mt-2"><a href="/place/{{this.placeId}}">{{this.placeName}}</a></p>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <p class="add-text"><a href="/bookmarks/add/{{place.placeId}}">
+                    <i class="fa fa-heart"></i>
+                    <span class="span-text ms-3">{{this.bookmarkCount}}</span>
+                </a></p>
+        </div>
+        
+    </div>
+</div>
+{{/each}}
+{{else}}
+    <p class="date">{{NoOwnerYet}}</p>
+{{/if}}
