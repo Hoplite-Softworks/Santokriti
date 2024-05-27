@@ -1,39 +1,51 @@
 {{#if message}}
     <p>{{message}}</p>
 {{/if}}
-    <div id="form">
-        <form action="#">
-            <div id="form-intro">
-                Το Γραφείο Τουριστικής Ανάπτυξης του Δήμου Σαντοκρητών βρίσκεται πάντα στην υπηρεσία του επισκέπτη.
+    <div class="row-auto contact-row justify-content-center">
+    <p class="form-info mt-4">{{introContact}}</p>
+    <form action="#">
+        <div class="form-row">
+            <div class="form-group col-12 col-md-12">
+                <label for="firstName">{{firstName}}</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="First Name"
+                    required
+                />
             </div>
-            <div id="form-details">
-                <section id="names">
-                    <div>
-                        <label for="first_name">Ονοματεπώνυμο</label>
-                    </div>
-                    <div>
-                        <input id="first_name" type="text" name="first_name" placeholder="Όνομα">
-                        <input type="text" name="last_name" placeholder="Επώνυμο">
-                    </div>
-                </section>
-                <section id="contact-info">
-                    <div>
-                        <label for="telephone">Στοιχεία επικοινωνίας</label>
-                    </div>
-                    <div>
-                        <input type="tel" id="telephone" name="telephone" placeholder="Τηλέφωνο">
-                        <input required type="email" name="email" placeholder="Διεύθυνση μέιλ">
-                    </div>
-                </section>
-                <section id="personal-message">
-                    <div>
-                        <label for="message">Μήνυμα</label>
-                    </div>
-                    <div>
-                        <textarea required id="message" name="message"></textarea>
-                    </div>
-                </section>
+            <div class="form-group col-12 col-md-12">
+                <label for="lastName">{{lastName}}</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Last Name"
+                    required
+                />
             </div>
-            <input id="submit" type="submit" value="Αποστολή μηνύματος">
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="email">{{email}}</label>
+            <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email"
+                required
+            />
+        </div>
+        <div class="form-group">
+            <label for="message">{{contactMessage}}</label>
+            <textarea
+                class="form-control"
+                id="message"
+                rows="5"
+                placeholder="Your message"
+                required
+            ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">{{sendMessage}}</button>
+    </form>
+</div>

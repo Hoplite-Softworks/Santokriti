@@ -1,0 +1,62 @@
+.form-row label {
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.5rem;
+
+    margin-right: 1rem;
+    width: 18ch;
+    text-align: center;
+}
+
+#registerLabel {
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    margin-left: 2.5rem;
+
+    text-align: center;
+    justify-content: center;
+    width: max-content;
+
+}
+
+#registerLabel a {
+    cursor: pointer;
+    text-decoration: none;
+    color: cyan;
+}
+
+
+.form-info {
+        border: 0.1rem solid whitesmoke;
+        border-radius: 1rem;
+        background-color: rgba(0, 0, 0, 0.2);
+    
+        color: whitesmoke;
+        padding: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: inline;
+}
+
+/* Media queries for desktop vs mobile */
+@media (max-width: 767.98px) {
+
+}
+
+@media (min-width: 768px) {
+
+    .contact-row {
+        justify-self: center;
+        max-width: 70%;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        justify-content: center;
+    }
+}

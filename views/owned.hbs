@@ -1,15 +1,26 @@
 {{#if message}}
-    <p>{{message}}</p>
+<p>{{message}}</p>
 {{/if}}
+
 {{#if ownedPlaces.length}}
-    <ul>
-        {{#each ownedPlaces}}
-            <li>
-                <h3>{{this.placeName}}</h3>
-                <p>Bookmark count: {{this.bookmarkCount}}</p>
-            </li>
-        {{/each}}
-    </ul>
+ {{#each ownedPlaces}}
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-1">
+            <p class="title text-center m-0 mt-2"><a href="/place/{{this.placeId}}">{{this.name}}</a></p>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col">
+            <p class="add-text">
+                    <i class="fa fa-heart"></i>
+                    <span class="span-text ms-3">{{this.bookmarkCount}}</span>
+            </p>
+        </div>
+        
+    </div>
+</div>
+{{/each}}
 {{else}}
-    <p>Δεν είστε ιδιοκτήτης κάποιου μαγαζιού ακόμα.</p>
+    <p class="date">{{NoOwnerYet}}</p>
 {{/if}}

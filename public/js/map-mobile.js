@@ -1,18 +1,23 @@
 let L = window.L;
 
 let map = L.map("map", {
-    //dragging: false,
-    //zoomControl: false,
+    dragging: true,
+    zoomControl: true,
+    maxBounds: [
+        [35.5, 22.6], // South West coordinates of Kythera
+        [36.5, 23.3]  // North East coordinates of Kythera
+    ]
 }).setView([36.261039, 22.987658], 11);
 
 let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 18,
-    //minZoom: 11,
+    minZoom: 11,
     attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
 var popup = L.popup();
+var $jq = jQuery.noConflict();
 
 async function loadPlacesOnMap() {
     const markers = L.markerClusterGroup({
@@ -51,7 +56,7 @@ async function loadPlacesOnMap() {
         let popupOpened = false;
         newMarker.on('touchstart click', function (e) {
             newMarker.openPopup();
-            $('.carousel').slick({
+            $jq('.carousel').slick({
                 autoplay: true,
                 dots: true,
                 autoplaySpeed: 1 * 1000, // each image lasts 1000 ms = 1 sec

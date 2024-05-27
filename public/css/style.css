@@ -1,0 +1,118 @@
+@font-face {
+    font-family: Alegreya;
+    src: url(/fonts/Alegreya-VariableFont_wght.ttf);
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url(/fonts/OpenSans-VariableFont_wdth\,wght.ttf);
+}
+
+.background-container {
+    height: 100%;
+    padding: 0;
+}
+
+#islandName,
+#islandSlogan {
+    font-family: Alegreya;
+    color: white;
+}
+
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+#menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1050;
+}
+
+#menu-button {
+    position: relative;
+    top: 0.5rem;
+    right: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+    border-color: whitesmoke;
+    z-index: 1050;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 255, 0.0);
+    pointer-events: auto;
+    align-content: center;
+
+    height: fit-content;
+}
+
+
+
+#menu-container {
+    width: max-content;
+    background-color: rgba(0, 112, 101, 1.0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1050;
+    color: whitesmoke;
+    pointer-events: auto;
+
+    position: relative;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    margin-right: 10.1rem;
+}
+
+#menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: Alegreya;
+    font-size: larger;
+}
+
+#menu-container ul li a {
+    cursor: pointer;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+/* Media queries for desktop vs mobile */
+@media (max-width: 767.98px) {
+
+    .background-container {
+        width: 100%;
+        margin: 0;
+        align-self: center;
+    }
+
+}
+
+#credits {
+    font-family: Alegreya;
+    color: white;
+    bottom: 0;
+    right: 1rem;
+    left: 1rem;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    .background-container {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        align-self: center;
+    }
+
+    #menu-button {
+        top: 1rem;
+        right: 1rem;
+    }
+
+}

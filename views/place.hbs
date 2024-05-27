@@ -1,34 +1,57 @@
 {{#if message}}
-    <p>{{message}}</p>
+<p>{{message}}</p>
 {{/if}}
 <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
 <!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
-<style>
-    .place-image {
-        max-width: 80%;
-        height: auto;
-    }
-</style>
-
-<h3>{{place.name}} - στην Σαντοκρήτη</h3>
-<p>{{place.description}}</p>
-<p>Keywords: {{place.keywords}}</p>
-<div class="carousel">
-    {{#each place.images}}
-        <div><img src="{{this}}" alt="{{../place.name}}" class="place-image"></div>
-    {{/each}}
+<div class="row mb-4 ms-1 me-1 info-core">
+    <div class="row m-0 p-0">
+        <div class="col p-2">
+            <p class="title fs-3 text-center m-0 mt-2">{{place.name}}</p>
+        </div>
+    </div>
+    <div class="row m-0 p-2 pt-3">
+        <div class="col">
+            <p class="info-text">{{place.description}}</p>
+            <p class="keywords-text mt-3 mb-1">{{place.keywords}}</p>
+        </div>
+    </div>
+    <div class="row-auto m-0 p-2 pt-0">
+        <div class="col p-4 d-flex justify-content-center align-items-center">
+            <div class="slick-carousel">
+                {{#each place.images}}
+                <div><img src="{{this}}" alt="{{../place.name}}" class="info-image float-start mb-3"></div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="row m-0 p-2 pt-3 pb-0">
+        <div class="col">
+            <p class="add-text"><a href="/bookmarks/add/{{place.placeId}}">
+                    <i class="fa fa-bookmark"></i>
+                    <span class="span-text ms-3">{{AddToBookmarks}}</span>
+                </a></p>
+        </div>
+    </div>
+    <div class="row m-0 mb-3 p-2 pt-0 pb-0">
+        <div class="col">
+            <p class="add-text"><a href="/map">
+                    <i class="fa fa-backward"></i>
+                    <span class="span-text ms-3">{{backToMap}}</span>
+                </a></p>
+        </div>
+    </div>
 </div>
-<a href="/map">Back to map</a>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 <script>
-    $(document).ready(function(){
-        $('.carousel').slick({
+    var $jq = jQuery.noConflict();
+    $jq(document).ready(function () {
+        $jq('.slick-carousel').slick({
             autoplay: true,
             dots: true,
         });
