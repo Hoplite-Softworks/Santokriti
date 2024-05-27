@@ -1,7 +1,5 @@
-import bcrypt from "bcrypt";
-
-//import * as userModel from "../model/postgres/tg-model-postgres.mjs";
-import * as userModel from "../model-old/sqlite-async/tg-model-sqlite-async.mjs";
+import bcrypt from 'bcrypt'
+import * as userModel from '../model/postgres/tg-model-postgres.mjs';
 
 const commonLocalizedUIStringsKeys = [
     "islandName",
@@ -29,19 +27,20 @@ export let showLogInForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleLogin",
         "introLogin",
-        "username",
+        "name",
         "password",
         "login",
         "noAccountYet",
         "register",
+        "email",
     ]);
 
     res.render("login", {
         ...localizedUIStrings,
         title: localizedUIStrings["titleLogin"],
-        pageSpecificCSS: "/css/sign-in.css",
+        pageSpecificCSS: "/css/login.css",
         locale: req.getLocale(),
-        model: process.env.MODEL,
+        model: process.env.MODEL
     });
 };
 
@@ -49,11 +48,10 @@ export let showRegisterForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleRegister",
         "register",
-        "username",
+        "name",
         "password",
         "email",
-        "telephone",
-        "shopKeeperQuestion",
+        "isShopKeeper",
         "country",
         "alreadyAccount",
         "login",
@@ -65,7 +63,7 @@ export let showRegisterForm = function (req, res) {
         title: localizedUIStrings["titleRegister"],
         pageSpecificCSS: "/css/register.css",
         locale: req.getLocale(),
-        model: process.env.MODEL,
+        model: process.env.MODEL
     });
 };
 
@@ -81,11 +79,10 @@ export let doRegister = async function (req, res) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleRegister",
                 "register",
-                "username",
+                "name",
                 "password",
                 "email",
-                "telephone",
-                "shopKeeperQuestion",
+                "isShopKeeper",
                 "country",
                 "alreadyAccount",
                 "login",
@@ -98,23 +95,24 @@ export let doRegister = async function (req, res) {
                 pageSpecificCSS: "/css/register.css",
                 message: registrationResult.message,
                 locale: req.getLocale(),
-                model: process.env.MODEL,
+                model: process.env.MODEL
             });
         } else {
-            res.redirect("/login");
+            console.log( req.body.name,
+                req.body.email,
+                req.body.password,
+                req.body.isShopKeeper)
+            res.redirect('/login?message=Successful%20registration');
         }
     } catch (error) {
         console.error("registration error: " + error);
-        //FIXME: δε θα έπρεπε να περνάμε το εσωτερικό σφάλμα στον χρήστη
-        res.render("register", { message: error });
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleRegister",
             "register",
-            "username",
+            "name",
             "password",
             "email",
-            "telephone",
-            "shopKeeperQuestion",
+            "isShopKeeper",
             "country",
             "alreadyAccount",
             "login",
@@ -128,7 +126,7 @@ export let doRegister = async function (req, res) {
             pageSpecificCSS: "/css/register.css",
             message: localizedUIStrings["messageRegistrationError"],
             locale: req.getLocale(),
-            model: process.env.MODEL,
+            model: process.env.MODEL
         });
     }
 };
@@ -136,26 +134,30 @@ export let doRegister = async function (req, res) {
 export let doLogin = async function (req, res) {
     //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
     //συνάρτηση επιστροφής authenticated
+    console.log(req.body.email)
 
     const user = await userModel.getUserByEmail(req.body.email);
+    
+    console.log(user)
     if (user == undefined || !user.password || !user.userId) {
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleLogin",
             "introLogin",
-            "username",
+            "name",
             "password",
             "login",
             "noAccountYet",
             "register",
             "messageNoUserFound",
+            "email",
         ]);
         res.render("login", {
             ...localizedUIStrings,
             message: localizedUIStrings["messageNoUserFound"],
             title: localizedUIStrings["titleLogin"],
-            pageSpecificCSS: "/css/sign-in.css",
+            pageSpecificCSS: "/css/login.css",
             locale: req.getLocale(),
-            model: process.env.MODEL,
+            model: process.env.MODEL
         });
     } else {
         const match = await bcrypt.compare(req.body.password, user.password);
@@ -163,6 +165,7 @@ export let doLogin = async function (req, res) {
             //if (req.body.password == user.password) {
             //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
             req.session.loggedUserId = user.userId;
+	        req.session.isShopKeeper = user.isShopKeeper;
             //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/"
             // res.redirect("/");
             const redirectTo = req.session.originalUrl || "/bookmarks";
@@ -172,7 +175,7 @@ export let doLogin = async function (req, res) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleLogin",
                 "introLogin",
-                "username",
+                "name",
                 "password",
                 "login",
                 "noAccountYet",
@@ -183,9 +186,9 @@ export let doLogin = async function (req, res) {
                 ...localizedUIStrings,
                 message: localizedUIStrings["messageWrongPassword"],
                 title: localizedUIStrings["titleLogin"],
-                pageSpecificCSS: "/css/sign-in.css",
+                pageSpecificCSS: "/css/login.css",
                 locale: req.getLocale(),
-                model: process.env.MODEL,
+                model: process.env.MODEL
             });
         }
     }
@@ -194,8 +197,8 @@ export let doLogin = async function (req, res) {
 export let doLogout = (req, res) => {
     //Σημειώνουμε πως ο χρήστης δεν είναι πια συνδεδεμένος
     req.session.destroy();
-    res.redirect("/");
-};
+    res.redirect('/');
+}
 
 //Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
 export let checkAuthenticated = function (req, res, next) {
@@ -204,15 +207,25 @@ export let checkAuthenticated = function (req, res, next) {
         console.log("user is authenticated", req.originalUrl);
         //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
         next();
-    } else {
+    }
+    else {
         //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
         //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
-        if (req.originalUrl === "/login" || req.originalUrl === "/register") {
-            next();
-        } else {
-            //Στείλε το χρήστη στη "/login"
-            console.log("not authenticated, redirecting to /login");
-            res.redirect("/login");
+        if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
+            next()
+        }
+        else {
+            //Στείλε το χρήστη στη "/login" 
+            console.log("not authenticated, redirecting to /login")
+            res.redirect('/login');
         }
     }
-};
+}
+
+export let checkShopKeeper = function (req, res, next) {
+    if (req.session.isShopKeeper) {
+        next();
+    } else {
+        res.render('contact', { message: 'You must be a shopkeeper to access the owned page. Contact the developers if you want to apply as a shopkeeper.' });
+    }
+}

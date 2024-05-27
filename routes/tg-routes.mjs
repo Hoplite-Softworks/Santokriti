@@ -1,31 +1,24 @@
-import express from 'express'
+import express from 'express';
 const router = express.Router();
 
-import dotenv from 'dotenv'
-if (process.env.NODE_ENV !== 'production') {
-    console.log('loading .env');
-    dotenv.config();
-}
+import * as tgController from '../controller/tg-controller.mjs';
 
-const tgController = await import(`../controller/tg-controller.mjs`);
-const logInController = await import(`../controller/login-controller-password.mjs`);
+//Για την υποστήριξη σύνδεσης/αποσύνδεσης χρηστών
+import * as logInController from '../controller/login-controller-password.mjs';
 
 //Καταχώριση συμπεριφοράς σε διάφορα path
-router.route('/').get((req, res) => { res.redirect('/home');});
-
-router.get('/home', tgController.home);
-
-router.get('/place/:placeId', tgController.placeInfo);
+router.route('/').get((req, res, next) => {
+    //throw new Error('Panos Lelakis 1083712 :)'); 
+    res.redirect('/map');
+});
 
 router.get('/bookmarks/remove/:placeId', logInController.checkAuthenticated, tgController.removeBookmark);
 router.get('/bookmarks', logInController.checkAuthenticated, tgController.listAllBookmarksRender);
 router.get('/bookmarks/add/:placeId', logInController.checkAuthenticated, tgController.addBookmark);
 
-router.get('/info', tgController.info);
+router.get('/owned', logInController.checkAuthenticated, logInController.checkShopKeeper, tgController.listOwnedPlaces);
 
-router.get('/contact', tgController.contact);
-
-
+//Αιτήματα για σύνδεση
 //Δείξε τη φόρμα σύνδεσης.
 router.route('/login').get(logInController.showLogInForm);
 
@@ -40,5 +33,12 @@ router.route('/register').get(logInController.showRegisterForm);
 
 router.post('/register', logInController.doRegister);
 
+router.get('/info', tgController.info);
+
+router.get('/contact', tgController.contact);
+
+router.get('/map', tgController.map);
+
+router.get('/place/:placeId', tgController.placeInfo);
 
 export default router;

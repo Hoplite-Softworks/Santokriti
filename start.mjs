@@ -1,4 +1,8 @@
-import dotenv from "dotenv"
+//Χρησιμοποιούμε το πακέτο dotenv
+//Αν η μεταβλητή περιβάλλοντος 'NODE_ENV' δεν έχει τιμή 'production', τότε
+//θα φορτωθούν οι ρυθμίσεις από το dotenv,
+//δηλ οι μεταβλητές που ορίζονται στο αρχείο '.env'
+import dotenv from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
    console.log('loading .env');
