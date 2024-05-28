@@ -50,12 +50,11 @@ export async function listAllBookmarksRender(req, res, next) {
 export async function addBookmark(req, res, next) {
    const placeId = req.params.placeId;
    const userId = req.session.loggedUserId;
+   const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(commonLocalizedUIStringsKeys);
+   const localizedUIStrings = getLocalizedUIStrings(req, keys);
    try {
       await model.addBookmark(userId, placeId);
       const bookmarks = await model.getAllBookmarksWithPlaces(userId);
-
-      const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(commonLocalizedUIStringsKeys);
-      const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
       res.render("bookmarks", {
          ...localizedUIStrings,
@@ -68,16 +67,18 @@ export async function addBookmark(req, res, next) {
       });
    } catch (error) {
       if (error.message === 'Bookmark already exists') {
-         res.render("place", {
-            ...localizedUIStrings,
-            title: place.name,
-            locale: req.getLocale(),
-            pageSpecificCSS: "/css/place.css",
-            place: place,
-            model: process.env.MODEL,
-            session: req.session,
-            message: 'You have already bookmarked this place'
-         });
+         //const place = await model.getPlace(placeId);
+         //res.render("place", {
+            //...localizedUIStrings,
+            //title: place.name,
+            //locale: req.getLocale(),
+            //pageSpecificCSS: "/css/place.css",
+            //place: place,
+            //model: process.env.MODEL,
+            //session: req.session,
+            //message: 'You have already bookmarked this place'
+            await placeInfo(req, res, next);
+         //});
       } else {
          next(error);
       }

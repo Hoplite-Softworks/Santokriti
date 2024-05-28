@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import pkg from 'pg';
 import fs from 'fs';
 
-
 const { Pool } = pkg; // get Pool from pg package
 
 dotenv.config(); // load environment variables from .env file
@@ -24,7 +23,6 @@ export let connect = async () => {
         throw new Error('Unable to connect to the database: ' + error);
     }
 }
-
 
 // initialize database
 export let initializeDatabase = async () => {
@@ -230,11 +228,9 @@ export let registerUser = async function (name, email, password, isShopKeeper) {
     }
 }
 
-
-// get info and bookmark count of owned places of a shop keeper
 export let getOwnedPlaces = async (userId) => {
     const sql = `
-        SELECT p."placeId", p."name", COUNT(b."bookmarkId") AS "bookmarkCount"
+        SELECT p.*, COUNT(b."bookmarkId") AS "bookmarkCount"
         FROM "Place" p
         LEFT JOIN "Bookmark" b ON p."placeId" = b."placeId"
         JOIN "Owns" o ON p."placeId" = o."placeId"
@@ -246,13 +242,12 @@ export let getOwnedPlaces = async (userId) => {
         const client = await connect();
         const places = await client.query(sql, params);
         await client.release();
-        return places.rows;
+        return places.rows; // Return the result
     } catch (err) {
-        throw err;
+        throw err; // Throw the error to be handled by the caller
     }
 }
 
-// check if a bookmark exists for a given place and user
 export let bookmarkExists = async (userId, placeId) => {
     const sql = `
         SELECT 1 FROM "Bookmark" WHERE "userId" = $1 AND "placeId" = $2
