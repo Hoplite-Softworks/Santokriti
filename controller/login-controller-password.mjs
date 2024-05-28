@@ -112,10 +112,10 @@ export let doRegister = async function (req, res) {
                 model: process.env.MODEL
             });
         } else {
-            console.log( req.body.name,
-                req.body.email,
-                req.body.password,
-                shopkeeper)
+            //console.log( req.body.name,
+                //req.body.email,
+                //req.body.password,
+                //shopkeeper)
             res.redirect('/login?message=Successful%20registration');
         }
     } catch (error) {
