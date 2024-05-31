@@ -1,6 +1,8 @@
 SANTOKRITI
 -------TRAVEL GUIDE
 
+WARNING: visit postgres branch for bug fixes etc
+
 Lefteris and Panos welcome you to the mythical island of Santokriti!
 
 If you want to run the app locally on your computer (which isn't advised btw :( ),
