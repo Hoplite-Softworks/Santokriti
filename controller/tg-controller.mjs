@@ -234,7 +234,7 @@ export async function placeInfo(req, res, next) {
 export async function listOwnedPlaces(req, res, next) {
    const userId = req.session.loggedUserId;
    try {
-
+      //await model.popul(userId);
       const keys = ["titleOwned", "NoOwnerYet"].concat(commonLocalizedUIStringsKeys);
       const localizedUIStrings = getLocalizedUIStrings(req, keys);
 

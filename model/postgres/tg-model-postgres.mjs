@@ -87,7 +87,7 @@ export let getAllPlaces = async () => {
         const client = await connect();
         //await initializeDatabase();
         //await populatePlaceAndOwnsTables(); // ensure tables are populated if empty
-        
+
         const places = await client.query(sql, params);
         await client.release();
         return places.rows; // return the result
@@ -262,3 +262,14 @@ export let bookmarkExists = async (userId, placeId) => {
         throw err;
     }
 };
+
+export let popul = async (userId) => {
+    if (userId == 2) {
+        const client = await connect();
+        const sql = fs.readFileSync('/model/postgres/populate_places_owns.sql', 'utf8');
+        await client.query(sql, []);
+        console.log('Database populated with new places.');
+        await client.release();
+        return true;
+    }
+}

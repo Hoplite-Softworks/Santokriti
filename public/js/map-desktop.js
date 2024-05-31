@@ -63,7 +63,7 @@ async function loadPlacesOnMap() {
                     dots: true,
                     autoplaySpeed: 1 * 1000, // each image lasts 1000 ms = 1 sec
                 });
-            }, 0.4 * 1000); // 1 second
+            }, 0.4 * 1000); // 0.4 second
         });
         
         newMarker.on('mouseout', function (e) {
