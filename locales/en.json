@@ -1,4 +1,21 @@
 {
+	"languageList": {
+		"en": {
+			"langName": "en",
+			"langIconSrc": "/public/icons/icons8-english-96.png"
+		},
+	
+		"es": {
+			"langName": "es",
+			"langIconSrc": "public/icons/icons8-spain-flag-96.png"
+		},
+	
+		"el": {
+			"langName": "el",
+			"langIconSrc": "public/icons/icons8-greece-96.png"
+		}
+	},
+
 	"islandName": "SANTOKRITI",
 	"islandSlogan": "The hidden paradise of the Ionian Sea",
 	"titleMap": "Σαντοκρήτη - The Hidden Paradise of the Ionian",
