@@ -10,8 +10,8 @@ dotenv.config();
 
 //const pool = new pg.Pool(); //οι παράμετροι ορίζονται ως μεταβλητές περιβάλλοντος
 const pool = new Pool({
-    connectionString: process.env.LOCAL_DATABASE_URL
-    //connectionString: process.env.REMOTE_DATABASE_URL
+    //connectionString: process.env.LOCAL_DATABASE_URL
+    connectionString: process.env.REMOTE_DATABASE_URL
 });
 
 export let connect = async () => {

@@ -1,7 +1,7 @@
 let L = window.L;
 
 let map = L.map("map", {
-    dragging: false,
+    dragging: true,
     zoomControl: true,
     maxBounds: [
         [35.5, 22.6], // South West coordinates of Kythera
