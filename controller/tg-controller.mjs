@@ -31,16 +31,11 @@ const getLocalizedUIStrings = (req, keys) => {
 export async function map(req, res, next) {
     try {
         const places = await model.getAllPlaces();
+        const categories = await model.getAllCategories();
 
         const keys = [
             "titleMap",
             "filtersPopupText",
-            "foodFilterOption",
-            "beachFilterOption",
-            "StayingFilterOption",
-            "FunFilterOption",
-            "SightsFilterOption",
-            "AidFilterOption",
         ].concat(commonLocalizedUIStringsKeys);
         const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
@@ -51,6 +46,7 @@ export async function map(req, res, next) {
             pageSpecificCSS: "/css/map.css",
             locale: req.getLocale(),
             places: JSON.stringify(places),
+            categories: JSON.stringify(categories),
             model: process.env.MODEL,
             session: req.session,
         });

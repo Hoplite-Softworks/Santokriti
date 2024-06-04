@@ -26,14 +26,36 @@ export let connect = async () => {
 
 export let getAllPlaces = async () => {
     const sql = `
-        SELECT * FROM places
-    `;
+        SELECT p.place_id, p.name AS place_name, latitude, longitude, c.name AS category_name, k.keywords
+        FROM places AS p
+        LEFT JOIN (
+            SELECT place_id, string_agg(keyword, ', ') AS keywords
+            FROM place_keywords
+            GROUP BY place_id
+        ) AS k ON p.place_id = k.place_id
+        JOIN categories AS c ON c.category_id = p.category_id
+        WHERE p.date_removed IS NULL`;
     const params = [];
     try {
         const client = await connect();
         const places = await client.query(sql, params);
         client.release();
         return places.rows; // Return the result
+    } catch (err) {
+        throw err; // Throw the error to be handled by the caller
+    }
+};
+
+export let getAllCategories = async () => {
+    const sql = `
+        SELECT name FROM categories ORDER BY category_id
+    `;
+    const params = [];
+    try {
+        const client = await connect();
+        const categories = await client.query(sql, params);
+        client.release();
+        return categories.rows; // Return the result
     } catch (err) {
         throw err; // Throw the error to be handled by the caller
     }
@@ -75,7 +97,7 @@ export let getAllBookmarksByUser = async (userId) => {
     const sql = `
     SELECT p.name, p.description, b.date_added, k.keywords
     FROM bookmarks AS b
-    JOIN places AS p ON (b.place_id = p.place_id AND b.date_removed IS NULL)
+    JOIN places AS p ON (b.place_id = p.place_id AND b.date_removed IS NULL AND p.date_removed IS NULL)
     LEFT JOIN (
         SELECT place_id, string_agg(keyword, ', ') AS keywords
         FROM place_keywords

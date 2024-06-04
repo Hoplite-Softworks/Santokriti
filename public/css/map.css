@@ -48,20 +48,35 @@
     margin-right: 1.4rem;
 }
 
-.marker-image {
-    width: 0.5rem;
-    height: auto;
-}
 
 .leaflet-popup-content {
-    width: 0.5rem;
+   
 }
 
-.leaflet-popup-content .marker-text{
-    margin:0
-}
-
-.leaflet-popup-content .carousel{
+.leaflet-popup-content .swiper{
     margin:0;
-    margin-right: 0.5rem;
+    padding: 0;
+}
+
+.leaflet-popup-content .swiper-slide {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    justify-self: center;
+    align-self: center;
+}
+
+.leaflet-popup-content .popup-image {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    padding: auto;
+}
+
+.leaflet-popup-content .popup-text{
+    margin:auto;
+    padding:auto;
+    justify-self: center;
+    align-self: center;
 }

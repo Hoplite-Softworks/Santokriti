@@ -32,13 +32,13 @@ async function loadPlacesOnMap() {
         //let description = place.description;
         let latitude = place.latitude;
         let longitude = place.longitude;
-        let markerImages = null;
-        let keywords = place.keywords;// ? place.keywords.split(", ").join(", ") : '';
+        let markerImages = ["/images/background-image-2.jpg", "/images/background-image-1.jpg"];
+        let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
         
         // Creating the carousel HTML
         let innerHTML = `
             <!--<div class="carousel">
-                ${markerImages.map(img => `<div><img src="" alt="${name}" style="max-width: 100px; max-height: 100px;"></div>`).join('')}
+                ${markerImages.map(img => `<div><img src="${markerImages}" alt="${name}" style="max-width: 100px; max-height: 100px;"></div>`).join('')}
             </div>-->
             <div class="marker-text">
                 <div>${name}</div>

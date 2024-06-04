@@ -1,17 +1,15 @@
-    {{#if message}}
-        <p>{{message}}</p>
-    {{/if}}
+{{#if message}}
+<p>{{message}}</p>
+{{/if}}
 
-    <script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
-    <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <!-- Add the slick-theme.css if you want default styling -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    
-    <div class="row">
+
+<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="row">
     <div class="col">
         <div id="map">
             <div id="filter" class="btn-group dropup">
@@ -23,7 +21,7 @@
                     <i class="fa fa-filter"></i>
                 </button>
                 <div class="dropdown-menu floating-container" id="floating-container">
-                    <div><input id="food" type="checkbox" />
+                    <!--<div><input id="food" type="checkbox" />
                         <label for="food">{{foodFilterOption}}</label>
                     </div>
                     <div><input id="beach" type="checkbox" />
@@ -40,33 +38,28 @@
                     </div>
                     <div><input id="medical" type="checkbox" />
                         <label for="medical">{{AidFilterOption}}</label>
-                    </div>
+                    </div>-->
                 </div>
             </div>
 
         </div>
     </div>
-    </div>
-    
-    <script>
-        document.querySelectorAll('.dropdown-menu input[type="checkbox"], .dropdown-menu label').forEach(element => {
-            element.addEventListener('click', function (event) {
-                event.stopPropagation();
-            });
+</div>
+
+<script>
+    document.querySelectorAll('.dropdown-menu input[type="checkbox"], .dropdown-menu label').forEach(element => {
+        element.addEventListener('click', function (event) {
+            event.stopPropagation();
         });
-    </script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script>
-    <script>const places = {{{places}}}; // Pass places data to JavaScript</script>
-    <script>
-        // Detect user agent to determine whether to load desktop or mobile map script
-        var $jq = jQuery.noConflict();
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-            document.write('<script src="/js/map-mobile.js"><\/script>');
-        } else {
-            document.write('<script src="/js/map-desktop.js"><\/script>');
-        }
-    </script>
-    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    });
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const places = {{{ places }}}; // Pass places data to JavaScript
+    const categories = {{{ categories }}}; // Pass categories data to JavaScript
+</script>
+<script src="/js/map.js"></script>

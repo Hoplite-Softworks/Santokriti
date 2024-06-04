@@ -1,4 +1,3 @@
-console.log("lang.js!!!");
 
 const languages = {
     en: {

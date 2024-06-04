@@ -23,16 +23,16 @@ async function loadPlacesOnMap() {
     const markers = L.markerClusterGroup({
         spiderfyOnMaxZoom: false,
         showCoverageOnHover: false,
-        zoomToBoundsOnClick: false,
+        zoomToBoundsOnClick: true,
     });
 
     places.forEach((place) => {
-        let id = place.placeId;
+        let id = place.place_id;
         let name = place.name;
-        let description = place.description;
-        let latitude = place.lat;
-        let longitude = place.lng;
-        let markerImages = place.markerImage.split(', '); // Assuming images are stored as comma-separated values
+        //let description = place.description;
+        let latitude = place.latitude;
+        let longitude = place.longitude;
+        let markerImages = ["/images/background-image-2.jpg", "/images/background-image-1.jpg"];//place.markerImage.split(', '); // Assuming images are stored as comma-separated values
         let keywords = place.keywords ? place.keywords.split(", ").join(", ") : '';
         
         // Creating the carousel HTML
