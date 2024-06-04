@@ -118,7 +118,7 @@ export async function contact(req, res, next) {
 export async function listAllBookmarksRender(req, res, next) {
     const userId = req.session.loggedUserId;
     try {
-        const bookmarks = await model.getAllBookmarksWithPlaces(userId);
+        const bookmarks = await model.getAllBookmarksByUser(userId);
 
         const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
             commonLocalizedUIStringsKeys
@@ -144,7 +144,7 @@ export async function addBookmark(req, res, next) {
     const userId = req.session.loggedUserId;
     try {
         await model.addBookmark(userId, placeId);
-        const bookmarks = await model.getAllBookmarksWithPlaces(userId);
+        const bookmarks = await model.getAllBookmarksByUser(userId);
 
         const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
             commonLocalizedUIStringsKeys
@@ -185,7 +185,7 @@ export async function removeBookmark(req, res, next) {
 
     try {
         await model.removeBookmark(placeId, userId);
-        const bookmarks = await model.getAllBookmarksWithPlaces(userId);
+        const bookmarks = await model.getAllBookmarksByUser(userId);
 
         const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
             commonLocalizedUIStringsKeys
