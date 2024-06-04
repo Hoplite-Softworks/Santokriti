@@ -126,10 +126,7 @@ async function loadPlacesOnMap(displayedCategories) {
     markers.on("clusterclick", function (e) {
         //console.log("hehe");
         let clusterLatLng = markers.getVisibleParent(e.layer).getLatLng();
-        popup
-            .setLatLng(clusterLatLng)
-            .setContent("You clicked the map at " + clusterLatLng)
-            .openOn(map);
+        map.panTo(clusterLatLng);
     });
 }
 
