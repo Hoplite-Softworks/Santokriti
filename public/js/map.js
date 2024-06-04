@@ -156,10 +156,8 @@ function addListenersToCategories() {
             // Perform the desired action
             if (checkbox.checked) {
                 categoriesList.push(checkbox.id);
-                console.log(categoriesList);
                 loadPlacesOnMap(categoriesList);
             } else {
-                console.log(checkbox.id);
                 categoriesList = categoriesList.filter((item) => item !== checkbox.id)
                 loadPlacesOnMap(categoriesList);
             }
