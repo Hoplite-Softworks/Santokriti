@@ -20,7 +20,6 @@ let baseLayer = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 let globalMarkersLayer = L.layerGroup().addTo(map);
 
 var popup = L.popup();
-var $jq = jQuery.noConflict();
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 

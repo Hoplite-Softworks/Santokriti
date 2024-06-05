@@ -1,17 +1,14 @@
 {{#if message}}
-<p>{{message}}</p>
+    <p>{{message}}</p>
 {{/if}}
-<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
 <div class="row-auto d-flex justify-content-center">
     <div class="row mb-4 ms-1 me-1 info-core">
         <div class="row m-0 p-0">
             <div class="col p-2">
-                <p class="title fs-3 text-center m-0 mt-2">{{place.place_name}}</p>
+                <p
+                    class="title fs-3 text-center m-0 mt-2"
+                >{{place.place_name}}</p>
             </div>
         </div>
         <div class="row m-0 p-2 pt-3">
@@ -21,15 +18,27 @@
             </div>
         </div>
         <div class="row-auto m-0 p-2 pt-0">
-            <div class="col p-4 d-flex justify-content-center align-items-center">
+            <div
+                class="col p-4 d-flex justify-content-center align-items-center"
+            >
                 <div class="swiper">
                     <div class="swiper-wrapper">
-                        {{#each place.photo_paths}}
-                        <div><img src="{{this}}" alt="{{../place.name}}" class="info-image float-start mb-3"></div>
-                        <div class="swiper-slide"><img class="popup-image" src="${image}" alt="${name}"
-                                style="width: 100%">
-                        </div>
-                        {{/each}}
+                        {{#unless place.photo_paths}}
+                            <div class="swiper-slide"><img
+                                    src="/images/background-image-1.jpg"
+                                    alt="{{place.name}}"
+                                    class="popup-image float-start mb-3"
+                                /></div>
+                        {{else}}
+                            {{#each place.photo_paths}}
+                                <div class="swiper-slide"><img
+                                        class="popup-image float-start mb-3"
+                                        src="{{this}}"
+                                        alt="{{place.name}}"
+                                        style="width: 100%"
+                                    /></div>
+                            {{/each}}
+                        {{/unless}}
                     </div>
                 </div>
             </div>
@@ -53,15 +62,10 @@
     </div>
 </div>
 
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+<script
+    src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+></script>
 <script>
-    var $jq = jQuery.noConflict();
-    $jq(document).ready(function () {
-        $jq('.slick-carousel').slick({
-            autoplay: true,
-            dots: true,
-        });
-    });
+    const swiper = new Swiper(".swiper", { direction: "vertical", loop: true,
+    autoplay: { delay: 3000, }, pagination: { el: ".swiper-pagination", }, });
 </script>

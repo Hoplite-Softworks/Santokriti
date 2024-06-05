@@ -52,8 +52,16 @@
     font-size: 1.2rem;
 }
 
+.swiper {
+    text-align: center;
+}
 
-.slick-slide img {
+.swiper-slide {
+    display: inline-block;
+    /* Ensure each slide appears in line */
+}
+
+.swiper-slide img {
     width: 100%;
     border-radius: 10px;
 }
@@ -61,22 +69,12 @@
 /* Media queries for desktop vs mobile */
 @media (max-width: 767.98px) {
 
-    .info-image {
-        width: inherit;
-        border-radius: 1rem;
-        text-align: center;
-        padding: 1rem;
+    .info-core {
+        width: 100%;
     }
 
     .swiper {
-        width: 20rem;
-        /* Center align the carousel images */
-        text-align: center;
-    }
-
-    .swiper-slide {
-        display: inline-block;
-        /* Ensure each slide appears in line */
+        width: 100%;
     }
 
 }
@@ -90,23 +88,9 @@
         width: 60%;
     }
 
-
     .swiper {
-        margin: 0 10rem;
-        width: 40rem;
+        width: 45rem;
         /* Center align the carousel images */
-        text-align: center;
-    }
-
-    .swiper-slide {
-        display: inline-block;
-        /* Ensure each slide appears in line */
-    }
-
-    .info-image {
-        width: inherit;
-        margin-right: 1rem;
-        border-radius: 1rem;
         text-align: center;
     }
 
