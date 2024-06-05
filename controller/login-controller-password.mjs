@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
-import * as userModel from '../model/postgres/tg-model-postgres.mjs';
+import bcrypt from "bcrypt";
+import * as userModel from "../model/postgres/tg-model-postgres.mjs";
 
 const commonLocalizedUIStringsKeys = [
     "islandName",
@@ -13,7 +13,6 @@ const commonLocalizedUIStringsKeys = [
     "menuOptionRegister",
     "menuOptionLogin",
 ];
-
 
 const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
@@ -40,7 +39,7 @@ export let showLogInForm = function (req, res) {
         title: localizedUIStrings["titleLogin"],
         pageSpecificCSS: "/css/login.css",
         locale: req.getLocale(),
-        model: process.env.MODEL
+        model: process.env.MODEL,
     });
 };
 
@@ -63,7 +62,7 @@ export let showRegisterForm = function (req, res) {
         title: localizedUIStrings["titleRegister"],
         pageSpecificCSS: "/css/register.css",
         locale: req.getLocale(),
-        model: process.env.MODEL
+        model: process.env.MODEL,
     });
 };
 
@@ -95,14 +94,16 @@ export let doRegister = async function (req, res) {
                 pageSpecificCSS: "/css/register.css",
                 message: registrationResult.message,
                 locale: req.getLocale(),
-                model: process.env.MODEL
+                model: process.env.MODEL,
             });
         } else {
-            console.log( req.body.name,
+            console.log(
+                req.body.name,
                 req.body.email,
                 req.body.password,
-                req.body.isShopKeeper)
-            res.redirect('/login?message=Successful%20registration');
+                req.body.isShopKeeper
+            );
+            res.redirect("/login?message=Successful%20registration");
         }
     } catch (error) {
         console.error("registration error: " + error);
@@ -126,7 +127,7 @@ export let doRegister = async function (req, res) {
             pageSpecificCSS: "/css/register.css",
             message: localizedUIStrings["messageRegistrationError"],
             locale: req.getLocale(),
-            model: process.env.MODEL
+            model: process.env.MODEL,
         });
     }
 };
@@ -134,12 +135,9 @@ export let doRegister = async function (req, res) {
 export let doLogin = async function (req, res) {
     //Ελέγχει αν το username και το password είναι σωστά και εκτελεί την
     //συνάρτηση επιστροφής authenticated
-    console.log(req.body.email)
-
     const user = await userModel.getUserByEmail(req.body.email);
-    
-    console.log(user)
-    if (user == undefined || !user.password || !user.userId) {
+
+    if (user == undefined || !user.password || !user.user_id) {
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleLogin",
             "introLogin",
@@ -157,20 +155,15 @@ export let doLogin = async function (req, res) {
             title: localizedUIStrings["titleLogin"],
             pageSpecificCSS: "/css/login.css",
             locale: req.getLocale(),
-            model: process.env.MODEL
+            model: process.env.MODEL,
         });
     } else {
-        const match = await bcrypt.compare(req.body.password, user.password);
+        //const match = await bcrypt.compare(req.body.password, user.password);
+        const match = req.body.password === user.password;
         if (match) {
-            //if (req.body.password == user.password) {
-            //Θέτουμε τη μεταβλητή συνεδρίας "loggedUserId"
-            req.session.loggedUserId = user.userId;
-	        req.session.isShopKeeper = user.isShopKeeper;
-            //Αν έχει τιμή η μεταβλητή req.session.originalUrl, αλλιώς όρισέ τη σε "/"
-            // res.redirect("/");
-            const redirectTo = req.session.originalUrl || "/bookmarks";
-
-            res.redirect(redirectTo);
+            req.session.loggedUserId = user.user_id;
+            req.session.isShopKeeper = false;
+            res.redirect("/bookmarks");
         } else {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleLogin",
@@ -180,7 +173,8 @@ export let doLogin = async function (req, res) {
                 "login",
                 "noAccountYet",
                 "register",
-                "messageWrongPassword",
+                "messageNoUserFound",
+                "email",
             ]);
             res.render("login", {
                 ...localizedUIStrings,
@@ -188,7 +182,7 @@ export let doLogin = async function (req, res) {
                 title: localizedUIStrings["titleLogin"],
                 pageSpecificCSS: "/css/login.css",
                 locale: req.getLocale(),
-                model: process.env.MODEL
+                model: process.env.MODEL,
             });
         }
     }
@@ -197,8 +191,8 @@ export let doLogin = async function (req, res) {
 export let doLogout = (req, res) => {
     //Σημειώνουμε πως ο χρήστης δεν είναι πια συνδεδεμένος
     req.session.destroy();
-    res.redirect('/');
-}
+    res.redirect("/");
+};
 
 //Τη χρησιμοποιούμε για να ανακατευθύνουμε στη σελίδα /login όλα τα αιτήματα από μη συνδεδεμένους χρήστες
 export let checkAuthenticated = function (req, res, next) {
@@ -207,25 +201,26 @@ export let checkAuthenticated = function (req, res, next) {
         console.log("user is authenticated", req.originalUrl);
         //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
         next();
-    }
-    else {
+    } else {
         //Ο χρήστης δεν έχει ταυτοποιηθεί, αν απλά ζητάει το /login ή το register δίνουμε τον
         //έλεγχο στο επόμενο middleware που έχει οριστεί στον router
-        if ((req.originalUrl === "/login") || (req.originalUrl === "/register")) {
-            next()
-        }
-        else {
-            //Στείλε το χρήστη στη "/login" 
-            console.log("not authenticated, redirecting to /login")
-            res.redirect('/login');
+        if (req.originalUrl === "/login" || req.originalUrl === "/register") {
+            next();
+        } else {
+            //Στείλε το χρήστη στη "/login"
+            console.log("not authenticated, redirecting to /login");
+            res.redirect("/login");
         }
     }
-}
+};
 
 export let checkShopKeeper = function (req, res, next) {
     if (req.session.isShopKeeper) {
         next();
     } else {
-        res.render('contact', { message: 'You must be a shopkeeper to access the owned page. Contact the developers if you want to apply as a shopkeeper.' });
+        res.render("contact", {
+            message:
+                "You must be a shopkeeper to access the owned page. Contact the developers if you want to apply as a shopkeeper.",
+        });
     }
-}
+};

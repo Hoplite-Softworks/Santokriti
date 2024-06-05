@@ -36,6 +36,7 @@ router.post('/register', logInController.doRegister);
 router.get('/info', tgController.info);
 
 router.get('/contact', tgController.contact);
+router.post('/contact', tgController.sendContactMessage);
 
 router.get('/map', tgController.map);
 

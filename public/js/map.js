@@ -4,8 +4,8 @@ let map = L.map("map", {
     dragging: true,
     zoomControl: true,
     maxBounds: [
-        [35.5, 22.6], // South West coordinates of Kythera
-        [36.5, 23.3], // North East coordinates of Kythera
+        [36.076162, 22.804711], // South West coordinates of Kythera
+        [36.415831, 23.203361], // North East coordinates of Kythera
     ],
 }).setView([36.261039, 22.987658], 11);
 

@@ -1,6 +1,6 @@
 import * as model from "../model/postgres/tg-model-postgres.mjs";
 
-const commonLocalizedUIStringsKeys = [
+export const commonLocalizedUIStringsKeys = [
 
     "islandName",
     "islandSlogan",
@@ -18,7 +18,7 @@ const commonLocalizedUIStringsKeys = [
 ];
 
 
-const getLocalizedUIStrings = (req, keys) => {
+export const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
     keys.forEach((key) => {
         localizedStrings[key] = req.__(key);
@@ -94,17 +94,42 @@ export async function contact(req, res, next) {
             "email",
             "contactMessage",
             "sendMessage",
+            "firstName",
+            "lastName",
         ].concat(commonLocalizedUIStringsKeys);
         const localizedUIStrings = getLocalizedUIStrings(req, keys);
+        
         res.render("contact", {
             ...localizedUIStrings,
-            lastName: "Last Name",
             title: localizedUIStrings["titleContact"],
             pageSpecificCSS: "/css/contact.css",
             locale: req.getLocale(),
             model: process.env.MODEL,
             session: req.session,
         });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export async function sendContactMessage(req, res, next) {
+    
+    try {
+        if (req.session.loggedUserId) {
+            await model.sendUserMessage(
+                req.body.message,
+                req.session.loggedUserId
+            )
+        } else {
+            await model.sendEmailMessage(
+                req.body.message,
+                req.body.email,
+                req.body.firstName,
+                req.body.lastName,
+            )
+        }
+
+        res.redirect("/contact");
     } catch (error) {
         next(error);
     }

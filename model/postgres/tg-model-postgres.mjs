@@ -2,16 +2,15 @@
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import pkg from "pg";
-import fs from "fs";
+import os from "os";
 
 const { Pool } = pkg;
 
 dotenv.config();
 
-//const pool = new pg.Pool(); //οι παράμετροι ορίζονται ως μεταβλητές περιβάλλοντος
+const isDevelopment = process.env.NODE_ENV === 'development';
 const pool = new Pool({
-    //connectionString: process.env.LOCAL_DATABASE_URL
-    connectionString: process.env.REMOTE_DATABASE_URL
+    connectionString: isDevelopment ? process.env.LOCAL_DATABASE_URL : process.env.REMOTE_DATABASE_URL
 });
 
 export let connect = async () => {
@@ -147,6 +146,34 @@ export let removeBookmark = async (placeId, userId) => {
         await client.query(sql, params);
         client.release();
         return true;
+    } catch (err) {
+        throw err; // Throw the error to be handled by the caller
+    }
+};
+
+export let sendUserMessage = async (message, userId) => {
+    const sql = `
+        INSERT INTO user_messages (content, date_sent, user_id) VALUES ($1, CURRENT_DATE, $2)
+    `;
+    const params = [message, userId];
+    try {
+        const client = await connect();
+        await client.query(sql, params);
+        client.release();
+    } catch (err) {
+        throw err; // Throw the error to be handled by the caller
+    }
+};
+
+export let sendEmailMessage = async (message, email, firstName, lastName) => {
+    const sql = `
+        INSERT INTO email_messages (content, date_sent, email, first_name, last_name) VALUES ($1, CURRENT_DATE, $2, $3, $4)
+    `;
+    const params = [message, email, firstName, lastName];
+    try {
+        const client = await connect();
+        await client.query(sql, params);
+        client.release();
     } catch (err) {
         throw err; // Throw the error to be handled by the caller
     }
