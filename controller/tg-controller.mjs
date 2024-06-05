@@ -235,7 +235,6 @@ export async function placeInfo(req, res, next) {
     try {
         const place = await model.getPlace(placeId);
         if (place) {
-            place.images = place.markerImage.split(", ");
             const keys = ["backToMap", "AddToBookmarks"].concat(
                 commonLocalizedUIStringsKeys
             );

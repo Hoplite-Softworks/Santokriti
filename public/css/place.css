@@ -68,13 +68,13 @@
         padding: 1rem;
     }
 
-    .slick-carousel {
+    .swiper {
         width: 20rem;
         /* Center align the carousel images */
         text-align: center;
     }
 
-    .slick-slide {
+    .swiper-slide {
         display: inline-block;
         /* Ensure each slide appears in line */
     }
@@ -87,17 +87,18 @@
     .info-core {
         margin-left: 30rem;
         margin-right: 30rem;
+        width: 60%;
     }
 
 
-    .slick-carousel {
+    .swiper {
         margin: 0 10rem;
         width: 40rem;
         /* Center align the carousel images */
         text-align: center;
     }
 
-    .slick-slide {
+    .swiper-slide {
         display: inline-block;
         /* Ensure each slide appears in line */
     }

@@ -63,7 +63,19 @@ export let getAllCategories = async () => {
 
 export let getPlace = async (placeId) => {
     const sql = `
-        SELECT * FROM places WHERE place_id = $1
+        SELECT p.place_id, p.name AS place_name, p.description, ph.photo_paths, k.keywords
+        FROM places AS p
+        LEFT JOIN (
+            SELECT place_id, string_agg(keyword, ', ') AS keywords
+            FROM place_keywords
+            GROUP BY place_id
+        ) AS k ON p.place_id = k.place_id
+        LEFT JOIN (
+            SELECT place_id, string_agg(photo_path, ', ') AS photo_paths
+            FROM photos
+            GROUP BY place_id
+        ) AS ph ON p.place_id = ph.place_id
+        WHERE p.date_removed IS NULL AND p.place_id = $1
     `;
     const params = [placeId];
     try {
