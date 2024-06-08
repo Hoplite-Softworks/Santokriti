@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import * as userModel from "../model/postgres/tg-model-postgres.mjs";
 
-const commonLocalizedUIStringsKeys = [
+export const commonLocalizedUIStringsKeys = [
     "islandName",
     "islandSlogan",
     "menuText",
@@ -12,8 +12,9 @@ const commonLocalizedUIStringsKeys = [
     "menuOptionOwned",
     "menuOptionRegister",
     "menuOptionLogin",
+    "menuOptionLogout",
+    "languageList",
 ];
-
 const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
     keys.concat(commonLocalizedUIStringsKeys).forEach((key) => {
@@ -47,9 +48,11 @@ export let showRegisterForm = function (req, res) {
     const localizedUIStrings = getLocalizedUIStrings(req, [
         "titleRegister",
         "register",
-        "name",
+        "firstName",
+        "lastName",
         "password",
         "email",
+        "telephone",
         "isShopKeeper",
         "country",
         "alreadyAccount",
@@ -69,19 +72,23 @@ export let showRegisterForm = function (req, res) {
 export let doRegister = async function (req, res) {
     try {
         const registrationResult = await userModel.registerUser(
-            req.body.name,
-            req.body.email,
+            req.body.firstName,
+            req.body.lastName,
             req.body.password,
-            req.body.isShopKeeper
+            req.body.email,
+            req.body.isShopKeeper,
+            req.body.telephone,
         );
         if (registrationResult.message) {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleRegister",
                 "register",
-                "name",
+                "firstName",
+                "lastName",
                 "password",
                 "email",
                 "isShopKeeper",
+                "telephone",
                 "country",
                 "alreadyAccount",
                 "login",
@@ -97,12 +104,6 @@ export let doRegister = async function (req, res) {
                 model: process.env.MODEL,
             });
         } else {
-            console.log(
-                req.body.name,
-                req.body.email,
-                req.body.password,
-                req.body.isShopKeeper
-            );
             res.redirect("/login?message=Successful%20registration");
         }
     } catch (error) {
@@ -110,10 +111,12 @@ export let doRegister = async function (req, res) {
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleRegister",
             "register",
-            "name",
+            "firstName",
+            "lastName",
             "password",
             "email",
             "isShopKeeper",
+            "telephone",
             "country",
             "alreadyAccount",
             "login",
@@ -162,7 +165,6 @@ export let doLogin = async function (req, res) {
         const match = req.body.password === user.password;
         if (match) {
             req.session.loggedUserId = user.user_id;
-            req.session.isShopKeeper = false;
             res.redirect("/bookmarks");
         } else {
             const localizedUIStrings = getLocalizedUIStrings(req, [
@@ -198,7 +200,6 @@ export let doLogout = (req, res) => {
 export let checkAuthenticated = function (req, res, next) {
     //Αν η μεταβλητή συνεδρίας έχει τεθεί, τότε ο χρήστης είναι συνεδεμένος
     if (req.session.loggedUserId) {
-        console.log("user is authenticated", req.originalUrl);
         //Καλεί τον επόμενο χειριστή (handler) του αιτήματος
         next();
     } else {
@@ -208,7 +209,6 @@ export let checkAuthenticated = function (req, res, next) {
             next();
         } else {
             //Στείλε το χρήστη στη "/login"
-            console.log("not authenticated, redirecting to /login");
             res.redirect("/login");
         }
     }

@@ -4,7 +4,7 @@
 <div class="row-auto contact-row justify-content-center">
     <p class="form-info mt-4">{{introContact}}</p>
     <form method="post">
-        {{#unless session.loggedUserId}}
+        {{#unless userId}}
             <div class="form-row">
                 <div class="form-group col-12 col-md-12">
                     <label for="firstName">{{firstName}}</label>

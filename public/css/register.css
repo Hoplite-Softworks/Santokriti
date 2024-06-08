@@ -43,6 +43,16 @@
     display: inline;
 }
 
+
+#isShopKeeperLabel {
+    width: 6.95rem;
+}
+
+#isShopKeeper {
+    width: 1.5rem;
+    margin-left: 1rem;
+}
+
 /* Media queries for desktop vs mobile */
 @media (max-width: 767.98px) {
 
@@ -51,12 +61,16 @@
 @media (min-width: 768px) {
 
     .contact-row {
-        justify-self: center;
         max-width: 70%;
         margin: 0 auto;
     }
 
     .form-group {
         justify-content: center;
+    }
+
+    .form {
+        width: 60%;
+        justify-content: start;
     }
 }

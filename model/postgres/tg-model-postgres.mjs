@@ -106,7 +106,7 @@ export let getPlace = async (placeId) => {
 
 export let getAllBookmarksByUser = async (userId) => {
     const sql = `
-    SELECT p.name, p.description, b.date_added, k.keywords
+    SELECT p.name AS place_name, p.description, b.date_added, k.keywords
     FROM bookmarks AS b
     JOIN places AS p ON (b.place_id = p.place_id AND b.date_removed IS NULL AND p.date_removed IS NULL)
     LEFT JOIN (
@@ -208,36 +208,52 @@ export let getUserByEmail = async (email) => {
 
 export let userExistsByEmail = async (email) => {
     const sql = `
-        SELECT 1 FROM "User" WHERE "email" = $1 LIMIT 1
+        SELECT 1 FROM users WHERE email = $1 LIMIT 1
     `;
     const params = [email];
     try {
         const client = await connect();
         const result = await client.query(sql, params);
-        await client.release();
+        client.release();
         return !!result.rows.length; // Return true if user exists
     } catch (err) {
         throw err; // Throw the error to be handled by the caller
     }
 };
 
-export let registerUser = async function (name, email, password, isShopKeeper) {
+export let registerUser = async function (firstName, lastName, password, email, isShopKeeper, telephone) {
     const userExists = await userExistsByEmail(email);
     if (userExists) {
         return { message: "A user with this email already exists" };
     } else {
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
-            const sql = `
-                INSERT INTO "User" ("name", "email", "password", "isShopKeeper")
+            var sql = ``
+            if (isShopKeeper == 'on') {
+                sql = `
+                WITH inserted_user AS (
+                INSERT INTO users ("first_name", "last_name", "password", "email")
                 VALUES ($1, $2, $3, $4)
-                RETURNING "userId"
+                RETURNING "user_id"
+                )
+                INSERT INTO owners ("telephone", "user_id")
+                SELECT $5, "user_id"
+                FROM inserted_user
+                RETURNING "user_id";
+                `
+            } else {
+                sql = `
+                INSERT INTO users ("first_name", "last_name", "password", "email")
+                VALUES ($1, $2, $3, $4)
+                RETURNING "user_id"
             `;
-            const params = [name, email, hashedPassword, isShopKeeper];
+            }
+            
+            const params = [firstName, lastName, password, email, telephone];
             const client = await connect();
             const result = await client.query(sql, params);
-            await client.release();
-            return result.rows[0].userId; // Return the new user's ID
+            client.release();
+            return result.rows[0].user_id; // Return the new user's ID
         } catch (error) {
             throw error;
         }

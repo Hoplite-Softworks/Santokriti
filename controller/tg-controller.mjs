@@ -1,7 +1,6 @@
 import * as model from "../model/postgres/tg-model-postgres.mjs";
 
 export const commonLocalizedUIStringsKeys = [
-
     "islandName",
     "islandSlogan",
     "menuText",
@@ -12,15 +11,14 @@ export const commonLocalizedUIStringsKeys = [
     "menuOptionOwned",
     "menuOptionRegister",
     "menuOptionLogin",
-    "menuOptionOwned",
     "menuOptionLogout",
     "languageList",
 ];
 
 
-export const getLocalizedUIStrings = (req, keys) => {
+const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
-    keys.forEach((key) => {
+    keys.concat(commonLocalizedUIStringsKeys).forEach((key) => {
         localizedStrings[key] = req.__(key);
     });
     return localizedStrings;
@@ -32,12 +30,10 @@ export async function map(req, res, next) {
     try {
         const places = await model.getAllPlaces();
         const categories = await model.getAllCategories();
-
-        const keys = [
+        const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleMap",
             "filtersPopupText",
-        ].concat(commonLocalizedUIStringsKeys);
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
+        ]);
 
         res.render("map", {
             ...localizedUIStrings,
@@ -58,7 +54,7 @@ export async function map(req, res, next) {
 // for the info page
 export async function info(req, res, next) {
     try {
-        const keys = [
+        const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleInfo",
             "introInfo",
             "infoAncientTitle",
@@ -67,8 +63,7 @@ export async function info(req, res, next) {
             "infoMedieval",
             "infoModernTitle",
             "infoModern",
-        ].concat(commonLocalizedUIStringsKeys);
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
+        ]);
 
         res.render("info", {
             ...localizedUIStrings,
@@ -86,7 +81,8 @@ export async function info(req, res, next) {
 // for the contact page
 export async function contact(req, res, next) {
     try {
-        const keys = [
+
+        const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleContact",
             "introContact",
             "name",
@@ -96,9 +92,8 @@ export async function contact(req, res, next) {
             "sendMessage",
             "firstName",
             "lastName",
-        ].concat(commonLocalizedUIStringsKeys);
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
-        
+        ]);
+
         res.render("contact", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleContact"],
@@ -113,7 +108,7 @@ export async function contact(req, res, next) {
 }
 
 export async function sendContactMessage(req, res, next) {
-    
+
     try {
         if (req.session.loggedUserId) {
             await model.sendUserMessage(
@@ -137,14 +132,12 @@ export async function sendContactMessage(req, res, next) {
 
 // give all needed info to the bookmarks page
 export async function listAllBookmarksRender(req, res, next) {
+
     const userId = req.session.loggedUserId;
+    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
+
     try {
         const bookmarks = await model.getAllBookmarksByUser(userId);
-
-        const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
-            commonLocalizedUIStringsKeys
-        );
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
         res.render("bookmarks", {
             ...localizedUIStrings,
@@ -163,14 +156,10 @@ export async function listAllBookmarksRender(req, res, next) {
 export async function addBookmark(req, res, next) {
     const placeId = req.params.placeId;
     const userId = req.session.loggedUserId;
+    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
     try {
         await model.addBookmark(userId, placeId);
         const bookmarks = await model.getAllBookmarksByUser(userId);
-
-        const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
-            commonLocalizedUIStringsKeys
-        );
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
         res.render("bookmarks", {
             ...localizedUIStrings,
@@ -182,20 +171,8 @@ export async function addBookmark(req, res, next) {
             session: req.session,
         });
     } catch (error) {
-        if (error.message === "Bookmark already exists") {
-            res.render("place", {
-                ...localizedUIStrings,
-                title: place.name,
-                locale: req.getLocale(),
-                pageSpecificCSS: "/css/place.css",
-                place: place,
-                model: process.env.MODEL,
-                session: req.session,
-                message: "You have already bookmarked this place",
-            });
-        } else {
-            next(error);
-        }
+        error.message === "Bookmark already exists"
+        next(error);
     }
 }
 
@@ -203,15 +180,11 @@ export async function addBookmark(req, res, next) {
 export async function removeBookmark(req, res, next) {
     const placeId = req.params.placeId;
     const userId = req.session.loggedUserId;
+    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
 
     try {
         await model.removeBookmark(placeId, userId);
         const bookmarks = await model.getAllBookmarksByUser(userId);
-
-        const keys = ["titleBookmarks", "dateAdded", "NoBookmarksYet"].concat(
-            commonLocalizedUIStringsKeys
-        );
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
 
         res.render("bookmarks", {
             ...localizedUIStrings,
@@ -235,10 +208,8 @@ export async function placeInfo(req, res, next) {
     try {
         const place = await model.getPlace(placeId);
         if (place) {
-            const keys = ["backToMap", "AddToBookmarks"].concat(
-                commonLocalizedUIStringsKeys
-            );
-            const localizedUIStrings = getLocalizedUIStrings(req, keys);
+            const localizedUIStrings = getLocalizedUIStrings(req, ["backToMap", "AddToBookmarks"]);
+            
             res.render("place", {
                 ...localizedUIStrings,
                 title: place.name,
@@ -260,10 +231,7 @@ export async function placeInfo(req, res, next) {
 export async function listOwnedPlaces(req, res, next) {
     const userId = req.session.loggedUserId;
     try {
-        const keys = ["titleOwned", "NoOwnerYet"].concat(
-            commonLocalizedUIStringsKeys
-        );
-        const localizedUIStrings = getLocalizedUIStrings(req, keys);
+        const localizedUIStrings = getLocalizedUIStrings(req, ["titleOwned", "NoOwnerYet"]);
 
         const ownedPlaces = await model.getOwnedPlaces(userId);
         res.render("owned", {

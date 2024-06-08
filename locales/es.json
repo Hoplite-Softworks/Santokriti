@@ -4,18 +4,15 @@
 			"langName": "en",
 			"langIconSrc": "/public/icons/icons8-english-96.png"
 		},
-	
 		"es": {
 			"langName": "es",
 			"langIconSrc": "public/icons/icons8-spain-flag-96.png"
 		},
-	
 		"el": {
 			"langName": "el",
 			"langIconSrc": "public/icons/icons8-greece-96.png"
 		}
 	},
-
 	"islandName": "SANTOKRITI",
 	"islandSlogan": "El paraíso escondido del Mar Jónico",
 	"titleMap": "Santokriti - El Paraíso Escondido del Jónico",
@@ -73,5 +70,7 @@
 	"AddToBookmarks": "Añadir a tus favoritos",
 	"dateAdded": "Fecha de adición",
 	"NoBookmarksYet": "¡No has añadido favoritos aún!",
-	"NoOwnerYet": "¡Aún no eres propietario!"
+	"NoOwnerYet": "¡Aún no eres propietario!",
+	"dateBookmarkAdded": "dateBookmarkAdded",
+	"dateBookmarked": "dateBookmarked"
 }
