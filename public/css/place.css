@@ -28,29 +28,11 @@
     color: rgb(70, 70, 70);
 }
 
-
-.remove-place {
-    float: right;
-}
-
-.remove-place a {
-    font-size: 1.4rem;
-    color: rgb(48, 12, 12);
-}
-
-.add-text a {
-    text-decoration: none;
-}
-
-.add-text {
-    font-size: 1.5rem;
+.row-auto a {
     margin: 0;
+    padding: 0;
 }
 
-.span-text {
-    text-decoration: underline;
-    font-size: 1.2rem;
-}
 
 .swiper {
     text-align: center;

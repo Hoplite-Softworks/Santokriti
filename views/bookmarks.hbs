@@ -1,35 +1,48 @@
 {{#if message}}
-<p>{{message}}</p>
+    <p>{{message}}</p>
 {{/if}}
 {{#if bookmarks.length}}
-{{#each bookmarks}}
-<div class="row mb-4 ms-1 me-1 info-core">
-    <div class="row m-0 p-0">
-        <div class="col p-1">
-            <p class="title text-center m-0 mt-2"><a href="/place/{{this.place_id}}">{{this.place_name}}</a></p>
+    {{#each bookmarks}}
+        <div class="row mb-4 ms-1 me-1 info-core">
+            <div class="row m-0 p-0">
+                <div class="col p-1 title text-center m-0 mt-2">
+                    <a href="/place/{{this.place_id}}">{{this.place_name}}</a>
+                </div>
+            </div>
+            <div class="row m-0 p-1 pt-1">
+                <div class="col info-text">
+                    {{this.description}}
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col date">
+                    {{this.date_added}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="remove-place"><a
+                            href="/bookmarks/remove/{{this.place_id}}"
+                        >
+                            <i class="bi bi-trash-fill"></i>
+                        </a></p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row m-0 p-1 pt-1">
-        <div class="col">
-            <p class="info-text">{{this.description}}</p>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <p class="date">{{titleBookmarks}}:<br>{{this.date_added}}</p>
-        </div>
-    </div>
-     <div class="row">
-        <div class="col">
-            <p class="remove-place"><a href="/bookmarks/remove/{{this.place_id}}">
-                    <i class="fa fa-trash"></i>
-                </a></p>
-        </div>
-    </div>
-</div>
-{{/each}}
+    {{/each}}
 {{else}}
-<div class="row-auto contact-row justify-content-center">
-    <p class="form-info mt-4">{{NoBookmarksYet}}</p>
-</div>
+    <div class="row-auto contact-row justify-content-center">
+        <p class="form-info mt-4">{{NoBookmarksYet}}</p>
+    </div>
 {{/if}}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const datesBookmarked = document.getElementsByClassName("date");
+    Array.from(datesBookmarked).forEach((dateBookmarked) => {
+        const localDate = new Date(dateBookmarked.innerHTML);
+        dateBookmarked.innerHTML = `{{dateBookmarked}}:<br>` + localDate.toLocaleDateString("el-GR");
+    });
+});
+    
+</script>

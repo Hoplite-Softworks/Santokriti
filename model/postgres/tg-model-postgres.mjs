@@ -88,6 +88,21 @@ export let getPlace = async (placeId) => {
     }
 };
 
+export let isBookmarked = async (userId, placeId) => {
+    const sql = `
+        SELECT 1 FROM bookmarks WHERE "user_id" = $1 AND "place_id" = $2 AND "date_removed" IS NULL
+    `;
+    const params = [userId, placeId];
+    try {
+        const client = await connect();
+        const result = await client.query(sql, params);
+        client.release();
+        return !!result.rows.length; // Return true if bookmark exists
+    } catch (err) {
+        throw err; // Throw the error to be handled by the caller
+    }
+};
+
 
 /*export let bookmarkExists = async (userId, placeId) => {
     const sql = `
@@ -106,7 +121,7 @@ export let getPlace = async (placeId) => {
 
 export let getAllBookmarksByUser = async (userId) => {
     const sql = `
-    SELECT p.name AS place_name, p.description, b.date_added, k.keywords
+    SELECT p.name AS place_name, p.description, b.date_added, k.keywords, b.place_id AS place_id
     FROM bookmarks AS b
     JOIN places AS p ON (b.place_id = p.place_id AND b.date_removed IS NULL AND p.date_removed IS NULL)
     LEFT JOIN (

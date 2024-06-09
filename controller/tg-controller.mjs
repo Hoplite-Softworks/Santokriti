@@ -16,7 +16,7 @@ export const commonLocalizedUIStringsKeys = [
 ];
 
 
-const getLocalizedUIStrings = (req, keys) => {
+export const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
     keys.concat(commonLocalizedUIStringsKeys).forEach((key) => {
         localizedStrings[key] = req.__(key);
@@ -134,10 +134,10 @@ export async function sendContactMessage(req, res, next) {
 export async function listAllBookmarksRender(req, res, next) {
 
     const userId = req.session.loggedUserId;
-    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
-
     try {
         const bookmarks = await model.getAllBookmarksByUser(userId);
+        const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
+        bookmarks[0].da = localizedUIStrings["dateBookmarked"];
 
         res.render("bookmarks", {
             ...localizedUIStrings,
@@ -156,11 +156,11 @@ export async function listAllBookmarksRender(req, res, next) {
 export async function addBookmark(req, res, next) {
     const placeId = req.params.placeId;
     const userId = req.session.loggedUserId;
-    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
     try {
         await model.addBookmark(userId, placeId);
+        /*
         const bookmarks = await model.getAllBookmarksByUser(userId);
-
+        const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
         res.render("bookmarks", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleBookmarks"],
@@ -169,7 +169,9 @@ export async function addBookmark(req, res, next) {
             bookmarks: bookmarks,
             model: process.env.MODEL,
             session: req.session,
-        });
+        });*/
+
+        res.redirect("/place/" + placeId);
     } catch (error) {
         error.message === "Bookmark already exists"
         next(error);
@@ -180,12 +182,11 @@ export async function addBookmark(req, res, next) {
 export async function removeBookmark(req, res, next) {
     const placeId = req.params.placeId;
     const userId = req.session.loggedUserId;
-    const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
-
     try {
         await model.removeBookmark(placeId, userId);
+        /*
         const bookmarks = await model.getAllBookmarksByUser(userId);
-
+        const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
         res.render("bookmarks", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleBookmarks"],
@@ -195,7 +196,9 @@ export async function removeBookmark(req, res, next) {
             model: process.env.MODEL,
             session: req.session,
             message: "Bookmark removed",
-        });
+        });*/
+
+        res.redirect("/place/" + placeId);
     } catch (error) {
         next(error);
     }
@@ -208,7 +211,12 @@ export async function placeInfo(req, res, next) {
     try {
         const place = await model.getPlace(placeId);
         if (place) {
-            const localizedUIStrings = getLocalizedUIStrings(req, ["backToMap", "AddToBookmarks"]);
+            if (req.session.loggedUserId) {
+                place.isBookmarked = await model.isBookmarked(req.session.loggedUserId, placeId);
+            } else {
+                place.isBookmarked = false;
+            }
+            const localizedUIStrings = getLocalizedUIStrings(req, ["backToMap", "AddToBookmarks", "RemoveFromBookmarks"]);
             
             res.render("place", {
                 ...localizedUIStrings,

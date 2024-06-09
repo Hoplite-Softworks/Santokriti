@@ -80,8 +80,7 @@ app.use((err, req, res, next) => {
         return next(err);
     }
 
-    const keys = [].concat(controller.commonLocalizedUIStringsKeys);
-    const localizedUIStrings = controller.getLocalizedUIStrings(req, keys);
+    const localizedUIStrings = controller.getLocalizedUIStrings(req, []);
 
     res.status(500);
     res.render("error", {
