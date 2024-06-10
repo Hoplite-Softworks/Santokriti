@@ -18,7 +18,7 @@ import cookieParser from "cookie-parser";
 //languagesSupported = {"en": "English", "el": "Ελληνικά", "es": "Español"} }
 
 i18n.configure({
-    locales: ["en", "el", "es", "zh"], // List of supported languages
+    locales: ["el" ,"en", "es", "zh"], // List of supported languages
     directory: path.join(__dirname, "locales"), // Path to locales directory
     defaultLocale: "el", // Default language
     queryParameter: "lang", // Query parameter to change language
