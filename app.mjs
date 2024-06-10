@@ -53,10 +53,10 @@ app.use(express.static("public"));
 app.use((req, res, next) => {
     if (req.session) {
         res.locals.userId = req.session.loggedUserId;
-        res.locals.isShopKeeper = req.session.isShopKeeper;
+        res.locals.isOwner = req.session.isOwner;
     } else {
         res.locals.userId = "επισκέπτης";
-        res.locals.isShopKeeper = 0;
+        res.locals.isOwner = false;
     }
     next();
 });

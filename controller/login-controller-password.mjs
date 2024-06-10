@@ -13,7 +13,7 @@ export const commonLocalizedUIStringsKeys = [
     "menuOptionRegister",
     "menuOptionLogin",
     "menuOptionLogout",
-    "languageList",
+    "languagesList",
 ];
 const getLocalizedUIStrings = (req, keys) => {
     const localizedStrings = {};
@@ -53,7 +53,7 @@ export let showRegisterForm = function (req, res) {
         "password",
         "email",
         "telephone",
-        "isShopKeeper",
+        "isOwner",
         "country",
         "alreadyAccount",
         "login",
@@ -76,7 +76,7 @@ export let doRegister = async function (req, res) {
             req.body.lastName,
             req.body.password,
             req.body.email,
-            req.body.isShopKeeper,
+            req.body.isOwner,
             req.body.telephone,
         );
         if (registrationResult.message) {
@@ -87,7 +87,7 @@ export let doRegister = async function (req, res) {
                 "lastName",
                 "password",
                 "email",
-                "isShopKeeper",
+                "isOwner",
                 "telephone",
                 "country",
                 "alreadyAccount",
@@ -115,7 +115,7 @@ export let doRegister = async function (req, res) {
             "lastName",
             "password",
             "email",
-            "isShopKeeper",
+            "isOwner",
             "telephone",
             "country",
             "alreadyAccount",
@@ -165,7 +165,14 @@ export let doLogin = async function (req, res) {
         const match = req.body.password === user.password;
         if (match) {
             req.session.loggedUserId = user.user_id;
-            res.redirect("/bookmarks");
+            if (await userModel.checkOwnership(user.user_id)) {
+                req.session.isOwner = true;
+                res.redirect("/owned");
+            }
+            else {
+                req.session.isOwner = false;
+                res.redirect("/bookmarks");
+            }
         } else {
             const localizedUIStrings = getLocalizedUIStrings(req, [
                 "titleLogin",
@@ -215,7 +222,7 @@ export let checkAuthenticated = function (req, res, next) {
 };
 
 export let checkShopKeeper = function (req, res, next) {
-    if (req.session.isShopKeeper) {
+    if (req.session.isOwner) {
         next();
     } else {
         res.render("contact", {

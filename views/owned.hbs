@@ -1,26 +1,28 @@
 {{#if message}}
-<p>{{message}}</p>
+    <p>{{message}}</p>
 {{/if}}
-
-{{#if ownedPlaces.length}}
- {{#each ownedPlaces}}
-<div class="row mb-4 ms-1 me-1 info-core">
-    <div class="row m-0 p-0">
-        <div class="col p-1">
-            <p class="title text-center m-0 mt-2"><a href="/place/{{this.placeId}}">{{this.placeName}}</a></p>
-        </div>
-    </div>
-    <div class="row mt-2">
-        <div class="col">
-            <p class="add-text"><a href="/bookmarks/add/{{place.placeId}}">
-                    <i class="bi bi-heart-fill"></i>
-                    <span class="span-text ms-3">{{this.bookmarkCount}}</span>
-                </a></p>
-        </div>
-        
-    </div>
+<div class="row-auto contact-row justify-content-center form-info mt-4">
+    {{#if ownedPlaces.length}}
+        {{#each ownedPlaces}}
+            <div class="row mb-4 ms-1 me-1 info-core">
+                <div class="row m-0 p-0">
+                    <div class="col p-1">
+                        <p class="title text-center m-0 mt-2"><a
+                                href="/place/{{this.place_id}}"
+                            >{{this.name}}</a></p>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <i class="fs-4 bi bi-heart-fill"></i>
+                        <span
+                            class="fs-4 ms-1"
+                        >{{this.bookmark_count}}</span>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        {{NoBookmarksYet}}
+    {{/if}}
 </div>
-{{/each}}
-{{else}}
-    <p class="date">{{NoOwnerYet}}</p>
-{{/if}}

@@ -236,7 +236,7 @@ export let userExistsByEmail = async (email) => {
     }
 };
 
-export let registerUser = async function (firstName, lastName, password, email, isShopKeeper, telephone) {
+export let registerUser = async function (firstName, lastName, password, email, isOwner, telephone) {
     const userExists = await userExistsByEmail(email);
     if (userExists) {
         return { message: "A user with this email already exists" };
@@ -244,7 +244,7 @@ export let registerUser = async function (firstName, lastName, password, email, 
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
             var sql = ``
-            if (isShopKeeper == 'on') {
+            if (isOwner == 'on') {
                 sql = `
                 WITH inserted_user AS (
                 INSERT INTO users ("first_name", "last_name", "password", "email")
@@ -275,14 +275,30 @@ export let registerUser = async function (firstName, lastName, password, email, 
     }
 };
 
+export let checkOwnership = async (userId) => {
+    const sql = `
+        SELECT 1 FROM owners WHERE "user_id" = $1
+    `;
+    const params = [userId];
+    try {
+        const client = await connect();
+        const result = await client.query(sql, params);
+        client.release();
+        return !!result.rows.length; // Return true if ownership exists
+    } catch (err) {
+        throw err; // Throw the error to be handled by the caller
+    }
+};
+
+
 export let getOwnedPlaces = async (userId) => {
     const sql = `
-        SELECT p.*, COUNT(b."bookmarkId") AS "bookmarkCount"
-        FROM "Place" p
-        LEFT JOIN "Bookmark" b ON p."placeId" = b."placeId"
-        JOIN "Owns" o ON p."placeId" = o."placeId"
-        WHERE o."userId" = $1
-        GROUP BY p."placeId"
+        select p.*, count(b.bookmark_id) as "bookmark_count"
+        from places as p
+        left join bookmarks as b on (p.place_id = b.place_id and b.date_removed is null)
+        join owners as o on p."owner_id" = o."user_id"
+        where o."user_id" = $1
+        group by p."place_id"
     `;
     const params = [userId];
     try {

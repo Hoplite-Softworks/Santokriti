@@ -44,11 +44,11 @@
 }
 
 
-#isShopKeeperLabel {
+#isOwnerLabel {
     width: 6.95rem;
 }
 
-#isShopKeeper {
+#isOwner {
     width: 1.5rem;
     margin-left: 1rem;
 }

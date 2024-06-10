@@ -58,14 +58,14 @@
             >
                 <label
                     class="custom-control-label"
-                    id="isShopKeeperLabel"
-                    for="isShopKeeper"
-                >{{isShopKeeper}}</label>
+                    id="isOwnerLabel"
+                    for="isOwner"
+                >{{isOwner}}</label>
                 <input
                     type="checkbox"
                     class="custom-control-input"
-                    id="isShopKeeper"
-                    name="isShopKeeper"
+                    id="isOwner"
+                    name="isOwner"
                 />
             </div>
         </div>
@@ -102,7 +102,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
    $(document).ready(function() {
-            $('#isShopKeeper').change(function() {
+            $('#isOwner').change(function() {
                 if ($(this).is(':checked')) {
                     $('#telephoneContainer').removeClass('d-none').addClass('d-flex');
                 } else {

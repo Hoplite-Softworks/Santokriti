@@ -83,6 +83,32 @@
 }
 
 
+#lang-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+}
+
+#lang-menu-button {
+    position: relative;
+    top: 0.5rem;
+    left: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 8px;
+    border-color: whitesmoke;
+    z-index: 1050;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 255, 0.0);
+    pointer-events: auto;
+    align-content: center;
+
+    height: fit-content;
+}
+
+
 /* Media queries for desktop vs mobile */
 @media (max-width: 767.98px) {
 

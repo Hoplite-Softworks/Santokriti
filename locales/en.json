@@ -1,18 +1,21 @@
 {
-	"languageList": {
+	"languagesList": {
 		"en": {
-			"langName": "en",
-			"langIconSrc": "/public/icons/icons8-english-96.png"
+			"langShort": "en",
+			"langName": "English",
+			"langIconSrc": "/flags/us.png"
 		},
 	
 		"es": {
-			"langName": "es",
-			"langIconSrc": "public/icons/icons8-spain-flag-96.png"
+			"langShort": "es",
+			"langName": "Español",
+			"langIconSrc": "/flags/es.png"
 		},
 	
 		"el": {
-			"langName": "el",
-			"langIconSrc": "public/icons/icons8-greece-96.png"
+			"langShort": "el",
+			"langName": "Ελληνικά",
+			"langIconSrc": "/flags/gr.png"
 		}
 	},
 
@@ -39,7 +42,7 @@
 	"register": "Register",
 	"noAccountYet": "Don't have an account yet?",
 	"alreadyAccount": "Already have an account?",
-	"isShopKeeper": "Are you a shopkeeper?",
+	"isOwner": "Are you a shopkeeper?",
 	"country": "Country",
 	"messageNoUserFound": "User not found.",
 	"messageRegistrationError": "Error! Please try again later.",

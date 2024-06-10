@@ -12,7 +12,7 @@ export const commonLocalizedUIStringsKeys = [
     "menuOptionRegister",
     "menuOptionLogin",
     "menuOptionLogout",
-    "languageList",
+    "languagesList",
 ];
 
 
@@ -38,7 +38,6 @@ export async function map(req, res, next) {
         res.render("map", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleMap"],
-            //languages: localizedUIStrings["languageList"],
             pageSpecificCSS: "/css/map.css",
             locale: req.getLocale(),
             places: JSON.stringify(places),

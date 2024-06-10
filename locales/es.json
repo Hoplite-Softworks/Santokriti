@@ -1,16 +1,21 @@
 {
-	"languageList": {
+	"languagesList": {
 		"en": {
-			"langName": "en",
-			"langIconSrc": "/public/icons/icons8-english-96.png"
+			"langShort": "en",
+			"langName": "English",
+			"langIconSrc": "/flags/us.png"
 		},
+	
 		"es": {
-			"langName": "es",
-			"langIconSrc": "public/icons/icons8-spain-flag-96.png"
+			"langShort": "es",
+			"langName": "Español",
+			"langIconSrc": "/flags/es.png"
 		},
+	
 		"el": {
-			"langName": "el",
-			"langIconSrc": "public/icons/icons8-greece-96.png"
+			"langShort": "el",
+			"langName": "Ελληνικά",
+			"langIconSrc": "/flags/gr.png"
 		}
 	},
 	"islandName": "SANTOKRITI",
@@ -36,7 +41,7 @@
 	"register": "Registrarse",
 	"noAccountYet": "¿Aún no tienes una cuenta?",
 	"alreadyAccount": "¿Ya tienes una cuenta?",
-	"isShopKeeper": "¿Eres comerciante?",
+	"isOwner": "¿Eres comerciante?",
 	"country": "País",
 	"messageNoUserFound": "Usuario no encontrado.",
 	"messageRegistrationError": "¡Error! Por favor, inténtalo de nuevo más tarde.",

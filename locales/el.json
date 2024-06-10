@@ -1,18 +1,21 @@
 {	
-	"languageList": {
+	"languagesList": {
 		"en": {
-			"langName": "en",
-			"langIconSrc": "/public/icons/icons8-english-96.png"
+			"langShort": "en",
+			"langName": "English",
+			"langIconSrc": "/flags/us.png"
 		},
 	
 		"es": {
-			"langName": "es",
-			"langIconSrc": "public/icons/icons8-spain-flag-96.png"
+			"langShort": "es",
+			"langName": "Español",
+			"langIconSrc": "/flags/es.png"
 		},
 	
 		"el": {
-			"langName": "el",
-			"langIconSrc": "public/icons/icons8-greece-96.png"
+			"langShort": "el",
+			"langName": "Ελληνικά",
+			"langIconSrc": "/flags/gr.png"
 		}
 	},
 
@@ -39,7 +42,7 @@
 	"register": "Εγγραφή",
 	"noAccountYet": "Δεν έχετε ακόμα λογαριασμό;",
 	"alreadyAccount": "Έχετε ήδη λογαριασμό;",
-	"isShopKeeper": "Είστε καταστηματάρχης;",
+	"isOwner": "Είστε καταστηματάρχης;",
 	"country": "Χώρα",
 	"messageNoUserFound": "Ο χρήστης δεν βρέθηκε.",
 	"messageRegistrationError": "Σφάλμα! Παρακαλώ δοκιμάστε ξανά αργότερα.",
