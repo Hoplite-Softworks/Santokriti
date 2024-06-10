@@ -29,12 +29,12 @@
     <div class="container background-container">
         <div class="row">
             <div class="col-auto">
-                <div id="lang-menu" class="btn-group dropend">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                <div id="lang-menu" class="btn-group dropdown">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false" id="lang-menu-button">
                         {{#each languagesList}}
                         {{#if (equals this.langShort ../locale)}}
-                        <p class="fs-6 d-none d-md-inline m-1">{{this.langName}}</p>
+                        <p class="fs-6 d-none d-md-inline m-1 me-2">{{this.langName}}</p>
                         <i class="fi fi-{{this.countryShort}}"></i>
                         {{/if}}
                         {{/each}}
@@ -43,7 +43,7 @@
                         <ul id="menu-list">
                             {{#each languagesList}}
                             <li class="navitem">
-                                <a href="?lang={{this.langShort}}">{{this.langName}}</a>
+                                <a href="?lang={{this.langShort}}" class="fs-5 m-1 me-2">{{this.langName}}</a>
                                 <i class="fi fi-{{this.countryShort}}"></i>
                             </li>
                             {{/each}}
@@ -55,8 +55,8 @@
                 <p class="text-center fs-2 mb-0" id="islandName">{{islandName}}</p>
             </div>
             <div class="col-auto">
-                <div id="menu" class="btn-group dropstart">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                <div id="menu" class="btn-group dropdown">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="dropdown"
                         data-bs-auto-close="outside" aria-expanded="false" id="menu-button">
                         <p class="fs-6 d-none d-md-inline m-1">
                             {{menuText}}
