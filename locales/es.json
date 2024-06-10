@@ -2,22 +2,26 @@
 	"languagesList": {
 		"en": {
 			"langShort": "en",
+			"countryShort": "us",
 			"langName": "English",
-			"langIconSrc": "/flags/us.png"
+			"langIconSrc": "/public/flags/us.png"
 		},
 	
 		"es": {
 			"langShort": "es",
+			"countryShort": "es",
 			"langName": "Español",
-			"langIconSrc": "/flags/es.png"
+			"langIconSrc": "/public/flags/es.png"
 		},
 	
 		"el": {
 			"langShort": "el",
+			"countryShort": "gr",
 			"langName": "Ελληνικά",
-			"langIconSrc": "/flags/gr.png"
+			"langIconSrc": "/public/flags/gr.png"
 		}
 	},
+	
 	"islandName": "SANTOKRITI",
 	"islandSlogan": "El paraíso escondido del Mar Jónico",
 	"titleMap": "Santokriti - El Paraíso Escondido del Jónico",

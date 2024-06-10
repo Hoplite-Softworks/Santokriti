@@ -96,7 +96,17 @@ app.use((err, req, res, next) => {
 //Σημ.: η engine πρέπει να έχει ίδιο όνομα με το extname, αλλιώς δεν θα
 //αναγνωριστεί το extname (αν δεν το κάνουμε αυτό, απλά τα αρχεία handlebars θα πρέπει να
 ///τελειώνουν με .handlebars)
-app.engine("hbs", exphbs.engine({ extname: "hbs" }));
+app.engine(
+    "hbs",
+    exphbs.engine({
+        extname: "hbs",
+        helpers: {
+            equals: function (a, b) {
+                return a === b;
+            },
+        },
+    })
+);
 //και ορίζουμε πως θα χρησιμοποιήσουμε τη μηχανή template με όνομα 'hbs'
 app.set("view engine", "hbs");
 
