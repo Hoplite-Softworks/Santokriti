@@ -23,18 +23,40 @@ export let connect = async () => {
 };
 
 
-export let getAllPlaces = async () => {
-    const sql = `
-        SELECT p.place_id, p.name AS place_name, latitude, longitude, c.name AS category_name, k.keywords
-        FROM places AS p
-        LEFT JOIN (
-            SELECT place_id, string_agg(keyword, ', ') AS keywords
-            FROM place_keywords
-            GROUP BY place_id
-        ) AS k ON p.place_id = k.place_id
-        JOIN categories AS c ON c.category_id = p.category_id
-        WHERE p.date_removed IS NULL`;
+export let getAllPlaces = async (withPhotoPaths) => {
+    let sql = ``;
+    if (withPhotoPaths) {
+        sql = `
+            SELECT p.place_id, p.name AS place_name, latitude, longitude, p.description, ph.photos, c.name AS category_name, k.keywords
+            FROM places AS p
+            LEFT JOIN (
+                SELECT place_id, string_agg(keyword, ', ') AS keywords
+                FROM place_keywords
+                GROUP BY place_id
+            ) AS k ON p.place_id = k.place_id
+            LEFT JOIN (
+                SELECT place_id, string_agg(photo_name, ', ') AS photos
+                FROM photos
+                GROUP BY place_id
+            ) AS ph ON p.place_id = ph.place_id
+            JOIN categories AS c ON c.category_id = p.category_id
+            WHERE p.date_removed IS NULL
+ `;
+    } else {
+        sql = `
+            SELECT p.place_id, p.name AS place_name, latitude, longitude, c.name AS category_name, k.keywords
+            FROM places AS p
+            LEFT JOIN (
+                SELECT place_id, string_agg(keyword, ', ') AS keywords
+                FROM place_keywords
+                GROUP BY place_id
+            ) AS k ON p.place_id = k.place_id
+            JOIN categories AS c ON c.category_id = p.category_id
+            WHERE p.date_removed IS NULL`;
+    }
+    
     const params = [];
+
     try {
         const client = await connect();
         const places = await client.query(sql, params);
@@ -63,7 +85,7 @@ export let getAllCategories = async () => {
 
 export let getPlace = async (placeId) => {
     const sql = `
-        SELECT p.place_id, p.name AS place_name, p.description, ph.photo_paths, k.keywords
+        SELECT p.place_id, p.name AS place_name, p.description, ph.photos, k.keywords
         FROM places AS p
         LEFT JOIN (
             SELECT place_id, string_agg(keyword, ', ') AS keywords
@@ -71,7 +93,7 @@ export let getPlace = async (placeId) => {
             GROUP BY place_id
         ) AS k ON p.place_id = k.place_id
         LEFT JOIN (
-            SELECT place_id, string_agg(photo_path, ', ') AS photo_paths
+            SELECT place_id, string_agg(photo_name, ', ') AS photos
             FROM photos
             GROUP BY place_id
         ) AS ph ON p.place_id = ph.place_id
@@ -304,7 +326,7 @@ export let getOwnedPlaces = async (userId) => {
     try {
         const client = await connect();
         const places = await client.query(sql, params);
-        await client.release();
+        client.release();
         return places.rows; // Return the result
     } catch (err) {
         throw err; // Throw the error to be handled by the caller

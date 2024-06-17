@@ -28,7 +28,7 @@ export const getLocalizedUIStrings = (req, keys) => {
 // give all the needed place info to the map page
 export async function map(req, res, next) {
     try {
-        const places = await model.getAllPlaces();
+        const places = await model.getAllPlaces(true);
         const categories = await model.getAllCategories();
         const localizedUIStrings = getLocalizedUIStrings(req, [
             "titleMap",
@@ -209,6 +209,14 @@ export async function placeInfo(req, res, next) {
     const placeId = req.params.placeId;
     try {
         const place = await model.getPlace(placeId);
+        const placePhotoDirectory = "/images/";
+        place.photos = place.photos ? place.photos.split(", ") : ["background-image-2.jpg","background-image-1.jpg"];
+        console.log(...place.photos)
+        for (let i = 0; i < place.photos.length; i++) {
+            place.photos[i] = placePhotoDirectory + place.photos[i]
+        }
+        console.log(...place.photos)
+
         if (place) {
             if (req.session.loggedUserId) {
                 place.isBookmarked = await model.isBookmarked(req.session.loggedUserId, placeId);

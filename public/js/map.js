@@ -45,6 +45,7 @@ async function loadPlacesOnMap(displayedCategories) {
         zoomToBoundsOnClick: true,
     });
 
+    const placePhotoDirectory = "/images/";
     places.forEach((place) => {
         let id = place.place_id;
         let name = place.place_name;
@@ -52,10 +53,14 @@ async function loadPlacesOnMap(displayedCategories) {
         let latitude = place.latitude;
         let longitude = place.longitude;
         let category = place.category_name;
-        let markerImages = [
-            "images/background-image-2.jpg",
-            "images/background-image-1.jpg",
-        ]; //place.markerImage.split(', '); // Assuming images are stored as comma-separated values
+
+        let photo_paths = place.photos ? place.photos.split(", ") : ["background-image-2.jpg","background-image-1.jpg"];
+        console.log(...photo_paths)
+        for (let i = 0; i < photo_paths.length; i++) {
+            photo_paths[i] = placePhotoDirectory + photo_paths[i]
+        }
+        photo_paths = ["images/background-image-2.jpg","images/background-image-1.jpg"]
+
         let keywords = place.keywords
             ? place.keywords.split(", ").join(", ")
             : "";
@@ -68,7 +73,7 @@ async function loadPlacesOnMap(displayedCategories) {
                 <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
                         <!-- Slides -->
-                        ${markerImages
+                        ${photo_paths
                             .map((image) => {
                                 return `<div class="swiper-slide"><img class="popup-image" src="${image}" alt="${name}" style="width: 100%"></div>`;
                             })
