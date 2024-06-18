@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="/css/place.css" rel="stylesheet" />
+
 {{#if message}}
     <p>{{message}}</p>
 {{/if}}
@@ -27,17 +30,19 @@
                             <div class="swiper-slide"><img
                                     src="/images/background-image-1.jpg"
                                     alt="{{place.name}}"
-                                    class="float-start mb-3"
+                                    class="float-center mb-3"
                                 /></div>
                         {{else}}
                             {{#each place.photos}}
                                 <div class="swiper-slide"><img
-                                        class="float-start mb-3"
                                         src="{{this}}"
                                         alt="{{place.name}}"
                                     /></div>
                             {{/each}}
                         {{/unless}}
+                    </div>
+                    <div class="swiper-pagination-container">
+                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
             </div>
@@ -84,6 +89,10 @@
     src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
 ></script>
 <script>
-    const swiper = new Swiper(".swiper", { direction: "vertical", loop: true,
-    autoplay: { delay: 3000, }, pagination: { el: ".swiper-pagination", }, });
+    const swiper = new Swiper(".swiper", { 
+        direction: "horizontal",
+        loop: true,
+        //autoplay: { delay: 10000, },
+        pagination: { el: ".swiper-pagination", },
+    });
 </script>

@@ -38,7 +38,6 @@ export async function map(req, res, next) {
         res.render("map", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleMap"],
-            pageSpecificCSS: "/css/map.css",
             locale: req.getLocale(),
             places: JSON.stringify(places),
             categories: JSON.stringify(categories),
@@ -67,7 +66,6 @@ export async function info(req, res, next) {
         res.render("info", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleInfo"],
-            pageSpecificCSS: "/css/info.css",
             locale: req.getLocale(),
             model: process.env.MODEL,
             session: req.session,
@@ -96,7 +94,6 @@ export async function contact(req, res, next) {
         res.render("contact", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleContact"],
-            pageSpecificCSS: "/css/contact.css",
             locale: req.getLocale(),
             model: process.env.MODEL,
             session: req.session,
@@ -142,7 +139,6 @@ export async function listAllBookmarksRender(req, res, next) {
             ...localizedUIStrings,
             title: localizedUIStrings["titleBookmarks"],
             locale: req.getLocale(),
-            pageSpecificCSS: "/css/bookmarks.css",
             bookmarks: bookmarks,
             model: process.env.MODEL,
             session: req.session,
@@ -157,19 +153,6 @@ export async function addBookmark(req, res, next) {
     const userId = req.session.loggedUserId;
     try {
         await model.addBookmark(userId, placeId);
-        /*
-        const bookmarks = await model.getAllBookmarksByUser(userId);
-        const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
-        res.render("bookmarks", {
-            ...localizedUIStrings,
-            title: localizedUIStrings["titleBookmarks"],
-            pageSpecificCSS: "/css/bookmarks.css",
-            locale: req.getLocale(),
-            bookmarks: bookmarks,
-            model: process.env.MODEL,
-            session: req.session,
-        });*/
-
         res.redirect("/place/" + placeId);
     } catch (error) {
         error.message === "Bookmark already exists"
@@ -183,20 +166,6 @@ export async function removeBookmark(req, res, next) {
     const userId = req.session.loggedUserId;
     try {
         await model.removeBookmark(placeId, userId);
-        /*
-        const bookmarks = await model.getAllBookmarksByUser(userId);
-        const localizedUIStrings = getLocalizedUIStrings(req, ["titleBookmarks", "dateBookmarked", "NoBookmarksYet"]);
-        res.render("bookmarks", {
-            ...localizedUIStrings,
-            title: localizedUIStrings["titleBookmarks"],
-            locale: req.getLocale(),
-            pageSpecificCSS: "/css/bookmarks.css",
-            bookmarks: bookmarks,
-            model: process.env.MODEL,
-            session: req.session,
-            message: "Bookmark removed",
-        });*/
-
         res.redirect("/place/" + placeId);
     } catch (error) {
         next(error);
@@ -211,11 +180,9 @@ export async function placeInfo(req, res, next) {
         const place = await model.getPlace(placeId);
         const placePhotoDirectory = "/images/";
         place.photos = place.photos ? place.photos.split(", ") : ["background-image-2.jpg","background-image-1.jpg"];
-        console.log(...place.photos)
         for (let i = 0; i < place.photos.length; i++) {
             place.photos[i] = placePhotoDirectory + place.photos[i]
         }
-        console.log(...place.photos)
 
         if (place) {
             if (req.session.loggedUserId) {
@@ -229,7 +196,6 @@ export async function placeInfo(req, res, next) {
                 ...localizedUIStrings,
                 title: place.name,
                 locale: req.getLocale(),
-                pageSpecificCSS: "/css/place.css",
                 place: place,
                 model: process.env.MODEL,
                 session: req.session,
@@ -253,7 +219,6 @@ export async function listOwnedPlaces(req, res, next) {
             ...localizedUIStrings,
             title: localizedUIStrings["titleOwned"],
             locale: req.getLocale(),
-            pageSpecificCSS: "/css/owned.css",
             ownedPlaces: ownedPlaces,
             model: process.env.MODEL,
             session: req.session,

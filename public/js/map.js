@@ -23,18 +23,6 @@ var popup = L.popup();
 
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-const swiper = new Swiper(".swiper", {
-    direction: "vertical",
-    loop: true,
-    autoplay: {
-        delay: 3000,
-    },
-    pagination: {
-        el: ".swiper-pagination",
-    },
-});
-
-
 async function loadPlacesOnMap(displayedCategories) {
 
     globalMarkersLayer.clearLayers();
@@ -55,30 +43,25 @@ async function loadPlacesOnMap(displayedCategories) {
         let category = place.category_name;
 
         let photo_paths = place.photos ? place.photos.split(", ") : ["background-image-2.jpg","background-image-1.jpg"];
-        console.log(...photo_paths)
         for (let i = 0; i < photo_paths.length; i++) {
             photo_paths[i] = placePhotoDirectory + photo_paths[i]
         }
-        photo_paths = ["images/background-image-2.jpg","images/background-image-1.jpg"]
 
         let keywords = place.keywords
             ? place.keywords.split(", ").join(", ")
             : "";
 
         if (displayedCategories.includes(category)) {
-            // Creating the carousel HTML
             let innerHTML = `
-                <!-- Slider main container -->
                 <div class="swiper">
-                <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
-                        <!-- Slides -->
                         ${photo_paths
                             .map((image) => {
-                                return `<div class="swiper-slide"><img class="popup-image" src="${image}" alt="${name}" style="width: 100%"></div>`;
+                                return `<div class="swiper-slide"><img class="popup-image" src="${image}" alt="${name}"></div>`;
                             })
                             .join("")}
-                    </div>      
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
                 <div class="popup-text">
                     <div>${name}</div>
@@ -87,7 +70,20 @@ async function loadPlacesOnMap(displayedCategories) {
                 `;
 
             let newMarker = L.marker([latitude, longitude])
-                .bindPopup(innerHTML, { maxWidth: "auto", closeButton: false });
+                .bindPopup(innerHTML, { maxWidth: "auto", closeButton: false })
+                .on('popupopen', function() {
+                    new Swiper('.swiper',{
+                        direction: "horizontal",
+                        loop: true,
+                        autoplay: {
+                            delay: 3000,
+                        },
+                        pagination: {
+                            el: ".swiper-pagination",
+                        },
+                        allowTouchMove: true,
+                    });
+                });
             markers.addLayer(newMarker);
 
             if (isMobile) {

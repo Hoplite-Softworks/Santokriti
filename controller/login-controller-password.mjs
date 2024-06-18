@@ -38,7 +38,6 @@ export let showLogInForm = function (req, res) {
     res.render("login", {
         ...localizedUIStrings,
         title: localizedUIStrings["titleLogin"],
-        pageSpecificCSS: "/css/login.css",
         locale: req.getLocale(),
         model: process.env.MODEL,
     });
@@ -63,7 +62,6 @@ export let showRegisterForm = function (req, res) {
     res.render("register", {
         ...localizedUIStrings,
         title: localizedUIStrings["titleRegister"],
-        pageSpecificCSS: "/css/register.css",
         locale: req.getLocale(),
         model: process.env.MODEL,
     });
@@ -98,7 +96,6 @@ export let doRegister = async function (req, res) {
             res.render("register", {
                 ...localizedUIStrings,
                 title: localizedUIStrings["titleRegister"],
-                pageSpecificCSS: "/css/register.css",
                 message: registrationResult.message,
                 locale: req.getLocale(),
                 model: process.env.MODEL,
@@ -127,7 +124,6 @@ export let doRegister = async function (req, res) {
         res.render("register", {
             ...localizedUIStrings,
             title: localizedUIStrings["titleRegister"],
-            pageSpecificCSS: "/css/register.css",
             message: localizedUIStrings["messageRegistrationError"],
             locale: req.getLocale(),
             model: process.env.MODEL,
@@ -156,7 +152,6 @@ export let doLogin = async function (req, res) {
             ...localizedUIStrings,
             message: localizedUIStrings["messageNoUserFound"],
             title: localizedUIStrings["titleLogin"],
-            pageSpecificCSS: "/css/login.css",
             locale: req.getLocale(),
             model: process.env.MODEL,
         });
@@ -189,7 +184,6 @@ export let doLogin = async function (req, res) {
                 ...localizedUIStrings,
                 message: localizedUIStrings["messageWrongPassword"],
                 title: localizedUIStrings["titleLogin"],
-                pageSpecificCSS: "/css/login.css",
                 locale: req.getLocale(),
                 model: process.env.MODEL,
             });

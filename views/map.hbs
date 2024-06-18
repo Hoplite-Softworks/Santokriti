@@ -2,12 +2,11 @@
 <p>{{message}}</p>
 {{/if}}
 
-
-<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css" />
 <link rel="stylesheet" href="/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="/css/map.css" rel="stylesheet" />
 
 <div class="row">
     <div class="col">
@@ -28,6 +27,7 @@
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-1.7.min.js"></script>
 <script>
     document.querySelectorAll('.dropdown-menu input[type="checkbox"], .dropdown-menu label').forEach(element => {
         element.addEventListener('click', function (event) {
@@ -41,7 +41,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    const places = {{{ places }}}; // Pass places data to JavaScript
-    const categories = {{{ categories }}}; // Pass categories data to JavaScript
+    const places = {{{ places }}};
+    const categories = {{{ categories }}};
 </script>
 <script src="/js/map.js"></script>
